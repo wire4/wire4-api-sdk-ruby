@@ -1,0 +1,18 @@
+# Wire4Client::Account
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**amount_limit** | **Float** | Monto límite permitido registrado para la cuenta | 
+**bank_key** | **String** | Clave del banco, es requerido en caso de que la cuenta del beneficiario sea un número de celular | [optional] 
+**beneficiary_account** | **String** | Cuenta del beneficiario, podría ser teléfono celular, TDD o cuenta CLABE | 
+**email** | **Array&lt;String&gt;** | Lista de email&#39;s, este dato es opcional | [optional] 
+**institution** | [**BeneficiaryInstitution**](BeneficiaryInstitution.md) | Objeto que contiene el nombre de la institución, es mutuamente exclusivo con el objeto Person | [optional] 
+**kind_of_relationship** | **String** | Tipo de relación con el propietario de la cuenta, para registrar una cuenta este valor se debe obtener  del recurso relationships | 
+**numeric_reference_spei** | **String** | Referencia numérica a utilizar cuando se realice una transferencia y no se especifique una referencia | [optional] 
+**payment_concept_spei** | **String** | Concepto de pago a utilizar cuando se realice una transferencia y no se especifique un concepto | [optional] 
+**person** | [**Person**](Person.md) | Objeto que contiene los datos de la persona propietaria de la cuenta, si se incluye este atributo, el atributo institution no debe estar presente | [optional] 
+**relationship** | **String** | Relación con el propietario de la cuenta, para registrar una cuenta este valor se debe obtener  del recurso relationships | 
+**rfc** | **String** | Registro federal de contribuyentes de la persona o institución propietaria de la cuenta | 
+
+
