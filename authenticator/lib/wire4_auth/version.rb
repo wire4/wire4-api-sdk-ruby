@@ -15,5 +15,5 @@ version: 1.0
 =end
 
 module Wire4Auth
-  VERSION = '0.0.2-SNAPSHOT'
+  VERSION = '0.0.3-SNAPSHOT'
 end

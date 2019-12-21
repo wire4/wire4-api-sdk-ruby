@@ -30,22 +30,22 @@ gem build wire4_auth.gemspec
 Después podemos instalar el gem localmente. Para instalar el client:
 
 ```shell
-gem install ./wire4_client-0.0.1-SNAPSHOT.gem
+gem install ./wire4_client-0.0.1.pre-SNAPSHOT.gem
 ```
-(para entornos de desarrollo, run `gem install --dev ./wire4_client-0.0.1-SNAPSHOT.gem` esto instalará las dependencias para desarrollo)
+(para entornos de desarrollo, run `gem install --dev ./wire4_client-0.0.1.pre.SNAPSHOT.gem` esto instalará las dependencias para desarrollo)
 
 Para instalar el autenticador:
 
 ```shell
-gem install ./wire4_auth-0.0.1-SNAPSHOT.gem
+gem install ./wire4_auth-0.0.2.pre-SNAPSHOT.gem
 ```
-(para entornos de desarrollo, run `gem install --dev ./wire4_auth-0.0.1-SNAPSHOT.gem` esto instalará las dependencias para desarrollo)
+(para entornos de desarrollo, run `gem install --dev ./wire4_auth-0.0.2.pre.SNAPSHOT.gem` esto instalará las dependencias para desarrollo)
 
 
 Finalmente agregamos los gems a nuestro 'Gemfile':
     
-    gem 'wire4_client', '~> 0.0.1.pre-SNAPSHOT'
-    gem 'wire4_auth', '~> 0.0.1.pre.SNAPSHOT'
+    gem 'wire4_client', '~> 0.0.1.pre.SNAPSHOT'
+    gem 'wire4_auth', '~> 0.0.2.pre.SNAPSHOT'
 
 ### Instalar usando Git
 
