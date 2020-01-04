@@ -728,6 +728,41 @@ class Wire4ExamplesTest < Test::Unit::TestCase
   end
 
   #noinspection RubyInstanceMethodNamingConvention
+  def test_out_comming_spei_request_id_transactions_report_using_get
+    omit('Reason')
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+
+    begin
+      # Obtain an access token use application flow and scope "spei_admin" and add to request
+      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin'))
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::TransferenciasSPEIApi.new
+
+    # build body with info (check references for more info: types, required fields, etc.)
+    subscription = SUBSCRIPTION
+    request_id = '6a9efe39-a795-4e09-8f7f-197e647a0f8b'
+
+    begin
+      # Call the API
+      response = api_instance.out_comming_spei_request_id_transactions_report_using_get(request_id, subscription)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling TransferenciasSPEIApi->out_comming_spei_request_id_transactions_report_using_get: #{e}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  #noinspection RubyInstanceMethodNamingConvention
   def test_register_outgoing_SPEI_transaction
     omit('Reason')
     # Create the authenticator to obtain access token
