@@ -57,6 +57,19 @@ describe 'TransferenciasSPEIApi' do
     end
   end
 
+  # unit tests for out_comming_spei_request_id_transactions_report_using_get
+  # Consulta de transferencias de salida por identificador de petición
+  # Consulta las transferencias de salida registradas en una petición, las transferencias que regresa este recuso son únicamente las transferencias  de salida agrupadas al identificador de la petición que se generó al hacer el registro de las transacciones el cual se debe especificar como parte del path de este endpoint.
+  # @param request_id Identificador de la petición a buscar
+  # @param subscription El identificador de la suscripción a esta API
+  # @param [Hash] opts the optional parameters
+  # @return [PaymentsRequestId]
+  describe 'out_comming_spei_request_id_transactions_report_using_get test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for outgoing_spei_transactions_report_using_get
   # Consulta de transferencias realizadas
   # Consulta las transferencias realizadas en la cuenta del cliente Monex relacionada a la suscripción, las transferencias que regresa este recuso son únicamente las transferencias recibidas en el día en el que se realiza la consulta.&lt;br&gt;Se pueden realizar consultas por &lt;strong&gt;order_id&lt;/strong&gt; al realizar este tipo de consultas no importa el día en el que se realizó la transferencia

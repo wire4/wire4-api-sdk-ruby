@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**drop_transactions_pending_using_delete**](TransferenciasSPEIApi.md#drop_transactions_pending_using_delete) | **DELETE** /subscriptions/{subscription}/transactions/outcoming/spei/request/{requestId} | Eliminación de transferencias SPEI® pendientes
 [**incoming_spei_transactions_report_using_get**](TransferenciasSPEIApi.md#incoming_spei_transactions_report_using_get) | **GET** /subscriptions/{subscription}/transactions/incoming/spei | Consulta de transferencias recibidas
+[**out_comming_spei_request_id_transactions_report_using_get**](TransferenciasSPEIApi.md#out_comming_spei_request_id_transactions_report_using_get) | **GET** /subscriptions/{subscription}/transactions/outcoming/spei/{requestId} | Consulta de transferencias de salida por identificador de petición
 [**outgoing_spei_transactions_report_using_get**](TransferenciasSPEIApi.md#outgoing_spei_transactions_report_using_get) | **GET** /subscriptions/{subscription}/transactions/outcoming/spei | Consulta de transferencias realizadas
 [**register_outgoing_spei_transaction_using_post**](TransferenciasSPEIApi.md#register_outgoing_spei_transaction_using_post) | **POST** /subscriptions/{subscription}/transactions/outcoming/spei | Registro de transferencias
 
@@ -104,6 +105,61 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Array&lt;Deposit&gt;**](Deposit.md)
+
+### Authorization
+
+[wire4_aut_app_user_spei](../README.md#wire4_aut_app_user_spei)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+
+# **out_comming_spei_request_id_transactions_report_using_get**
+> PaymentsRequestId out_comming_spei_request_id_transactions_report_using_get(request_id, subscription)
+
+Consulta de transferencias de salida por identificador de petición
+
+Consulta las transferencias de salida registradas en una petición, las transferencias que regresa este recuso son únicamente las transferencias  de salida agrupadas al identificador de la petición que se generó al hacer el registro de las transacciones el cual se debe especificar como parte del path de este endpoint.
+
+### Example
+```ruby
+# load the gem
+require 'wire4_client'
+# setup authorization
+Wire4Client.configure do |config|
+  # Configure OAuth2 access token for authorization: wire4_aut_app_user_spei
+  config.access_token = 'YOUR ACCESS TOKEN'
+end
+
+api_instance = Wire4Client::TransferenciasSPEIApi.new
+
+request_id = 'request_id_example' # String | Identificador de la petición a buscar
+
+subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
+
+
+begin
+  #Consulta de transferencias de salida por identificador de petición
+  result = api_instance.out_comming_spei_request_id_transactions_report_using_get(request_id, subscription)
+  p result
+rescue Wire4Client::ApiError => e
+  puts "Exception when calling TransferenciasSPEIApi->out_comming_spei_request_id_transactions_report_using_get: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request_id** | **String**| Identificador de la petición a buscar | 
+ **subscription** | **String**| El identificador de la suscripción a esta API | 
+
+### Return type
+
+[**PaymentsRequestId**](PaymentsRequestId.md)
 
 ### Authorization
 

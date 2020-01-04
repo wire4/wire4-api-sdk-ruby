@@ -101,6 +101,7 @@ Class | Method | HTTP request | Description
 *Wire4Client::SuscripcionesApi* | [**remove_subscription_pending_status_using_delete**](docs/SuscripcionesApi.md#remove_subscription_pending_status_using_delete) | **DELETE** /subscriptions/pre-subscription/{subscription} | Elimna una pre-suscripción
 *Wire4Client::TransferenciasSPEIApi* | [**drop_transactions_pending_using_delete**](docs/TransferenciasSPEIApi.md#drop_transactions_pending_using_delete) | **DELETE** /subscriptions/{subscription}/transactions/outcoming/spei/request/{requestId} | Eliminación de transferencias SPEI® pendientes
 *Wire4Client::TransferenciasSPEIApi* | [**incoming_spei_transactions_report_using_get**](docs/TransferenciasSPEIApi.md#incoming_spei_transactions_report_using_get) | **GET** /subscriptions/{subscription}/transactions/incoming/spei | Consulta de transferencias recibidas
+*Wire4Client::TransferenciasSPEIApi* | [**out_comming_spei_request_id_transactions_report_using_get**](docs/TransferenciasSPEIApi.md#out_comming_spei_request_id_transactions_report_using_get) | **GET** /subscriptions/{subscription}/transactions/outcoming/spei/{requestId} | Consulta de transferencias de salida por identificador de petición
 *Wire4Client::TransferenciasSPEIApi* | [**outgoing_spei_transactions_report_using_get**](docs/TransferenciasSPEIApi.md#outgoing_spei_transactions_report_using_get) | **GET** /subscriptions/{subscription}/transactions/outcoming/spei | Consulta de transferencias realizadas
 *Wire4Client::TransferenciasSPEIApi* | [**register_outgoing_spei_transaction_using_post**](docs/TransferenciasSPEIApi.md#register_outgoing_spei_transaction_using_post) | **POST** /subscriptions/{subscription}/transactions/outcoming/spei | Registro de transferencias
 *Wire4Client::TransferenciasSPIDApi* | [**get_spid_classifications_using_get**](docs/TransferenciasSPIDApi.md#get_spid_classifications_using_get) | **GET** /subscriptions/{subscription}/beneficiaries/spid/classifications | Consulta las clasificaciones para operaciones con SPID
@@ -142,6 +143,7 @@ Class | Method | HTTP request | Description
  - [Wire4Client::MessageSubscription](docs/MessageSubscription.md)
  - [Wire4Client::MessageWebHook](docs/MessageWebHook.md)
  - [Wire4Client::Payment](docs/Payment.md)
+ - [Wire4Client::PaymentsRequestId](docs/PaymentsRequestId.md)
  - [Wire4Client::Person](docs/Person.md)
  - [Wire4Client::PreEnrollmentData](docs/PreEnrollmentData.md)
  - [Wire4Client::PreEnrollmentResponse](docs/PreEnrollmentResponse.md)
