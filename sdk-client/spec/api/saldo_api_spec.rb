@@ -35,6 +35,7 @@ describe 'SaldoApi' do
   # unit tests for get_balance_using_get
   # Consulta los saldo de una cuenta
   # Obtiene el de las divisas que se manejen en el contrato.
+  # @param authorization Header para token
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
   # @return [BalanceListResponse]

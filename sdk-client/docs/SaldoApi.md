@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_balance_using_get**
-> BalanceListResponse get_balance_using_get(subscription)
+> BalanceListResponse get_balance_using_get(authorization, subscription)
 
 Consulta los saldo de una cuenta
 
@@ -18,20 +18,17 @@ Obtiene el de las divisas que se manejen en el contrato.
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app_user_spei
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::SaldoApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
 
 
 begin
   #Consulta los saldo de una cuenta
-  result = api_instance.get_balance_using_get(subscription)
+  result = api_instance.get_balance_using_get(authorization, subscription)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling SaldoApi->get_balance_using_get: #{e}"
@@ -42,6 +39,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **subscription** | **String**| El identificador de la suscripción a esta API | 
 
 ### Return type
@@ -50,7 +48,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[wire4_aut_app_user_spei](../README.md#wire4_aut_app_user_spei)
+No authorization required
 
 ### HTTP request headers
 

@@ -94,7 +94,7 @@ module Wire4Client
         :'account' => :'String',
         :'amount' => :'Float',
         :'beneficiary_account' => :'String',
-        :'beneficiary_bank' => :'MessageInstitution',
+        :'beneficiary_bank' => :'Institution',
         :'beneficiary_name' => :'String',
         :'cep' => :'MessageCEP',
         :'clave_rastreo' => :'String',

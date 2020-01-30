@@ -21,24 +21,30 @@ module Wire4Client
     end
     # Elimina la cuenta del beneficiario
     # Borra la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción. La cuenta a borrar debe ser una cuenta que opere con SPEI.
+    # @param authorization Header para token
     # @param account La cuenta del beneciario que será eliminada
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def delete_account_using_delete(account, subscription, opts = {})
-      delete_account_using_delete_with_http_info(account, subscription, opts)
+    def delete_account_using_delete(authorization, account, subscription, opts = {})
+      delete_account_using_delete_with_http_info(authorization, account, subscription, opts)
       nil
     end
 
     # Elimina la cuenta del beneficiario
     # Borra la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción. La cuenta a borrar debe ser una cuenta que opere con SPEI.
+    # @param authorization Header para token
     # @param account La cuenta del beneciario que será eliminada
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def delete_account_using_delete_with_http_info(account, subscription, opts = {})
+    def delete_account_using_delete_with_http_info(authorization, account, subscription, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CuentasDeBeneficiariosSPEIApi.delete_account_using_delete ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling CuentasDeBeneficiariosSPEIApi.delete_account_using_delete"
       end
       # verify the required parameter 'account' is set
       if @api_client.config.client_side_validation && account.nil?
@@ -78,13 +84,14 @@ module Wire4Client
       header_params = {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-      auth_names = ['wire4_aut_app_user_spei']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -98,22 +105,28 @@ module Wire4Client
     end
     # Consulta de relaciones
     # Obtiene las posibles relaciones existentes para registrar beneficiarios en Monex. Se debe invocar este recurso antes de pre-registrar una cuenta de beneficiario.
+    # @param authorization Header para token
     # @param subscription Identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [RelationshipsResponse]
-    def get_available_relationships_monex_using_get(subscription, opts = {})
-      data, _status_code, _headers = get_available_relationships_monex_using_get_with_http_info(subscription, opts)
+    def get_available_relationships_monex_using_get(authorization, subscription, opts = {})
+      data, _status_code, _headers = get_available_relationships_monex_using_get_with_http_info(authorization, subscription, opts)
       data
     end
 
     # Consulta de relaciones
     # Obtiene las posibles relaciones existentes para registrar beneficiarios en Monex. Se debe invocar este recurso antes de pre-registrar una cuenta de beneficiario.
+    # @param authorization Header para token
     # @param subscription Identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [Array<(RelationshipsResponse, Fixnum, Hash)>] RelationshipsResponse data, response status code and response headers
-    def get_available_relationships_monex_using_get_with_http_info(subscription, opts = {})
+    def get_available_relationships_monex_using_get_with_http_info(authorization, subscription, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CuentasDeBeneficiariosSPEIApi.get_available_relationships_monex_using_get ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling CuentasDeBeneficiariosSPEIApi.get_available_relationships_monex_using_get"
       end
       # verify the required parameter 'subscription' is set
       if @api_client.config.client_side_validation && subscription.nil?
@@ -141,13 +154,14 @@ module Wire4Client
       header_params = {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-      auth_names = ['wire4_aut_app_user_spei']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -162,24 +176,32 @@ module Wire4Client
     end
     # Consulta los beneficiarios registrados
     # Obtiene los beneficiarios registrados al contrato relacionado con la suscripción, Los beneficiarios son los que actualmente se encuentran registrados en banca Monex.
+    # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :account Cuenta del beneficiario, puede ser Clabe, TDD o Celular
     # @option opts [String] :rfc RFC del beneficiario
     # @return [BeneficiariesResponse]
-    def get_beneficiaries_for_account_using_get(subscription, opts = {})
-      data, _status_code, _headers = get_beneficiaries_for_account_using_get_with_http_info(subscription, opts)
+    def get_beneficiaries_for_account_using_get(authorization, subscription, opts = {})
+      data, _status_code, _headers = get_beneficiaries_for_account_using_get_with_http_info(authorization, subscription, opts)
       data
     end
 
     # Consulta los beneficiarios registrados
     # Obtiene los beneficiarios registrados al contrato relacionado con la suscripción, Los beneficiarios son los que actualmente se encuentran registrados en banca Monex.
+    # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :account Cuenta del beneficiario, puede ser Clabe, TDD o Celular
     # @option opts [String] :rfc RFC del beneficiario
     # @return [Array<(BeneficiariesResponse, Fixnum, Hash)>] BeneficiariesResponse data, response status code and response headers
-    def get_beneficiaries_for_account_using_get_with_http_info(subscription, opts = {})
+    def get_beneficiaries_for_account_using_get_with_http_info(authorization, subscription, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CuentasDeBeneficiariosSPEIApi.get_beneficiaries_for_account_using_get ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling CuentasDeBeneficiariosSPEIApi.get_beneficiaries_for_account_using_get"
       end
       # verify the required parameter 'subscription' is set
       if @api_client.config.client_side_validation && subscription.nil?
@@ -202,19 +224,21 @@ module Wire4Client
 
       # query parameters
       query_params = {}
+      query_params[:'account'] = opts[:'account'] if !opts[:'account'].nil?
       query_params[:'rfc'] = opts[:'rfc'] if !opts[:'rfc'].nil?
 
       # header parameters
       header_params = {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-      auth_names = ['wire4_aut_app_user_spei']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -229,24 +253,30 @@ module Wire4Client
     end
     # Pre-registro de cuentas de beneficiarios.
     # Pre-registra una o más cuentas de beneficiario en la plataforma, proporcionando una URL donde el cuentahabiente Monex debe ingresar un valor de su llave digital para confirmar el alta de las cuentas de beneficiarios.<br/>Los posibles valores de <i>relationship</i> y <i>kind_of_relationship</i> se deben  obtener de /subscriptions/{subscription}/beneficiaries/relationships.<br/><br/>La confirmación de registro en Monex se realiza a través de una llamada a los webhooks registrados con el evento ACCOUNT.CREATED.
+    # @param authorization Header para token
     # @param request_dto Información de la cuenta del beneficiario
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [TokenRequiredResponse]
-    def pre_register_accounts_using_post(request_dto, subscription, opts = {})
-      data, _status_code, _headers = pre_register_accounts_using_post_with_http_info(request_dto, subscription, opts)
+    def pre_register_accounts_using_post(authorization, request_dto, subscription, opts = {})
+      data, _status_code, _headers = pre_register_accounts_using_post_with_http_info(authorization, request_dto, subscription, opts)
       data
     end
 
     # Pre-registro de cuentas de beneficiarios.
     # Pre-registra una o más cuentas de beneficiario en la plataforma, proporcionando una URL donde el cuentahabiente Monex debe ingresar un valor de su llave digital para confirmar el alta de las cuentas de beneficiarios.&lt;br/&gt;Los posibles valores de &lt;i&gt;relationship&lt;/i&gt; y &lt;i&gt;kind_of_relationship&lt;/i&gt; se deben  obtener de /subscriptions/{subscription}/beneficiaries/relationships.&lt;br/&gt;&lt;br/&gt;La confirmación de registro en Monex se realiza a través de una llamada a los webhooks registrados con el evento ACCOUNT.CREATED.
+    # @param authorization Header para token
     # @param request_dto Información de la cuenta del beneficiario
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [Array<(TokenRequiredResponse, Fixnum, Hash)>] TokenRequiredResponse data, response status code and response headers
-    def pre_register_accounts_using_post_with_http_info(request_dto, subscription, opts = {})
+    def pre_register_accounts_using_post_with_http_info(authorization, request_dto, subscription, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CuentasDeBeneficiariosSPEIApi.pre_register_accounts_using_post ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling CuentasDeBeneficiariosSPEIApi.pre_register_accounts_using_post"
       end
       # verify the required parameter 'request_dto' is set
       if @api_client.config.client_side_validation && request_dto.nil?
@@ -280,13 +310,14 @@ module Wire4Client
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
       # HTTP header 'Content-Type'
       header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = @api_client.object_to_http_body(request_dto)
-      auth_names = ['wire4_aut_app_user_spei']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -301,24 +332,30 @@ module Wire4Client
     end
     # Eliminación de beneficiarios SPEI® sin confirmar
     # Elimina un conjunto de beneficiarios a registrar en la cuenta del cliente Monex relacionada a la suscripción, los beneficiarios no deben haber sido confirmados por el cliente.
+    # @param authorization Header para token
     # @param request_id Identificador de los beneficiarios a eliminar
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def remove_beneficiaries_pending_using_delete(request_id, subscription, opts = {})
-      remove_beneficiaries_pending_using_delete_with_http_info(request_id, subscription, opts)
+    def remove_beneficiaries_pending_using_delete(authorization, request_id, subscription, opts = {})
+      remove_beneficiaries_pending_using_delete_with_http_info(authorization, request_id, subscription, opts)
       nil
     end
 
     # Eliminación de beneficiarios SPEI® sin confirmar
     # Elimina un conjunto de beneficiarios a registrar en la cuenta del cliente Monex relacionada a la suscripción, los beneficiarios no deben haber sido confirmados por el cliente.
+    # @param authorization Header para token
     # @param request_id Identificador de los beneficiarios a eliminar
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def remove_beneficiaries_pending_using_delete_with_http_info(request_id, subscription, opts = {})
+    def remove_beneficiaries_pending_using_delete_with_http_info(authorization, request_id, subscription, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CuentasDeBeneficiariosSPEIApi.remove_beneficiaries_pending_using_delete ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling CuentasDeBeneficiariosSPEIApi.remove_beneficiaries_pending_using_delete"
       end
       # verify the required parameter 'request_id' is set
       if @api_client.config.client_side_validation && request_id.nil?
@@ -346,13 +383,14 @@ module Wire4Client
       header_params = {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-      auth_names = ['wire4_aut_app_user_spei']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -366,26 +404,32 @@ module Wire4Client
     end
     # Actualiza el monto límite
     # Actualiza el monto límite a la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción.
+    # @param authorization Header para token
     # @param account Cuenta a actualizar
     # @param request_dto Información de la cuenta y el monto límite a actualizar
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def update_amount_limit_account_using_put(account, request_dto, subscription, opts = {})
-      update_amount_limit_account_using_put_with_http_info(account, request_dto, subscription, opts)
+    def update_amount_limit_account_using_put(authorization, account, request_dto, subscription, opts = {})
+      update_amount_limit_account_using_put_with_http_info(authorization, account, request_dto, subscription, opts)
       nil
     end
 
     # Actualiza el monto límite
     # Actualiza el monto límite a la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción.
+    # @param authorization Header para token
     # @param account Cuenta a actualizar
     # @param request_dto Información de la cuenta y el monto límite a actualizar
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def update_amount_limit_account_using_put_with_http_info(account, request_dto, subscription, opts = {})
+    def update_amount_limit_account_using_put_with_http_info(authorization, account, request_dto, subscription, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CuentasDeBeneficiariosSPEIApi.update_amount_limit_account_using_put ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling CuentasDeBeneficiariosSPEIApi.update_amount_limit_account_using_put"
       end
       # verify the required parameter 'account' is set
       if @api_client.config.client_side_validation && account.nil?
@@ -431,13 +475,14 @@ module Wire4Client
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
       # HTTP header 'Content-Type'
       header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = @api_client.object_to_http_body(request_dto)
-      auth_names = ['wire4_aut_app_user_spei']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path,
         :header_params => header_params,
         :query_params => query_params,

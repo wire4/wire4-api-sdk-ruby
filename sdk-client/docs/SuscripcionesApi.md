@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **pre_enrollment_monex_user_using_post**
-> PreEnrollmentResponse pre_enrollment_monex_user_using_post(pre_enrollment_data)
+> PreEnrollmentResponse pre_enrollment_monex_user_using_post(authorization, pre_enrollment_data)
 
 registra una pre-suscripción
 
@@ -20,20 +20,17 @@ Pre-registra una suscripción para operar un contrato a través de un aplicació
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::SuscripcionesApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 pre_enrollment_data = Wire4Client::PreEnrollmentData.new # PreEnrollmentData | Información para el enrolamiento
 
 
 begin
   #registra una pre-suscripción
-  result = api_instance.pre_enrollment_monex_user_using_post(pre_enrollment_data)
+  result = api_instance.pre_enrollment_monex_user_using_post(authorization, pre_enrollment_data)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling SuscripcionesApi->pre_enrollment_monex_user_using_post: #{e}"
@@ -44,6 +41,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **pre_enrollment_data** | [**PreEnrollmentData**](PreEnrollmentData.md)| Información para el enrolamiento | 
 
 ### Return type
@@ -52,7 +50,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[wire4_aut_app](../README.md#wire4_aut_app)
+No authorization required
 
 ### HTTP request headers
 
@@ -62,7 +60,7 @@ Name | Type | Description  | Notes
 
 
 # **remove_enrollment_user_using_delete**
-> remove_enrollment_user_using_delete(subscription)
+> remove_enrollment_user_using_delete(authorization, subscription)
 
 Elimna una suscripción por id
 
@@ -72,20 +70,17 @@ Elimina una suscripción, una ves eliminada la suscripcion ya no se podran reali
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app_user_spei
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::SuscripcionesApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
 
 
 begin
   #Elimna una suscripción por id
-  api_instance.remove_enrollment_user_using_delete(subscription)
+  api_instance.remove_enrollment_user_using_delete(authorization, subscription)
 rescue Wire4Client::ApiError => e
   puts "Exception when calling SuscripcionesApi->remove_enrollment_user_using_delete: #{e}"
 end
@@ -95,6 +90,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **subscription** | **String**| El identificador de la suscripción a esta API | 
 
 ### Return type
@@ -103,7 +99,7 @@ nil (empty response body)
 
 ### Authorization
 
-[wire4_aut_app_user_spei](../README.md#wire4_aut_app_user_spei)
+No authorization required
 
 ### HTTP request headers
 
@@ -113,7 +109,7 @@ nil (empty response body)
 
 
 # **remove_subscription_pending_status_using_delete**
-> remove_subscription_pending_status_using_delete(subscription)
+> remove_subscription_pending_status_using_delete(authorization, subscription)
 
 Elimna una pre-suscripción
 
@@ -123,20 +119,17 @@ Se elimina una pre-suscripción, sólo se elimina en caso de que cliente monex n
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::SuscripcionesApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
 
 
 begin
   #Elimna una pre-suscripción
-  api_instance.remove_subscription_pending_status_using_delete(subscription)
+  api_instance.remove_subscription_pending_status_using_delete(authorization, subscription)
 rescue Wire4Client::ApiError => e
   puts "Exception when calling SuscripcionesApi->remove_subscription_pending_status_using_delete: #{e}"
 end
@@ -146,6 +139,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **subscription** | **String**| El identificador de la suscripción a esta API | 
 
 ### Return type
@@ -154,7 +148,7 @@ nil (empty response body)
 
 ### Authorization
 
-[wire4_aut_app](../README.md#wire4_aut_app)
+No authorization required
 
 ### HTTP request headers
 

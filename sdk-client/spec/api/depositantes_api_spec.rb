@@ -35,6 +35,7 @@ describe 'DepositantesApi' do
   # unit tests for get_depositants_using_get
   # Consulta de cuentas de depositantes
   # Obtiene una lista de depositantes asociados al contrato relacionado a la subscripción.
+  # @param authorization Header para token
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
   # @return [GetDepositants]
@@ -47,6 +48,7 @@ describe 'DepositantesApi' do
   # unit tests for register_depositants_using_post
   # Registra un nuevo depositante
   # Registra un nuevo depositante en el contrato asociado a la subscripción.
+  # @param authorization Header para token
   # @param register Depositant info
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters

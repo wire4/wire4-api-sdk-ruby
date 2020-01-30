@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **get_spid_classifications_using_get**
-> SpidClassificationsResponseDTO get_spid_classifications_using_get(subscription)
+> SpidClassificationsResponseDTO get_spid_classifications_using_get(authorization, subscription)
 
 Consulta las clasificaciones para operaciones con SPID
 
@@ -19,20 +19,17 @@ Obtiene las clasificaciones para operaciones con dólares (SPID) de Monex.<br/>E
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app_user_spid
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::TransferenciasSPIDApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
 
 
 begin
   #Consulta las clasificaciones para operaciones con SPID
-  result = api_instance.get_spid_classifications_using_get(subscription)
+  result = api_instance.get_spid_classifications_using_get(authorization, subscription)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling TransferenciasSPIDApi->get_spid_classifications_using_get: #{e}"
@@ -43,6 +40,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **subscription** | **String**| El identificador de la suscripción a esta API | 
 
 ### Return type
@@ -51,7 +49,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[wire4_aut_app_user_spid](../README.md#wire4_aut_app_user_spid)
+No authorization required
 
 ### HTTP request headers
 
@@ -61,7 +59,7 @@ Name | Type | Description  | Notes
 
 
 # **register_outgoing_spid_transaction_using_post**
-> TokenRequiredResponse register_outgoing_spid_transaction_using_post(subscription, transactions)
+> TokenRequiredResponse register_outgoing_spid_transaction_using_post(authorization, subscription, transactions)
 
 Registro de transferencias SPID
 
@@ -71,13 +69,10 @@ Registra un conjunto de transferencias a realizar en la cuenta del cliente Monex
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app_user_spid
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::TransferenciasSPIDApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
 
@@ -86,7 +81,7 @@ transactions = Wire4Client::TransactionOutgoingSpid.new # TransactionOutgoingSpi
 
 begin
   #Registro de transferencias SPID
-  result = api_instance.register_outgoing_spid_transaction_using_post(subscription, transactions)
+  result = api_instance.register_outgoing_spid_transaction_using_post(authorization, subscription, transactions)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling TransferenciasSPIDApi->register_outgoing_spid_transaction_using_post: #{e}"
@@ -97,6 +92,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **subscription** | **String**| El identificador de la suscripción a esta API | 
  **transactions** | [**TransactionOutgoingSpid**](TransactionOutgoingSpid.md)| Información de las transferencias SPID de salida | 
 
@@ -106,7 +102,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[wire4_aut_app_user_spid](../README.md#wire4_aut_app_user_spid)
+No authorization required
 
 ### HTTP request headers
 

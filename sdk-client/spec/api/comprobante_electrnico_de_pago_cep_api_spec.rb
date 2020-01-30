@@ -35,6 +35,7 @@ describe 'ComprobanteElectrnicoDePagoCEPApi' do
   # unit tests for obtain_transaction_cep_using_post
   # Consulta de CEP
   # Consulta el CEP de un pago realizado a través del SPEI, si es que este se encuentra disponible en BANXICO.
+  # @param authorization Header para token
   # @param cep_data Información para buscar un CEP
   # @param [Hash] opts the optional parameters
   # @return [CepResponse]

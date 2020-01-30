@@ -11,5 +11,5 @@ Swagger Codegen version: 2.4.10
 =end
 
 module Wire4Client
-  VERSION = '0.0.1-SNAPSHOT'
+  VERSION = '1.0.0'
 end

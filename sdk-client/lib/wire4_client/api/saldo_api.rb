@@ -21,22 +21,28 @@ module Wire4Client
     end
     # Consulta los saldo de una cuenta
     # Obtiene el de las divisas que se manejen en el contrato.
+    # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [BalanceListResponse]
-    def get_balance_using_get(subscription, opts = {})
-      data, _status_code, _headers = get_balance_using_get_with_http_info(subscription, opts)
+    def get_balance_using_get(authorization, subscription, opts = {})
+      data, _status_code, _headers = get_balance_using_get_with_http_info(authorization, subscription, opts)
       data
     end
 
     # Consulta los saldo de una cuenta
     # Obtiene el de las divisas que se manejen en el contrato.
+    # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [Array<(BalanceListResponse, Fixnum, Hash)>] BalanceListResponse data, response status code and response headers
-    def get_balance_using_get_with_http_info(subscription, opts = {})
+    def get_balance_using_get_with_http_info(authorization, subscription, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SaldoApi.get_balance_using_get ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling SaldoApi.get_balance_using_get"
       end
       # verify the required parameter 'subscription' is set
       if @api_client.config.client_side_validation && subscription.nil?
@@ -64,13 +70,14 @@ module Wire4Client
       header_params = {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-      auth_names = ['wire4_aut_app_user_spei']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,

@@ -32,8 +32,24 @@ describe 'CuentasDeBeneficiariosSPIDApi' do
     end
   end
 
+  # unit tests for get_spid_beneficiaries_for_account
+  # Consulta los beneficiarios SPID registrados
+  # Obtiene los beneficiarios SPID registrados al contrato relacionado con la suscripción, Los beneficiarios son los que actualmente se encuentran registrados en banca Monex.
+  # @param authorization Header para token
+  # @param subscription El identificador de la suscripción a esta API
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :account Cuenta del beneficiario, puede ser Clabe, TDD o Celular
+  # @option opts [String] :rfc RFC del beneficiario
+  # @return [SpidBeneficiariesResponse]
+  describe 'get_spid_beneficiaries_for_account test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for pre_register_accounts_using_post1
   # Pre-registro de cuentas de beneficiarios SPID
+  # @param authorization Header para token
   # @param request_spid_dto Información de la cuenta del beneficiario
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters

@@ -20,19 +20,25 @@ module Wire4Client
       @api_client = api_client
     end
     # Información de instituciones bancarias.
+    # @param authorization Header para token
     # @param [Hash] opts the optional parameters
     # @return [InstitutionsList]
-    def get_all_institutions_using_get(opts = {})
-      data, _status_code, _headers = get_all_institutions_using_get_with_http_info(opts)
+    def get_all_institutions_using_get(authorization, opts = {})
+      data, _status_code, _headers = get_all_institutions_using_get_with_http_info(authorization, opts)
       data
     end
 
     # Información de instituciones bancarias.
+    # @param authorization Header para token
     # @param [Hash] opts the optional parameters
     # @return [Array<(InstitutionsList, Fixnum, Hash)>] InstitutionsList data, response status code and response headers
-    def get_all_institutions_using_get_with_http_info(opts = {})
+    def get_all_institutions_using_get_with_http_info(authorization, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstitucionesApi.get_all_institutions_using_get ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling InstitucionesApi.get_all_institutions_using_get"
       end
       # resource path
       local_var_path = '/institutions'
@@ -44,13 +50,14 @@ module Wire4Client
       header_params = {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-      auth_names = ['wire4_aut_app']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,

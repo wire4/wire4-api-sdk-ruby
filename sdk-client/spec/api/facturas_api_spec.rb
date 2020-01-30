@@ -35,6 +35,7 @@ describe 'FacturasApi' do
   # unit tests for billings_report_by_id_using_get
   # Consulta de facturas por identificador
   # Consulta las facturas emitidas por conceptos de uso de la plataforma y operaciones realizadas tanto de entrada como de salida. Se debe especificar el identificador de la factura
+  # @param authorization Header para token
   # @param id Identificador de la factura
   # @param [Hash] opts the optional parameters
   # @return [Billing]
@@ -47,6 +48,7 @@ describe 'FacturasApi' do
   # unit tests for billings_report_using_get
   # Consulta de facturas
   # Consulta las facturas emitidas por conceptos de uso de la plataforma y operaciones realizadas tanto de entrada como de salida. Es posible filtrar por periodo de fecha yyyy-MM, por ejemplo 2019-11
+  # @param authorization Header para token
   # @param [Hash] opts the optional parameters
   # @option opts [String] :period Filtro de fecha yyyy-MM
   # @return [Array<Billing>]

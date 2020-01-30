@@ -21,22 +21,28 @@ module Wire4Client
     end
     # Consulta de Webhook
     # Obtiene un webhook registrado en la plataforma mediante su identificador.
+    # @param authorization Header para token
     # @param id Identificador del webhook
     # @param [Hash] opts the optional parameters
     # @return [WebhookResponse]
-    def get_webhook(id, opts = {})
-      data, _status_code, _headers = get_webhook_with_http_info(id, opts)
+    def get_webhook(authorization, id, opts = {})
+      data, _status_code, _headers = get_webhook_with_http_info(authorization, id, opts)
       data
     end
 
     # Consulta de Webhook
     # Obtiene un webhook registrado en la plataforma mediante su identificador.
+    # @param authorization Header para token
     # @param id Identificador del webhook
     # @param [Hash] opts the optional parameters
     # @return [Array<(WebhookResponse, Fixnum, Hash)>] WebhookResponse data, response status code and response headers
-    def get_webhook_with_http_info(id, opts = {})
+    def get_webhook_with_http_info(authorization, id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WebhooksApi.get_webhook ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling WebhooksApi.get_webhook"
       end
       # verify the required parameter 'id' is set
       if @api_client.config.client_side_validation && id.nil?
@@ -52,13 +58,14 @@ module Wire4Client
       header_params = {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-      auth_names = ['wire4_aut_app']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -73,20 +80,26 @@ module Wire4Client
     end
     # Consulta de Webhooks
     # Obtiene los webhooks registrados en la plataforma que tengan estatus 'ACTIVE' e 'INACTIVE'.
+    # @param authorization Header para token
     # @param [Hash] opts the optional parameters
     # @return [WebhooksList]
-    def get_webhooks(opts = {})
-      data, _status_code, _headers = get_webhooks_with_http_info(opts)
+    def get_webhooks(authorization, opts = {})
+      data, _status_code, _headers = get_webhooks_with_http_info(authorization, opts)
       data
     end
 
     # Consulta de Webhooks
     # Obtiene los webhooks registrados en la plataforma que tengan estatus &#39;ACTIVE&#39; e &#39;INACTIVE&#39;.
+    # @param authorization Header para token
     # @param [Hash] opts the optional parameters
     # @return [Array<(WebhooksList, Fixnum, Hash)>] WebhooksList data, response status code and response headers
-    def get_webhooks_with_http_info(opts = {})
+    def get_webhooks_with_http_info(authorization, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WebhooksApi.get_webhooks ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling WebhooksApi.get_webhooks"
       end
       # resource path
       local_var_path = '/webhooks'
@@ -98,13 +111,14 @@ module Wire4Client
       header_params = {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-      auth_names = ['wire4_aut_app']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -119,22 +133,28 @@ module Wire4Client
     end
     # Alta de Webhook
     # Registra un webhook en la plataforma para su uso como notificador de eventos cuando estos ocurran.
+    # @param authorization Header para token
     # @param webhook_request Información para registrar un Webhook
     # @param [Hash] opts the optional parameters
     # @return [WebhookResponse]
-    def register_webhook(webhook_request, opts = {})
-      data, _status_code, _headers = register_webhook_with_http_info(webhook_request, opts)
+    def register_webhook(authorization, webhook_request, opts = {})
+      data, _status_code, _headers = register_webhook_with_http_info(authorization, webhook_request, opts)
       data
     end
 
     # Alta de Webhook
     # Registra un webhook en la plataforma para su uso como notificador de eventos cuando estos ocurran.
+    # @param authorization Header para token
     # @param webhook_request Información para registrar un Webhook
     # @param [Hash] opts the optional parameters
     # @return [Array<(WebhookResponse, Fixnum, Hash)>] WebhookResponse data, response status code and response headers
-    def register_webhook_with_http_info(webhook_request, opts = {})
+    def register_webhook_with_http_info(authorization, webhook_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WebhooksApi.register_webhook ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling WebhooksApi.register_webhook"
       end
       # verify the required parameter 'webhook_request' is set
       if @api_client.config.client_side_validation && webhook_request.nil?
@@ -152,13 +172,14 @@ module Wire4Client
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
       # HTTP header 'Content-Type'
       header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = @api_client.object_to_http_body(webhook_request)
-      auth_names = ['wire4_aut_app']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
         :query_params => query_params,

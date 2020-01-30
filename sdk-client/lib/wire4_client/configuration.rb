@@ -196,27 +196,6 @@ module Wire4Client
     # Returns Auth Settings hash for api client.
     def auth_settings
       {
-        'wire4_aut_app' =>
-          {
-            type: 'oauth2',
-            in: 'header',
-            key: 'Authorization',
-            value: "Bearer #{access_token}"
-          },
-        'wire4_aut_app_user_spei' =>
-          {
-            type: 'oauth2',
-            in: 'header',
-            key: 'Authorization',
-            value: "Bearer #{access_token}"
-          },
-        'wire4_aut_app_user_spid' =>
-          {
-            type: 'oauth2',
-            in: 'header',
-            key: 'Authorization',
-            value: "Bearer #{access_token}"
-          },
       }
     end
   end

@@ -21,22 +21,28 @@ module Wire4Client
     end
     # Consulta de cuentas de depositantes
     # Obtiene una lista de depositantes asociados al contrato relacionado a la subscripción.
+    # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [GetDepositants]
-    def get_depositants_using_get(subscription, opts = {})
-      data, _status_code, _headers = get_depositants_using_get_with_http_info(subscription, opts)
+    def get_depositants_using_get(authorization, subscription, opts = {})
+      data, _status_code, _headers = get_depositants_using_get_with_http_info(authorization, subscription, opts)
       data
     end
 
     # Consulta de cuentas de depositantes
     # Obtiene una lista de depositantes asociados al contrato relacionado a la subscripción.
+    # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetDepositants, Fixnum, Hash)>] GetDepositants data, response status code and response headers
-    def get_depositants_using_get_with_http_info(subscription, opts = {})
+    def get_depositants_using_get_with_http_info(authorization, subscription, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: DepositantesApi.get_depositants_using_get ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling DepositantesApi.get_depositants_using_get"
       end
       # verify the required parameter 'subscription' is set
       if @api_client.config.client_side_validation && subscription.nil?
@@ -64,13 +70,14 @@ module Wire4Client
       header_params = {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-      auth_names = ['wire4_aut_app_user_spei']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -85,24 +92,30 @@ module Wire4Client
     end
     # Registra un nuevo depositante
     # Registra un nuevo depositante en el contrato asociado a la subscripción.
+    # @param authorization Header para token
     # @param register Depositant info
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [DepositantsResponse]
-    def register_depositants_using_post(register, subscription, opts = {})
-      data, _status_code, _headers = register_depositants_using_post_with_http_info(register, subscription, opts)
+    def register_depositants_using_post(authorization, register, subscription, opts = {})
+      data, _status_code, _headers = register_depositants_using_post_with_http_info(authorization, register, subscription, opts)
       data
     end
 
     # Registra un nuevo depositante
     # Registra un nuevo depositante en el contrato asociado a la subscripción.
+    # @param authorization Header para token
     # @param register Depositant info
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [Array<(DepositantsResponse, Fixnum, Hash)>] DepositantsResponse data, response status code and response headers
-    def register_depositants_using_post_with_http_info(register, subscription, opts = {})
+    def register_depositants_using_post_with_http_info(authorization, register, subscription, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: DepositantesApi.register_depositants_using_post ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling DepositantesApi.register_depositants_using_post"
       end
       # verify the required parameter 'register' is set
       if @api_client.config.client_side_validation && register.nil?
@@ -136,13 +149,14 @@ module Wire4Client
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
       # HTTP header 'Content-Type'
       header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = @api_client.object_to_http_body(register)
-      auth_names = ['wire4_aut_app_user_spei']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
         :query_params => query_params,

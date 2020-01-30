@@ -35,6 +35,7 @@ describe 'TransferenciasSPEIApi' do
   # unit tests for drop_transactions_pending_using_delete
   # Eliminación de transferencias SPEI® pendientes
   # Elimina un conjunto de transferencias a realizar en la cuenta del cliente Monex relacionada a la suscripción, las transferencias no deben haber sido confirmadas por el cliente.
+  # @param authorization Header para token
   # @param request_id Identificador de las transferencias a eliminar
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
@@ -48,6 +49,7 @@ describe 'TransferenciasSPEIApi' do
   # unit tests for incoming_spei_transactions_report_using_get
   # Consulta de transferencias recibidas
   # Realiza una consulta de las transferencias recibidas (depósitos) en la cuenta del cliente Monex relacionada a la suscripción, las transferencias que regresa este recuso son únicamente las transferencias  recibidas durante el día en el que se realiza la consulta.
+  # @param authorization Header para token
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
   # @return [Array<Deposit>]
@@ -60,6 +62,7 @@ describe 'TransferenciasSPEIApi' do
   # unit tests for out_comming_spei_request_id_transactions_report_using_get
   # Consulta de transferencias de salida por identificador de petición
   # Consulta las transferencias de salida registradas en una petición, las transferencias que regresa este recuso son únicamente las transferencias  de salida agrupadas al identificador de la petición que se generó al hacer el registro de las transacciones el cual se debe especificar como parte del path de este endpoint.
+  # @param authorization Header para token
   # @param request_id Identificador de la petición a buscar
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
@@ -73,6 +76,7 @@ describe 'TransferenciasSPEIApi' do
   # unit tests for outgoing_spei_transactions_report_using_get
   # Consulta de transferencias realizadas
   # Consulta las transferencias realizadas en la cuenta del cliente Monex relacionada a la suscripción, las transferencias que regresa este recuso son únicamente las transferencias recibidas en el día en el que se realiza la consulta.&lt;br&gt;Se pueden realizar consultas por &lt;strong&gt;order_id&lt;/strong&gt; al realizar este tipo de consultas no importa el día en el que se realizó la transferencia
+  # @param authorization Header para token
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
   # @option opts [String] :order_id Identificador de la orden a buscar
@@ -86,6 +90,7 @@ describe 'TransferenciasSPEIApi' do
   # unit tests for register_outgoing_spei_transaction_using_post
   # Registro de transferencias
   # Registra un conjunto de transferencias a realizar en la cuenta del cliente Monex relacionada a la suscripción, las transferencias deben ser confirmadas por el cliente para que se efectuen.
+  # @param authorization Header para token
   # @param subscription El identificador de la suscripción a esta API
   # @param transactions Información de las transferencias SPEI de salida
   # @param [Hash] opts the optional parameters

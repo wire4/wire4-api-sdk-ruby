@@ -13,19 +13,16 @@ Swagger Codegen version: 2.4.10
 require 'date'
 
 module Wire4Client
-  # Objeto que contiene información de la cuenta
-  class AccountSpid
+  # Objeto que contiene información de la cuenta de beneficiario SPID
+  class SpidBeneficiaryResponse
     # Monto límite permitido para la cuenta
     attr_accessor :amount_limit
 
-    # Código banxico con una longitud de 5 dígitos, es requerido en caso de que la cuenta del beneficiario sea un número de celular
-    attr_accessor :bank_code_banxico
+    # El banco al cual pertenece la cuenta
+    attr_accessor :bank
 
     # Cuenta del beneficiario debe ser una cuenta CLABE
     attr_accessor :beneficiary_account
-
-    # Url a la que se redirigira en caso no exitoso
-    attr_accessor :cancel_return_url
 
     # Lista de email's, este dato es opcional
     attr_accessor :email
@@ -37,16 +34,13 @@ module Wire4Client
     attr_accessor :kind_of_relationship
 
     # Referencia numérica
-    attr_accessor :numeric_reference
+    attr_accessor :numeric_reference_spid
 
     # Concepto de pago
-    attr_accessor :payment_concept
+    attr_accessor :payment_concept_spid
 
     # Código de relación de la cuenta, este valor debe ser igual a uno de los obtenidos del recurso de consulta de  relationship
     attr_accessor :relationship
-
-    # Url a la que se redireccionara en caso exitoso
-    attr_accessor :return_url
 
     # Registro federal de contribuyentes
     attr_accessor :rfc
@@ -55,16 +49,14 @@ module Wire4Client
     def self.attribute_map
       {
         :'amount_limit' => :'amount_limit',
-        :'bank_code_banxico' => :'bank_code_banxico',
+        :'bank' => :'bank',
         :'beneficiary_account' => :'beneficiary_account',
-        :'cancel_return_url' => :'cancel_return_url',
         :'email' => :'email',
         :'institution' => :'institution',
         :'kind_of_relationship' => :'kind_of_relationship',
-        :'numeric_reference' => :'numeric_reference',
-        :'payment_concept' => :'payment_concept',
+        :'numeric_reference_spid' => :'numeric_reference_spid',
+        :'payment_concept_spid' => :'payment_concept_spid',
         :'relationship' => :'relationship',
-        :'return_url' => :'return_url',
         :'rfc' => :'rfc'
       }
     end
@@ -73,16 +65,14 @@ module Wire4Client
     def self.swagger_types
       {
         :'amount_limit' => :'Float',
-        :'bank_code_banxico' => :'String',
+        :'bank' => :'Institution',
         :'beneficiary_account' => :'String',
-        :'cancel_return_url' => :'String',
         :'email' => :'Array<String>',
         :'institution' => :'BeneficiaryInstitution',
         :'kind_of_relationship' => :'String',
-        :'numeric_reference' => :'String',
-        :'payment_concept' => :'String',
+        :'numeric_reference_spid' => :'String',
+        :'payment_concept_spid' => :'String',
         :'relationship' => :'String',
-        :'return_url' => :'String',
         :'rfc' => :'String'
       }
     end
@@ -99,16 +89,12 @@ module Wire4Client
         self.amount_limit = attributes[:'amount_limit']
       end
 
-      if attributes.has_key?(:'bank_code_banxico')
-        self.bank_code_banxico = attributes[:'bank_code_banxico']
+      if attributes.has_key?(:'bank')
+        self.bank = attributes[:'bank']
       end
 
       if attributes.has_key?(:'beneficiary_account')
         self.beneficiary_account = attributes[:'beneficiary_account']
-      end
-
-      if attributes.has_key?(:'cancel_return_url')
-        self.cancel_return_url = attributes[:'cancel_return_url']
       end
 
       if attributes.has_key?(:'email')
@@ -125,20 +111,16 @@ module Wire4Client
         self.kind_of_relationship = attributes[:'kind_of_relationship']
       end
 
-      if attributes.has_key?(:'numeric_reference')
-        self.numeric_reference = attributes[:'numeric_reference']
+      if attributes.has_key?(:'numeric_reference_spid')
+        self.numeric_reference_spid = attributes[:'numeric_reference_spid']
       end
 
-      if attributes.has_key?(:'payment_concept')
-        self.payment_concept = attributes[:'payment_concept']
+      if attributes.has_key?(:'payment_concept_spid')
+        self.payment_concept_spid = attributes[:'payment_concept_spid']
       end
 
       if attributes.has_key?(:'relationship')
         self.relationship = attributes[:'relationship']
-      end
-
-      if attributes.has_key?(:'return_url')
-        self.return_url = attributes[:'return_url']
       end
 
       if attributes.has_key?(:'rfc')
@@ -154,18 +136,6 @@ module Wire4Client
         invalid_properties.push('invalid value for "amount_limit", amount_limit cannot be nil.')
       end
 
-      if !@bank_code_banxico.nil? && @bank_code_banxico.to_s.length > 5
-        invalid_properties.push('invalid value for "bank_code_banxico", the character length must be smaller than or equal to 5.')
-      end
-
-      if !@bank_code_banxico.nil? && @bank_code_banxico.to_s.length < 5
-        invalid_properties.push('invalid value for "bank_code_banxico", the character length must be great than or equal to 5.')
-      end
-
-      if !@bank_code_banxico.nil? && @bank_code_banxico !~ Regexp.new(/[0-9][0-9]*/)
-        invalid_properties.push('invalid value for "bank_code_banxico", must conform to the pattern /[0-9][0-9]*/.')
-      end
-
       if @beneficiary_account.nil?
         invalid_properties.push('invalid value for "beneficiary_account", beneficiary_account cannot be nil.')
       end
@@ -178,16 +148,16 @@ module Wire4Client
         invalid_properties.push('invalid value for "kind_of_relationship", kind_of_relationship cannot be nil.')
       end
 
-      if !@numeric_reference.nil? && @numeric_reference.to_s.length > 7
-        invalid_properties.push('invalid value for "numeric_reference", the character length must be smaller than or equal to 7.')
+      if !@numeric_reference_spid.nil? && @numeric_reference_spid.to_s.length > 7
+        invalid_properties.push('invalid value for "numeric_reference_spid", the character length must be smaller than or equal to 7.')
       end
 
-      if !@numeric_reference.nil? && @numeric_reference.to_s.length < 1
-        invalid_properties.push('invalid value for "numeric_reference", the character length must be great than or equal to 1.')
+      if !@numeric_reference_spid.nil? && @numeric_reference_spid.to_s.length < 1
+        invalid_properties.push('invalid value for "numeric_reference_spid", the character length must be great than or equal to 1.')
       end
 
-      if !@numeric_reference.nil? && @numeric_reference !~ Regexp.new(/[0-9][0-9]*/)
-        invalid_properties.push('invalid value for "numeric_reference", must conform to the pattern /[0-9][0-9]*/.')
+      if !@numeric_reference_spid.nil? && @numeric_reference_spid !~ Regexp.new(/[0-9][0-9]*/)
+        invalid_properties.push('invalid value for "numeric_reference_spid", must conform to the pattern /[0-9][0-9]*/.')
       end
 
       if @relationship.nil?
@@ -201,53 +171,32 @@ module Wire4Client
     # @return true if the model is valid
     def valid?
       return false if @amount_limit.nil?
-      return false if !@bank_code_banxico.nil? && @bank_code_banxico.to_s.length > 5
-      return false if !@bank_code_banxico.nil? && @bank_code_banxico.to_s.length < 5
-      return false if !@bank_code_banxico.nil? && @bank_code_banxico !~ Regexp.new(/[0-9][0-9]*/)
       return false if @beneficiary_account.nil?
       return false if @institution.nil?
       return false if @kind_of_relationship.nil?
-      return false if !@numeric_reference.nil? && @numeric_reference.to_s.length > 7
-      return false if !@numeric_reference.nil? && @numeric_reference.to_s.length < 1
-      return false if !@numeric_reference.nil? && @numeric_reference !~ Regexp.new(/[0-9][0-9]*/)
+      return false if !@numeric_reference_spid.nil? && @numeric_reference_spid.to_s.length > 7
+      return false if !@numeric_reference_spid.nil? && @numeric_reference_spid.to_s.length < 1
+      return false if !@numeric_reference_spid.nil? && @numeric_reference_spid !~ Regexp.new(/[0-9][0-9]*/)
       return false if @relationship.nil?
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] bank_code_banxico Value to be assigned
-    def bank_code_banxico=(bank_code_banxico)
-      if !bank_code_banxico.nil? && bank_code_banxico.to_s.length > 5
-        fail ArgumentError, 'invalid value for "bank_code_banxico", the character length must be smaller than or equal to 5.'
+    # @param [Object] numeric_reference_spid Value to be assigned
+    def numeric_reference_spid=(numeric_reference_spid)
+      if !numeric_reference_spid.nil? && numeric_reference_spid.to_s.length > 7
+        fail ArgumentError, 'invalid value for "numeric_reference_spid", the character length must be smaller than or equal to 7.'
       end
 
-      if !bank_code_banxico.nil? && bank_code_banxico.to_s.length < 5
-        fail ArgumentError, 'invalid value for "bank_code_banxico", the character length must be great than or equal to 5.'
+      if !numeric_reference_spid.nil? && numeric_reference_spid.to_s.length < 1
+        fail ArgumentError, 'invalid value for "numeric_reference_spid", the character length must be great than or equal to 1.'
       end
 
-      if !bank_code_banxico.nil? && bank_code_banxico !~ Regexp.new(/[0-9][0-9]*/)
-        fail ArgumentError, 'invalid value for "bank_code_banxico", must conform to the pattern /[0-9][0-9]*/.'
+      if !numeric_reference_spid.nil? && numeric_reference_spid !~ Regexp.new(/[0-9][0-9]*/)
+        fail ArgumentError, 'invalid value for "numeric_reference_spid", must conform to the pattern /[0-9][0-9]*/.'
       end
 
-      @bank_code_banxico = bank_code_banxico
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] numeric_reference Value to be assigned
-    def numeric_reference=(numeric_reference)
-      if !numeric_reference.nil? && numeric_reference.to_s.length > 7
-        fail ArgumentError, 'invalid value for "numeric_reference", the character length must be smaller than or equal to 7.'
-      end
-
-      if !numeric_reference.nil? && numeric_reference.to_s.length < 1
-        fail ArgumentError, 'invalid value for "numeric_reference", the character length must be great than or equal to 1.'
-      end
-
-      if !numeric_reference.nil? && numeric_reference !~ Regexp.new(/[0-9][0-9]*/)
-        fail ArgumentError, 'invalid value for "numeric_reference", must conform to the pattern /[0-9][0-9]*/.'
-      end
-
-      @numeric_reference = numeric_reference
+      @numeric_reference_spid = numeric_reference_spid
     end
 
     # Checks equality by comparing each attribute.
@@ -256,16 +205,14 @@ module Wire4Client
       return true if self.equal?(o)
       self.class == o.class &&
           amount_limit == o.amount_limit &&
-          bank_code_banxico == o.bank_code_banxico &&
+          bank == o.bank &&
           beneficiary_account == o.beneficiary_account &&
-          cancel_return_url == o.cancel_return_url &&
           email == o.email &&
           institution == o.institution &&
           kind_of_relationship == o.kind_of_relationship &&
-          numeric_reference == o.numeric_reference &&
-          payment_concept == o.payment_concept &&
+          numeric_reference_spid == o.numeric_reference_spid &&
+          payment_concept_spid == o.payment_concept_spid &&
           relationship == o.relationship &&
-          return_url == o.return_url &&
           rfc == o.rfc
     end
 
@@ -278,7 +225,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount_limit, bank_code_banxico, beneficiary_account, cancel_return_url, email, institution, kind_of_relationship, numeric_reference, payment_concept, relationship, return_url, rfc].hash
+      [amount_limit, bank, beneficiary_account, email, institution, kind_of_relationship, numeric_reference_spid, payment_concept_spid, relationship, rfc].hash
     end
 
     # Builds the object from hash

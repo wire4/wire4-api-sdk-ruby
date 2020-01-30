@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    wire4_client (0.0.1.pre.SNAPSHOT)
+    wire4_client (1.0.0)
       json (~> 2.1, >= 2.1.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
@@ -66,4 +66,4 @@ DEPENDENCIES
   wire4_client!
 
 BUNDLED WITH
-   1.17.2
+   1.17.3

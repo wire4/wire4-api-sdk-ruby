@@ -21,22 +21,28 @@ module Wire4Client
     end
     # Consulta de CEP
     # Consulta el CEP de un pago realizado a través del SPEI, si es que este se encuentra disponible en BANXICO.
+    # @param authorization Header para token
     # @param cep_data Información para buscar un CEP
     # @param [Hash] opts the optional parameters
     # @return [CepResponse]
-    def obtain_transaction_cep_using_post(cep_data, opts = {})
-      data, _status_code, _headers = obtain_transaction_cep_using_post_with_http_info(cep_data, opts)
+    def obtain_transaction_cep_using_post(authorization, cep_data, opts = {})
+      data, _status_code, _headers = obtain_transaction_cep_using_post_with_http_info(authorization, cep_data, opts)
       data
     end
 
     # Consulta de CEP
     # Consulta el CEP de un pago realizado a través del SPEI, si es que este se encuentra disponible en BANXICO.
+    # @param authorization Header para token
     # @param cep_data Información para buscar un CEP
     # @param [Hash] opts the optional parameters
     # @return [Array<(CepResponse, Fixnum, Hash)>] CepResponse data, response status code and response headers
-    def obtain_transaction_cep_using_post_with_http_info(cep_data, opts = {})
+    def obtain_transaction_cep_using_post_with_http_info(authorization, cep_data, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ComprobanteElectrnicoDePagoCEPApi.obtain_transaction_cep_using_post ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling ComprobanteElectrnicoDePagoCEPApi.obtain_transaction_cep_using_post"
       end
       # verify the required parameter 'cep_data' is set
       if @api_client.config.client_side_validation && cep_data.nil?
@@ -54,13 +60,14 @@ module Wire4Client
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
       # HTTP header 'Content-Type'
       header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = @api_client.object_to_http_body(cep_data)
-      auth_names = ['wire4_aut_app']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
         :query_params => query_params,

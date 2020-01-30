@@ -21,22 +21,28 @@ module Wire4Client
     end
     # Consulta de facturas por identificador
     # Consulta las facturas emitidas por conceptos de uso de la plataforma y operaciones realizadas tanto de entrada como de salida. Se debe especificar el identificador de la factura
+    # @param authorization Header para token
     # @param id Identificador de la factura
     # @param [Hash] opts the optional parameters
     # @return [Billing]
-    def billings_report_by_id_using_get(id, opts = {})
-      data, _status_code, _headers = billings_report_by_id_using_get_with_http_info(id, opts)
+    def billings_report_by_id_using_get(authorization, id, opts = {})
+      data, _status_code, _headers = billings_report_by_id_using_get_with_http_info(authorization, id, opts)
       data
     end
 
     # Consulta de facturas por identificador
     # Consulta las facturas emitidas por conceptos de uso de la plataforma y operaciones realizadas tanto de entrada como de salida. Se debe especificar el identificador de la factura
+    # @param authorization Header para token
     # @param id Identificador de la factura
     # @param [Hash] opts the optional parameters
     # @return [Array<(Billing, Fixnum, Hash)>] Billing data, response status code and response headers
-    def billings_report_by_id_using_get_with_http_info(id, opts = {})
+    def billings_report_by_id_using_get_with_http_info(authorization, id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: FacturasApi.billings_report_by_id_using_get ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling FacturasApi.billings_report_by_id_using_get"
       end
       # verify the required parameter 'id' is set
       if @api_client.config.client_side_validation && id.nil?
@@ -52,13 +58,14 @@ module Wire4Client
       header_params = {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-      auth_names = ['wire4_aut_app']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -73,22 +80,28 @@ module Wire4Client
     end
     # Consulta de facturas
     # Consulta las facturas emitidas por conceptos de uso de la plataforma y operaciones realizadas tanto de entrada como de salida. Es posible filtrar por periodo de fecha yyyy-MM, por ejemplo 2019-11
+    # @param authorization Header para token
     # @param [Hash] opts the optional parameters
     # @option opts [String] :period Filtro de fecha yyyy-MM
     # @return [Array<Billing>]
-    def billings_report_using_get(opts = {})
-      data, _status_code, _headers = billings_report_using_get_with_http_info(opts)
+    def billings_report_using_get(authorization, opts = {})
+      data, _status_code, _headers = billings_report_using_get_with_http_info(authorization, opts)
       data
     end
 
     # Consulta de facturas
     # Consulta las facturas emitidas por conceptos de uso de la plataforma y operaciones realizadas tanto de entrada como de salida. Es posible filtrar por periodo de fecha yyyy-MM, por ejemplo 2019-11
+    # @param authorization Header para token
     # @param [Hash] opts the optional parameters
     # @option opts [String] :period Filtro de fecha yyyy-MM
     # @return [Array<(Array<Billing>, Fixnum, Hash)>] Array<Billing> data, response status code and response headers
-    def billings_report_using_get_with_http_info(opts = {})
+    def billings_report_using_get_with_http_info(authorization, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: FacturasApi.billings_report_using_get ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling FacturasApi.billings_report_using_get"
       end
       # resource path
       local_var_path = '/billings'
@@ -101,13 +114,14 @@ module Wire4Client
       header_params = {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-      auth_names = ['wire4_aut_app']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,

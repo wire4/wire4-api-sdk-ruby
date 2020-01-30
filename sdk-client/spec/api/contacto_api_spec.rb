@@ -35,6 +35,7 @@ describe 'ContactoApi' do
   # unit tests for send_contact_using_post
   # Solicitud de contacto
   # Notifica a un asesor Monex para que se ponga en contacto con un posible cliente.
+  # @param authorization Header para token
   # @param request_dto Información del contacto
   # @param [Hash] opts the optional parameters
   # @return [nil]

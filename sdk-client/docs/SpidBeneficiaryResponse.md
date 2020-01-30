@@ -1,19 +1,17 @@
-# Wire4Client::AccountSpid
+# Wire4Client::SpidBeneficiaryResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **amount_limit** | **Float** | Monto límite permitido para la cuenta | 
-**bank_code_banxico** | **String** | Código banxico con una longitud de 5 dígitos, es requerido en caso de que la cuenta del beneficiario sea un número de celular | [optional] 
+**bank** | [**Institution**](Institution.md) | El banco al cual pertenece la cuenta | [optional] 
 **beneficiary_account** | **String** | Cuenta del beneficiario debe ser una cuenta CLABE | 
-**cancel_return_url** | **String** | Url a la que se redirigira en caso no exitoso | [optional] 
 **email** | **Array&lt;String&gt;** | Lista de email&#39;s, este dato es opcional | [optional] 
 **institution** | [**BeneficiaryInstitution**](BeneficiaryInstitution.md) | Objeto que contiene el nombre de la institución, es mutuamente exclusivo con el objeto Person | 
 **kind_of_relationship** | **String** | Tipo de relación de la cuenta, este valor debe ser igual a uno de los obtenidos del recurso de consulta de relationships | 
-**numeric_reference** | **String** | Referencia numérica | [optional] 
-**payment_concept** | **String** | Concepto de pago | [optional] 
+**numeric_reference_spid** | **String** | Referencia numérica | [optional] 
+**payment_concept_spid** | **String** | Concepto de pago | [optional] 
 **relationship** | **String** | Código de relación de la cuenta, este valor debe ser igual a uno de los obtenidos del recurso de consulta de  relationship | 
-**return_url** | **String** | Url a la que se redireccionara en caso exitoso | [optional] 
 **rfc** | **String** | Registro federal de contribuyentes | [optional] 
 
 

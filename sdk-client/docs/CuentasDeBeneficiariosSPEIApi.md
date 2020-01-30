@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **delete_account_using_delete**
-> delete_account_using_delete(account, subscription)
+> delete_account_using_delete(authorization, account, subscription)
 
 Elimina la cuenta del beneficiario
 
@@ -23,13 +23,10 @@ Borra la cuenta de beneficiario proporcionada relacionada al contrato pertenecie
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app_user_spei
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 account = 'account_example' # String | La cuenta del beneciario que será eliminada
 
@@ -38,7 +35,7 @@ subscription = 'subscription_example' # String | El identificador de la suscripc
 
 begin
   #Elimina la cuenta del beneficiario
-  api_instance.delete_account_using_delete(account, subscription)
+  api_instance.delete_account_using_delete(authorization, account, subscription)
 rescue Wire4Client::ApiError => e
   puts "Exception when calling CuentasDeBeneficiariosSPEIApi->delete_account_using_delete: #{e}"
 end
@@ -48,6 +45,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **account** | **String**| La cuenta del beneciario que será eliminada | 
  **subscription** | **String**| El identificador de la suscripción a esta API | 
 
@@ -57,7 +55,7 @@ nil (empty response body)
 
 ### Authorization
 
-[wire4_aut_app_user_spei](../README.md#wire4_aut_app_user_spei)
+No authorization required
 
 ### HTTP request headers
 
@@ -67,7 +65,7 @@ nil (empty response body)
 
 
 # **get_available_relationships_monex_using_get**
-> RelationshipsResponse get_available_relationships_monex_using_get(subscription)
+> RelationshipsResponse get_available_relationships_monex_using_get(authorization, subscription)
 
 Consulta de relaciones
 
@@ -77,20 +75,17 @@ Obtiene las posibles relaciones existentes para registrar beneficiarios en Monex
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app_user_spei
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 subscription = 'subscription_example' # String | Identificador de la suscripción a esta API
 
 
 begin
   #Consulta de relaciones
-  result = api_instance.get_available_relationships_monex_using_get(subscription)
+  result = api_instance.get_available_relationships_monex_using_get(authorization, subscription)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling CuentasDeBeneficiariosSPEIApi->get_available_relationships_monex_using_get: #{e}"
@@ -101,6 +96,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **subscription** | **String**| Identificador de la suscripción a esta API | 
 
 ### Return type
@@ -109,7 +105,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[wire4_aut_app_user_spei](../README.md#wire4_aut_app_user_spei)
+No authorization required
 
 ### HTTP request headers
 
@@ -119,7 +115,7 @@ Name | Type | Description  | Notes
 
 
 # **get_beneficiaries_for_account_using_get**
-> BeneficiariesResponse get_beneficiaries_for_account_using_get(subscription, opts)
+> BeneficiariesResponse get_beneficiaries_for_account_using_get(authorization, subscription, opts)
 
 Consulta los beneficiarios registrados
 
@@ -129,23 +125,21 @@ Obtiene los beneficiarios registrados al contrato relacionado con la suscripció
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app_user_spei
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
 
 opts = { 
+  account: 'account_example', # String | Cuenta del beneficiario, puede ser Clabe, TDD o Celular
   rfc: 'rfc_example' # String | RFC del beneficiario
 }
 
 begin
   #Consulta los beneficiarios registrados
-  result = api_instance.get_beneficiaries_for_account_using_get(subscription, opts)
+  result = api_instance.get_beneficiaries_for_account_using_get(authorization, subscription, opts)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling CuentasDeBeneficiariosSPEIApi->get_beneficiaries_for_account_using_get: #{e}"
@@ -156,7 +150,9 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **subscription** | **String**| El identificador de la suscripción a esta API | 
+ **account** | **String**| Cuenta del beneficiario, puede ser Clabe, TDD o Celular | [optional] 
  **rfc** | **String**| RFC del beneficiario | [optional] 
 
 ### Return type
@@ -165,7 +161,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[wire4_aut_app_user_spei](../README.md#wire4_aut_app_user_spei)
+No authorization required
 
 ### HTTP request headers
 
@@ -175,7 +171,7 @@ Name | Type | Description  | Notes
 
 
 # **pre_register_accounts_using_post**
-> TokenRequiredResponse pre_register_accounts_using_post(request_dto, subscription)
+> TokenRequiredResponse pre_register_accounts_using_post(authorization, request_dto, subscription)
 
 Pre-registro de cuentas de beneficiarios.
 
@@ -185,13 +181,10 @@ Pre-registra una o más cuentas de beneficiario en la plataforma, proporcionando
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app_user_spei
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 request_dto = Wire4Client::AccountRequest.new # AccountRequest | Información de la cuenta del beneficiario
 
@@ -200,7 +193,7 @@ subscription = 'subscription_example' # String | El identificador de la suscripc
 
 begin
   #Pre-registro de cuentas de beneficiarios.
-  result = api_instance.pre_register_accounts_using_post(request_dto, subscription)
+  result = api_instance.pre_register_accounts_using_post(authorization, request_dto, subscription)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling CuentasDeBeneficiariosSPEIApi->pre_register_accounts_using_post: #{e}"
@@ -211,6 +204,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **request_dto** | [**AccountRequest**](AccountRequest.md)| Información de la cuenta del beneficiario | 
  **subscription** | **String**| El identificador de la suscripción a esta API | 
 
@@ -220,7 +214,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[wire4_aut_app_user_spei](../README.md#wire4_aut_app_user_spei)
+No authorization required
 
 ### HTTP request headers
 
@@ -230,7 +224,7 @@ Name | Type | Description  | Notes
 
 
 # **remove_beneficiaries_pending_using_delete**
-> remove_beneficiaries_pending_using_delete(request_id, subscription)
+> remove_beneficiaries_pending_using_delete(authorization, request_id, subscription)
 
 Eliminación de beneficiarios SPEI® sin confirmar
 
@@ -240,13 +234,10 @@ Elimina un conjunto de beneficiarios a registrar en la cuenta del cliente Monex 
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app_user_spei
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 request_id = 'request_id_example' # String | Identificador de los beneficiarios a eliminar
 
@@ -255,7 +246,7 @@ subscription = 'subscription_example' # String | El identificador de la suscripc
 
 begin
   #Eliminación de beneficiarios SPEI® sin confirmar
-  api_instance.remove_beneficiaries_pending_using_delete(request_id, subscription)
+  api_instance.remove_beneficiaries_pending_using_delete(authorization, request_id, subscription)
 rescue Wire4Client::ApiError => e
   puts "Exception when calling CuentasDeBeneficiariosSPEIApi->remove_beneficiaries_pending_using_delete: #{e}"
 end
@@ -265,6 +256,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **request_id** | **String**| Identificador de los beneficiarios a eliminar | 
  **subscription** | **String**| El identificador de la suscripción a esta API | 
 
@@ -274,7 +266,7 @@ nil (empty response body)
 
 ### Authorization
 
-[wire4_aut_app_user_spei](../README.md#wire4_aut_app_user_spei)
+No authorization required
 
 ### HTTP request headers
 
@@ -284,7 +276,7 @@ nil (empty response body)
 
 
 # **update_amount_limit_account_using_put**
-> update_amount_limit_account_using_put(account, request_dto, subscription)
+> update_amount_limit_account_using_put(authorization, account, request_dto, subscription)
 
 Actualiza el monto límite
 
@@ -294,13 +286,10 @@ Actualiza el monto límite a la cuenta de beneficiario proporcionada relacionada
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app_user_spei
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 account = 'account_example' # String | Cuenta a actualizar
 
@@ -311,7 +300,7 @@ subscription = 'subscription_example' # String | El identificador de la suscripc
 
 begin
   #Actualiza el monto límite
-  api_instance.update_amount_limit_account_using_put(account, request_dto, subscription)
+  api_instance.update_amount_limit_account_using_put(authorization, account, request_dto, subscription)
 rescue Wire4Client::ApiError => e
   puts "Exception when calling CuentasDeBeneficiariosSPEIApi->update_amount_limit_account_using_put: #{e}"
 end
@@ -321,6 +310,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **account** | **String**| Cuenta a actualizar | 
  **request_dto** | [**AmountRequest**](AmountRequest.md)| Información de la cuenta y el monto límite a actualizar | 
  **subscription** | **String**| El identificador de la suscripción a esta API | 
@@ -331,7 +321,7 @@ nil (empty response body)
 
 ### Authorization
 
-[wire4_aut_app_user_spei](../README.md#wire4_aut_app_user_spei)
+No authorization required
 
 ### HTTP request headers
 

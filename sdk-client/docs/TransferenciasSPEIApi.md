@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **drop_transactions_pending_using_delete**
-> drop_transactions_pending_using_delete(request_id, subscription)
+> drop_transactions_pending_using_delete(authorization, request_id, subscription)
 
 Eliminación de transferencias SPEI® pendientes
 
@@ -22,13 +22,10 @@ Elimina un conjunto de transferencias a realizar en la cuenta del cliente Monex 
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app_user_spei
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::TransferenciasSPEIApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 request_id = 'request_id_example' # String | Identificador de las transferencias a eliminar
 
@@ -37,7 +34,7 @@ subscription = 'subscription_example' # String | El identificador de la suscripc
 
 begin
   #Eliminación de transferencias SPEI® pendientes
-  api_instance.drop_transactions_pending_using_delete(request_id, subscription)
+  api_instance.drop_transactions_pending_using_delete(authorization, request_id, subscription)
 rescue Wire4Client::ApiError => e
   puts "Exception when calling TransferenciasSPEIApi->drop_transactions_pending_using_delete: #{e}"
 end
@@ -47,6 +44,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **request_id** | **String**| Identificador de las transferencias a eliminar | 
  **subscription** | **String**| El identificador de la suscripción a esta API | 
 
@@ -56,7 +54,7 @@ nil (empty response body)
 
 ### Authorization
 
-[wire4_aut_app_user_spei](../README.md#wire4_aut_app_user_spei)
+No authorization required
 
 ### HTTP request headers
 
@@ -66,7 +64,7 @@ nil (empty response body)
 
 
 # **incoming_spei_transactions_report_using_get**
-> Array&lt;Deposit&gt; incoming_spei_transactions_report_using_get(subscription)
+> Array&lt;Deposit&gt; incoming_spei_transactions_report_using_get(authorization, subscription)
 
 Consulta de transferencias recibidas
 
@@ -76,20 +74,17 @@ Realiza una consulta de las transferencias recibidas (depósitos) en la cuenta d
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app_user_spei
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::TransferenciasSPEIApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
 
 
 begin
   #Consulta de transferencias recibidas
-  result = api_instance.incoming_spei_transactions_report_using_get(subscription)
+  result = api_instance.incoming_spei_transactions_report_using_get(authorization, subscription)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling TransferenciasSPEIApi->incoming_spei_transactions_report_using_get: #{e}"
@@ -100,6 +95,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **subscription** | **String**| El identificador de la suscripción a esta API | 
 
 ### Return type
@@ -108,7 +104,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[wire4_aut_app_user_spei](../README.md#wire4_aut_app_user_spei)
+No authorization required
 
 ### HTTP request headers
 
@@ -118,7 +114,7 @@ Name | Type | Description  | Notes
 
 
 # **out_comming_spei_request_id_transactions_report_using_get**
-> PaymentsRequestId out_comming_spei_request_id_transactions_report_using_get(request_id, subscription)
+> PaymentsRequestId out_comming_spei_request_id_transactions_report_using_get(authorization, request_id, subscription)
 
 Consulta de transferencias de salida por identificador de petición
 
@@ -128,13 +124,10 @@ Consulta las transferencias de salida registradas en una petición, las transfer
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app_user_spei
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::TransferenciasSPEIApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 request_id = 'request_id_example' # String | Identificador de la petición a buscar
 
@@ -143,7 +136,7 @@ subscription = 'subscription_example' # String | El identificador de la suscripc
 
 begin
   #Consulta de transferencias de salida por identificador de petición
-  result = api_instance.out_comming_spei_request_id_transactions_report_using_get(request_id, subscription)
+  result = api_instance.out_comming_spei_request_id_transactions_report_using_get(authorization, request_id, subscription)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling TransferenciasSPEIApi->out_comming_spei_request_id_transactions_report_using_get: #{e}"
@@ -154,6 +147,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **request_id** | **String**| Identificador de la petición a buscar | 
  **subscription** | **String**| El identificador de la suscripción a esta API | 
 
@@ -163,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[wire4_aut_app_user_spei](../README.md#wire4_aut_app_user_spei)
+No authorization required
 
 ### HTTP request headers
 
@@ -173,7 +167,7 @@ Name | Type | Description  | Notes
 
 
 # **outgoing_spei_transactions_report_using_get**
-> Array&lt;Payment&gt; outgoing_spei_transactions_report_using_get(subscription, opts)
+> Array&lt;Payment&gt; outgoing_spei_transactions_report_using_get(authorization, subscription, opts)
 
 Consulta de transferencias realizadas
 
@@ -183,13 +177,10 @@ Consulta las transferencias realizadas en la cuenta del cliente Monex relacionad
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app_user_spei
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::TransferenciasSPEIApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
 
@@ -199,7 +190,7 @@ opts = {
 
 begin
   #Consulta de transferencias realizadas
-  result = api_instance.outgoing_spei_transactions_report_using_get(subscription, opts)
+  result = api_instance.outgoing_spei_transactions_report_using_get(authorization, subscription, opts)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling TransferenciasSPEIApi->outgoing_spei_transactions_report_using_get: #{e}"
@@ -210,6 +201,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **subscription** | **String**| El identificador de la suscripción a esta API | 
  **order_id** | **String**| Identificador de la orden a buscar | [optional] 
 
@@ -219,7 +211,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[wire4_aut_app_user_spei](../README.md#wire4_aut_app_user_spei)
+No authorization required
 
 ### HTTP request headers
 
@@ -229,7 +221,7 @@ Name | Type | Description  | Notes
 
 
 # **register_outgoing_spei_transaction_using_post**
-> TokenRequiredResponse register_outgoing_spei_transaction_using_post(subscription, transactions)
+> TokenRequiredResponse register_outgoing_spei_transaction_using_post(authorization, subscription, transactions)
 
 Registro de transferencias
 
@@ -239,13 +231,10 @@ Registra un conjunto de transferencias a realizar en la cuenta del cliente Monex
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app_user_spei
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::TransferenciasSPEIApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
 
@@ -254,7 +243,7 @@ transactions = Wire4Client::TransactionsOutgoingRegister.new # TransactionsOutgo
 
 begin
   #Registro de transferencias
-  result = api_instance.register_outgoing_spei_transaction_using_post(subscription, transactions)
+  result = api_instance.register_outgoing_spei_transaction_using_post(authorization, subscription, transactions)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling TransferenciasSPEIApi->register_outgoing_spei_transaction_using_post: #{e}"
@@ -265,6 +254,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **subscription** | **String**| El identificador de la suscripción a esta API | 
  **transactions** | [**TransactionsOutgoingRegister**](TransactionsOutgoingRegister.md)| Información de las transferencias SPEI de salida | 
 
@@ -274,7 +264,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[wire4_aut_app_user_spei](../README.md#wire4_aut_app_user_spei)
+No authorization required
 
 ### HTTP request headers
 

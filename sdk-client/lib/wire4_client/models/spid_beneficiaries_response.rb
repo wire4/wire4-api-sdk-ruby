@@ -13,47 +13,21 @@ Swagger Codegen version: 2.4.10
 require 'date'
 
 module Wire4Client
-  # El mensaje que se envía mediante (webHook) con la información del la suscripción a esta a esta API
-  class MessageSubscription
-    # Contrato Monex, con el cual se suscribió el cliente Monex en Wire4
-    attr_accessor :contract
-
-    # Contrato enmascarado de Monex, con el cual se suscribió el cliente Monex en Wire4
-    attr_accessor :masked_contract
-
-    # Identificador de la suscripción, el cual se utiliza en las operaciones que solicitan una suscripción
-    attr_accessor :subscription
-
-    # Usuario enmascardo, con el cual se suscribió el cliente Monex en Wire4
-    attr_accessor :user
-
-    # Usuario proporcionado por Wire4, el cual se debe utilizar para autenticar a esta suscripción
-    attr_accessor :user_key
-
-    # Contraseña proporcionada por Wire4, la cual se debe utilizar para autenticar a esta suscripción
-    attr_accessor :user_secret
+  class SpidBeneficiariesResponse
+    # Lista de beneficiarios obtenidos
+    attr_accessor :beneficiaries
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'contract' => :'contract',
-        :'masked_contract' => :'masked_contract',
-        :'subscription' => :'subscription',
-        :'user' => :'user',
-        :'user_key' => :'user_key',
-        :'user_secret' => :'user_secret'
+        :'beneficiaries' => :'beneficiaries'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'contract' => :'String',
-        :'masked_contract' => :'String',
-        :'subscription' => :'String',
-        :'user' => :'String',
-        :'user_key' => :'String',
-        :'user_secret' => :'String'
+        :'beneficiaries' => :'Array<SpidBeneficiaryResponse>'
       }
     end
 
@@ -65,28 +39,10 @@ module Wire4Client
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'contract')
-        self.contract = attributes[:'contract']
-      end
-
-      if attributes.has_key?(:'masked_contract')
-        self.masked_contract = attributes[:'masked_contract']
-      end
-
-      if attributes.has_key?(:'subscription')
-        self.subscription = attributes[:'subscription']
-      end
-
-      if attributes.has_key?(:'user')
-        self.user = attributes[:'user']
-      end
-
-      if attributes.has_key?(:'user_key')
-        self.user_key = attributes[:'user_key']
-      end
-
-      if attributes.has_key?(:'user_secret')
-        self.user_secret = attributes[:'user_secret']
+      if attributes.has_key?(:'beneficiaries')
+        if (value = attributes[:'beneficiaries']).is_a?(Array)
+          self.beneficiaries = value
+        end
       end
     end
 
@@ -108,12 +64,7 @@ module Wire4Client
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          contract == o.contract &&
-          masked_contract == o.masked_contract &&
-          subscription == o.subscription &&
-          user == o.user &&
-          user_key == o.user_key &&
-          user_secret == o.user_secret
+          beneficiaries == o.beneficiaries
     end
 
     # @see the `==` method
@@ -125,7 +76,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [contract, masked_contract, subscription, user, user_key, user_secret].hash
+      [beneficiaries].hash
     end
 
     # Builds the object from hash

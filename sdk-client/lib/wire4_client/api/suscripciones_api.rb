@@ -21,22 +21,28 @@ module Wire4Client
     end
     # registra una pre-suscripción
     # Pre-registra una suscripción para operar un contrato a través de un aplicación socio de la plataforma, proporcionando una URL donde el cliente Monex debe autorizar el acceso a los datos de su cuenta a el socio.<br/>Una vez que el cuentahabiente autorice el acceso, se envia un webhook con el evento ENROLLMENT.CREATED, el cual contiene los datos de acceso.
+    # @param authorization Header para token
     # @param pre_enrollment_data Información para el enrolamiento
     # @param [Hash] opts the optional parameters
     # @return [PreEnrollmentResponse]
-    def pre_enrollment_monex_user_using_post(pre_enrollment_data, opts = {})
-      data, _status_code, _headers = pre_enrollment_monex_user_using_post_with_http_info(pre_enrollment_data, opts)
+    def pre_enrollment_monex_user_using_post(authorization, pre_enrollment_data, opts = {})
+      data, _status_code, _headers = pre_enrollment_monex_user_using_post_with_http_info(authorization, pre_enrollment_data, opts)
       data
     end
 
     # registra una pre-suscripción
     # Pre-registra una suscripción para operar un contrato a través de un aplicación socio de la plataforma, proporcionando una URL donde el cliente Monex debe autorizar el acceso a los datos de su cuenta a el socio.&lt;br/&gt;Una vez que el cuentahabiente autorice el acceso, se envia un webhook con el evento ENROLLMENT.CREATED, el cual contiene los datos de acceso.
+    # @param authorization Header para token
     # @param pre_enrollment_data Información para el enrolamiento
     # @param [Hash] opts the optional parameters
     # @return [Array<(PreEnrollmentResponse, Fixnum, Hash)>] PreEnrollmentResponse data, response status code and response headers
-    def pre_enrollment_monex_user_using_post_with_http_info(pre_enrollment_data, opts = {})
+    def pre_enrollment_monex_user_using_post_with_http_info(authorization, pre_enrollment_data, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SuscripcionesApi.pre_enrollment_monex_user_using_post ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling SuscripcionesApi.pre_enrollment_monex_user_using_post"
       end
       # verify the required parameter 'pre_enrollment_data' is set
       if @api_client.config.client_side_validation && pre_enrollment_data.nil?
@@ -54,13 +60,14 @@ module Wire4Client
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
       # HTTP header 'Content-Type'
       header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = @api_client.object_to_http_body(pre_enrollment_data)
-      auth_names = ['wire4_aut_app']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -75,22 +82,28 @@ module Wire4Client
     end
     # Elimna una suscripción por id
     # Elimina una suscripción, una ves eliminada la suscripcion ya no se podran realizar operacions en el API uilizando esta suscripción
+    # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def remove_enrollment_user_using_delete(subscription, opts = {})
-      remove_enrollment_user_using_delete_with_http_info(subscription, opts)
+    def remove_enrollment_user_using_delete(authorization, subscription, opts = {})
+      remove_enrollment_user_using_delete_with_http_info(authorization, subscription, opts)
       nil
     end
 
     # Elimna una suscripción por id
     # Elimina una suscripción, una ves eliminada la suscripcion ya no se podran realizar operacions en el API uilizando esta suscripción
+    # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def remove_enrollment_user_using_delete_with_http_info(subscription, opts = {})
+    def remove_enrollment_user_using_delete_with_http_info(authorization, subscription, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SuscripcionesApi.remove_enrollment_user_using_delete ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling SuscripcionesApi.remove_enrollment_user_using_delete"
       end
       # verify the required parameter 'subscription' is set
       if @api_client.config.client_side_validation && subscription.nil?
@@ -118,13 +131,14 @@ module Wire4Client
       header_params = {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-      auth_names = ['wire4_aut_app_user_spei']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -138,22 +152,28 @@ module Wire4Client
     end
     # Elimna una pre-suscripción
     # Se elimina una pre-suscripción, sólo se elimina en caso de que cliente monex no haya concedio su autorización de acceso, es decir que la pre-suscripcion este pendiente.
+    # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def remove_subscription_pending_status_using_delete(subscription, opts = {})
-      remove_subscription_pending_status_using_delete_with_http_info(subscription, opts)
+    def remove_subscription_pending_status_using_delete(authorization, subscription, opts = {})
+      remove_subscription_pending_status_using_delete_with_http_info(authorization, subscription, opts)
       nil
     end
 
     # Elimna una pre-suscripción
     # Se elimina una pre-suscripción, sólo se elimina en caso de que cliente monex no haya concedio su autorización de acceso, es decir que la pre-suscripcion este pendiente.
+    # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def remove_subscription_pending_status_using_delete_with_http_info(subscription, opts = {})
+    def remove_subscription_pending_status_using_delete_with_http_info(authorization, subscription, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SuscripcionesApi.remove_subscription_pending_status_using_delete ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling SuscripcionesApi.remove_subscription_pending_status_using_delete"
       end
       # verify the required parameter 'subscription' is set
       if @api_client.config.client_side_validation && subscription.nil?
@@ -181,13 +201,14 @@ module Wire4Client
       header_params = {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-      auth_names = ['wire4_aut_app']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path,
         :header_params => header_params,
         :query_params => query_params,

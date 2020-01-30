@@ -21,22 +21,28 @@ module Wire4Client
     end
     # Consulta las clasificaciones para operaciones con SPID
     # Obtiene las clasificaciones para operaciones con dólares (SPID) de Monex.<br/>Este recurso se debe invocar previo al realizar una operación SPID.<br/>Se requiere que el token de autenticación se genere con scope spid_admin.
+    # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [SpidClassificationsResponseDTO]
-    def get_spid_classifications_using_get(subscription, opts = {})
-      data, _status_code, _headers = get_spid_classifications_using_get_with_http_info(subscription, opts)
+    def get_spid_classifications_using_get(authorization, subscription, opts = {})
+      data, _status_code, _headers = get_spid_classifications_using_get_with_http_info(authorization, subscription, opts)
       data
     end
 
     # Consulta las clasificaciones para operaciones con SPID
     # Obtiene las clasificaciones para operaciones con dólares (SPID) de Monex.&lt;br/&gt;Este recurso se debe invocar previo al realizar una operación SPID.&lt;br/&gt;Se requiere que el token de autenticación se genere con scope spid_admin.
+    # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @return [Array<(SpidClassificationsResponseDTO, Fixnum, Hash)>] SpidClassificationsResponseDTO data, response status code and response headers
-    def get_spid_classifications_using_get_with_http_info(subscription, opts = {})
+    def get_spid_classifications_using_get_with_http_info(authorization, subscription, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TransferenciasSPIDApi.get_spid_classifications_using_get ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling TransferenciasSPIDApi.get_spid_classifications_using_get"
       end
       # verify the required parameter 'subscription' is set
       if @api_client.config.client_side_validation && subscription.nil?
@@ -60,13 +66,14 @@ module Wire4Client
       header_params = {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = nil
-      auth_names = ['wire4_aut_app_user_spid']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -81,24 +88,30 @@ module Wire4Client
     end
     # Registro de transferencias SPID
     # Registra un conjunto de transferencias a realizar en la cuenta del cliente Monex relacionada a la suscripción, las transferencias deben ser confirmadas por el cliente para que se efectuen.
+    # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param transactions Información de las transferencias SPID de salida
     # @param [Hash] opts the optional parameters
     # @return [TokenRequiredResponse]
-    def register_outgoing_spid_transaction_using_post(subscription, transactions, opts = {})
-      data, _status_code, _headers = register_outgoing_spid_transaction_using_post_with_http_info(subscription, transactions, opts)
+    def register_outgoing_spid_transaction_using_post(authorization, subscription, transactions, opts = {})
+      data, _status_code, _headers = register_outgoing_spid_transaction_using_post_with_http_info(authorization, subscription, transactions, opts)
       data
     end
 
     # Registro de transferencias SPID
     # Registra un conjunto de transferencias a realizar en la cuenta del cliente Monex relacionada a la suscripción, las transferencias deben ser confirmadas por el cliente para que se efectuen.
+    # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param transactions Información de las transferencias SPID de salida
     # @param [Hash] opts the optional parameters
     # @return [Array<(TokenRequiredResponse, Fixnum, Hash)>] TokenRequiredResponse data, response status code and response headers
-    def register_outgoing_spid_transaction_using_post_with_http_info(subscription, transactions, opts = {})
+    def register_outgoing_spid_transaction_using_post_with_http_info(authorization, subscription, transactions, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TransferenciasSPIDApi.register_outgoing_spid_transaction_using_post ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling TransferenciasSPIDApi.register_outgoing_spid_transaction_using_post"
       end
       # verify the required parameter 'subscription' is set
       if @api_client.config.client_side_validation && subscription.nil?
@@ -132,13 +145,14 @@ module Wire4Client
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
       # HTTP header 'Content-Type'
       header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = @api_client.object_to_http_body(transactions)
-      auth_names = ['wire4_aut_app_user_spid']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
         :query_params => query_params,

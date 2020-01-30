@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **get_webhook**
-> WebhookResponse get_webhook(id)
+> WebhookResponse get_webhook(authorization, id)
 
 Consulta de Webhook
 
@@ -20,20 +20,17 @@ Obtiene un webhook registrado en la plataforma mediante su identificador.
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::WebhooksApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 id = 'id_example' # String | Identificador del webhook
 
 
 begin
   #Consulta de Webhook
-  result = api_instance.get_webhook(id)
+  result = api_instance.get_webhook(authorization, id)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling WebhooksApi->get_webhook: #{e}"
@@ -44,6 +41,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **id** | **String**| Identificador del webhook | 
 
 ### Return type
@@ -52,7 +50,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[wire4_aut_app](../README.md#wire4_aut_app)
+No authorization required
 
 ### HTTP request headers
 
@@ -62,7 +60,7 @@ Name | Type | Description  | Notes
 
 
 # **get_webhooks**
-> WebhooksList get_webhooks
+> WebhooksList get_webhooks(authorization)
 
 Consulta de Webhooks
 
@@ -72,17 +70,15 @@ Obtiene los webhooks registrados en la plataforma que tengan estatus 'ACTIVE' e 
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::WebhooksApi.new
 
+authorization = 'authorization_example' # String | Header para token
+
+
 begin
   #Consulta de Webhooks
-  result = api_instance.get_webhooks
+  result = api_instance.get_webhooks(authorization)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling WebhooksApi->get_webhooks: #{e}"
@@ -90,7 +86,10 @@ end
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
 
 ### Return type
 
@@ -98,7 +97,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[wire4_aut_app](../README.md#wire4_aut_app)
+No authorization required
 
 ### HTTP request headers
 
@@ -108,7 +107,7 @@ This endpoint does not need any parameter.
 
 
 # **register_webhook**
-> WebhookResponse register_webhook(webhook_request)
+> WebhookResponse register_webhook(authorization, webhook_request)
 
 Alta de Webhook
 
@@ -118,20 +117,17 @@ Registra un webhook en la plataforma para su uso como notificador de eventos cua
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::WebhooksApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 webhook_request = Wire4Client::WebhookRequest.new # WebhookRequest | Información para registrar un Webhook
 
 
 begin
   #Alta de Webhook
-  result = api_instance.register_webhook(webhook_request)
+  result = api_instance.register_webhook(authorization, webhook_request)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling WebhooksApi->register_webhook: #{e}"
@@ -142,6 +138,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **webhook_request** | [**WebhookRequest**](WebhookRequest.md)| Información para registrar un Webhook | 
 
 ### Return type
@@ -150,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[wire4_aut_app](../README.md#wire4_aut_app)
+No authorization required
 
 ### HTTP request headers
 

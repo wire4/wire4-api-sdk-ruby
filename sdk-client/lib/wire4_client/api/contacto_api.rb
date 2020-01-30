@@ -21,22 +21,28 @@ module Wire4Client
     end
     # Solicitud de contacto
     # Notifica a un asesor Monex para que se ponga en contacto con un posible cliente.
+    # @param authorization Header para token
     # @param request_dto Información del contacto
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def send_contact_using_post(request_dto, opts = {})
-      send_contact_using_post_with_http_info(request_dto, opts)
+    def send_contact_using_post(authorization, request_dto, opts = {})
+      send_contact_using_post_with_http_info(authorization, request_dto, opts)
       nil
     end
 
     # Solicitud de contacto
     # Notifica a un asesor Monex para que se ponga en contacto con un posible cliente.
+    # @param authorization Header para token
     # @param request_dto Información del contacto
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def send_contact_using_post_with_http_info(request_dto, opts = {})
+    def send_contact_using_post_with_http_info(authorization, request_dto, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ContactoApi.send_contact_using_post ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling ContactoApi.send_contact_using_post"
       end
       # verify the required parameter 'request_dto' is set
       if @api_client.config.client_side_validation && request_dto.nil?
@@ -54,13 +60,14 @@ module Wire4Client
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
       # HTTP header 'Content-Type'
       header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+      header_params[:'Authorization'] = authorization
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = @api_client.object_to_http_body(request_dto)
-      auth_names = ['wire4_aut_app']
+      auth_names = []
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
         :query_params => query_params,

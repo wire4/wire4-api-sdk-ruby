@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **account** | **String** | Cuenta emisora | [optional] 
 **amount** | **Float** | Monto de la transferencia | [optional] 
 **beneficiary_account** | **String** | Cuenta del beneficiario | [optional] 
-**beneficiary_bank** | [**MessageInstitution**](MessageInstitution.md) | Información del banco beneficiario | [optional] 
+**beneficiary_bank** | [**Institution**](Institution.md) | Información del banco beneficiario | [optional] 
 **beneficiary_name** | **String** | Nombre del Beneficiario | [optional] 
 **cep** | [**MessageCEP**](MessageCEP.md) | CEP emitido por Banxico de la transferencia, sólo en caso de que este disponible en banxico, posteriomente  podrá usar la consulta de CEP del API | [optional] 
 **clave_rastreo** | **String** | Clave de rastreo de la transferencia | [optional] 

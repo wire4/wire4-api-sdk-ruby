@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **billings_report_by_id_using_get**
-> Billing billings_report_by_id_using_get(id)
+> Billing billings_report_by_id_using_get(authorization, id)
 
 Consulta de facturas por identificador
 
@@ -19,20 +19,17 @@ Consulta las facturas emitidas por conceptos de uso de la plataforma y operacion
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::FacturasApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 id = 'id_example' # String | Identificador de la factura
 
 
 begin
   #Consulta de facturas por identificador
-  result = api_instance.billings_report_by_id_using_get(id)
+  result = api_instance.billings_report_by_id_using_get(authorization, id)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling FacturasApi->billings_report_by_id_using_get: #{e}"
@@ -43,6 +40,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **id** | **String**| Identificador de la factura | 
 
 ### Return type
@@ -51,7 +49,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[wire4_aut_app](../README.md#wire4_aut_app)
+No authorization required
 
 ### HTTP request headers
 
@@ -61,7 +59,7 @@ Name | Type | Description  | Notes
 
 
 # **billings_report_using_get**
-> Array&lt;Billing&gt; billings_report_using_get(opts)
+> Array&lt;Billing&gt; billings_report_using_get(authorization, opts)
 
 Consulta de facturas
 
@@ -71,13 +69,10 @@ Consulta las facturas emitidas por conceptos de uso de la plataforma y operacion
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::FacturasApi.new
+
+authorization = 'authorization_example' # String | Header para token
 
 opts = { 
   period: 'period_example' # String | Filtro de fecha yyyy-MM
@@ -85,7 +80,7 @@ opts = {
 
 begin
   #Consulta de facturas
-  result = api_instance.billings_report_using_get(opts)
+  result = api_instance.billings_report_using_get(authorization, opts)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling FacturasApi->billings_report_using_get: #{e}"
@@ -96,6 +91,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
  **period** | **String**| Filtro de fecha yyyy-MM | [optional] 
 
 ### Return type
@@ -104,7 +100,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[wire4_aut_app](../README.md#wire4_aut_app)
+No authorization required
 
 ### HTTP request headers
 

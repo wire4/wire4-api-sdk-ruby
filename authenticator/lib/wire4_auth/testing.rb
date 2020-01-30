@@ -22,6 +22,7 @@ require 'wire4_auth/auth/oauth_wire4'
 require 'wire4_auth/webhook_verification_signature/utils_compute'
 require 'wire4_client'
 
+#noinspection RubyTooManyMethodsInspection
 class Wire4ExamplesTest < Test::Unit::TestCase
 
   CLIENT_ID = "FxUWmqYGZuv8O1qjxstvIyJothMa"
@@ -43,7 +44,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "general" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app('general'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -63,7 +65,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.send_contact_using_post_with_http_info(body)
+      response = api_instance.send_contact_using_post_with_http_info(authorization, body)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
@@ -81,7 +83,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "general" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app('general'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -104,7 +107,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.obtain_transaction_cep_using_post(cep_data)
+      response = api_instance.obtain_transaction_cep_using_post(authorization, cep_data)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -122,7 +125,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "general" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app('general'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -139,7 +143,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.pre_enrollment_monex_user_using_post(body)
+      response = api_instance.pre_enrollment_monex_user_using_post(authorization, body)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -157,7 +161,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "general" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app('general'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -172,7 +177,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.remove_subscription_pending_status_using_delete_with_http_info(subscription)
+      response = api_instance.remove_subscription_pending_status_using_delete_with_http_info(authorization, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -194,8 +199,9 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spei_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(subscription_to_remove_user_key,
-                                                                                     subscription_to_remove_user_secret, 'spei_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(subscription_to_remove_user_key,
+                                                               subscription_to_remove_user_secret, 'spei_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -210,7 +216,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.remove_enrollment_user_using_delete_with_http_info(subscription)
+      response = api_instance.remove_enrollment_user_using_delete_with_http_info(authorization, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -228,7 +234,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spei_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -243,7 +250,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.get_available_relationships_monex_using_get(subscription)
+      response = api_instance.get_available_relationships_monex_using_get(authorization, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -262,7 +269,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spei_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -295,7 +303,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.pre_register_accounts_using_post(body, subscription)
+      response = api_instance.pre_register_accounts_using_post(authorization, body, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -314,7 +322,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spei_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -330,7 +339,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.remove_beneficiaries_pending_using_delete_with_http_info(request_id, subscription)
+      response = api_instance.remove_beneficiaries_pending_using_delete_with_http_info(authorization, request_id, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -348,7 +357,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spei_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -364,7 +374,9 @@ class Wire4ExamplesTest < Test::Unit::TestCase
     begin
       # Call the API
       # response = api_instance.get_beneficiaries_for_account_using_get(subscription, rfc: "RFCE010980AR3")
-      response = api_instance.get_beneficiaries_for_account_using_get(subscription)
+      # response = api_instance.get_beneficiaries_for_account_using_get(subscription, account: "RFCE010980AR3")
+      # response = api_instance.get_beneficiaries_for_account_using_get(subscription, rfc: "RFCE010980AR3, account: "RFCE010980AR3")
+      response = api_instance.get_beneficiaries_for_account_using_get(authorization, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -383,7 +395,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spei_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -403,7 +416,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.update_amount_limit_account_using_put_with_http_info(account, body, subscription)
+      response = api_instance.update_amount_limit_account_using_put_with_http_info(authorization, account, body, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -420,7 +433,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spei_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -436,7 +450,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.delete_account_using_delete_with_http_info(account, subscription)
+      response = api_instance.delete_account_using_delete_with_http_info(authorization, account, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -446,7 +460,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
   end
 
   def test_obtain_institutions
-    #omit('Reason')
+    omit('Reason')
     # Create the authenticator to obtain access token
     # The token URL and Service URL are defined for this environment enum value.
     # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
@@ -454,7 +468,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "general" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app('general'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -466,7 +481,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.get_all_institutions_using_get
+      response = api_instance.get_all_institutions_using_get(authorization)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -484,7 +499,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spei_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -499,7 +515,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.get_balance_using_get(subscription)
+      response = api_instance.get_balance_using_get(authorization, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -518,7 +534,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spid_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spid_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spid_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -533,7 +550,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.get_spid_classifications_using_get(subscription)
+      response = api_instance.get_spid_classifications_using_get(authorization, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -552,7 +569,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spid_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spid_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spid_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -579,7 +597,44 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.pre_register_accounts_using_post1(body, subscription)
+      response = api_instance.pre_register_accounts_using_post1(authorization, body, subscription)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  def test_obtain_beneficiaries_spid
+    omit('Reason')
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+
+    begin
+      # Obtain an access token use application flow and scope "spei_admin" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spid_admin')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::CuentasDeBeneficiariosSPIDApi.new
+
+    # build body with info (check references for more info: types, required fields, etc.)
+    subscription = SUBSCRIPTION
+
+    begin
+      # Call the API
+      # response = api_instance.get_beneficiaries_for_account_using_get(subscription, rfc: "RFCE010980AR3")
+      # response = api_instance.get_beneficiaries_for_account_using_get(subscription, account: "RFCE010980AR3")
+      # response = api_instance.get_beneficiaries_for_account_using_get(subscription, rfc: "RFCE010980AR3, account: "RFCE010980AR3")
+      response = api_instance.get_spid_beneficiaries_for_account(authorization, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -597,7 +652,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spei_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -612,7 +668,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.get_depositants_using_get(subscription)
+      response = api_instance.get_depositants_using_get(authorization, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -630,7 +686,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spei_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -650,7 +707,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.register_depositants_using_post(body, subscription)
+      response = api_instance.register_depositants_using_post(authorization, body, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -669,7 +726,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spei_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -684,7 +742,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.incoming_spei_transactions_report_using_get(subscription)
+      response = api_instance.incoming_spei_transactions_report_using_get(authorization, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -703,7 +761,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spei_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -718,7 +777,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.outgoing_spei_transactions_report_using_get(subscription)
+      response = api_instance.outgoing_spei_transactions_report_using_get(authorization, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -737,7 +796,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spei_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -753,7 +813,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.out_comming_spei_request_id_transactions_report_using_get(request_id, subscription)
+      response = api_instance.out_comming_spei_request_id_transactions_report_using_get(authorization, request_id, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling TransferenciasSPEIApi->out_comming_spei_request_id_transactions_report_using_get: #{e}"
@@ -772,7 +832,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spei_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -799,7 +860,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.register_outgoing_spei_transaction_using_post(subscription, body)
+      response = api_instance.register_outgoing_spei_transaction_using_post(authorization, subscription, body)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -810,7 +871,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
   #noinspection RubyInstanceMethodNamingConvention
   def test_delete_outgoing_pending_SPEI_transaction
-    #omit('Reason')
+    omit('Reason')
     # Create the authenticator to obtain access token
     # The token URL and Service URL are defined for this environment enum value.
     # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
@@ -818,7 +879,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spei_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -834,7 +896,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.drop_transactions_pending_using_delete_with_http_info(request_id, subscription)
+      response = api_instance.drop_transactions_pending_using_delete_with_http_info(authorization, request_id, subscription)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -853,7 +915,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "spid_admin" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spid_admin'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spid_admin')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -879,7 +942,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.register_outgoing_spid_transaction_using_post(subscription, body)
+      response = api_instance.register_outgoing_spid_transaction_using_post(authorization, subscription, body)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -889,7 +952,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
   end
 
   def test_register_web_hook
-    #omit('Reason')
+    omit('Reason')
     # Create the authenticator to obtain access token
     # The token URL and Service URL are defined for this environment enum value.
     # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
@@ -897,7 +960,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "general" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app('general'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -915,7 +979,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.register_webhook(body)
+      response = api_instance.register_webhook(authorization, body)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -933,7 +997,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "general" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app('general'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -945,7 +1010,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.get_webhooks
+      response = api_instance.get_webhooks(authorization)
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -963,7 +1028,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "general" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app('general'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -975,7 +1041,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.get_webhook("wh_3fe3e5f4849f4cabb147804fd55c86fc")
+      response = api_instance.get_webhook(authorization, "wh_3fe3e5f4849f4cabb147804fd55c86fc")
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -996,7 +1062,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Obtain an access token use application flow and scope "general" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app('general'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -1008,7 +1075,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.billings_report_using_get(period: "2019-10")
+      response = api_instance.billings_report_using_get(authorization, period: "2019-10")
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -1023,13 +1090,14 @@ class Wire4ExamplesTest < Test::Unit::TestCase
     # The token URL and Service URL are defined for this environment enum value.
     # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
 
-    #oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
-    oauth_wire4 = Wire4Auth::OAuthWire4.new("kIinyEIYWUIF3pflFxhRdKft2_ga",
-                                            "gca6FwUE_9Dk23UhWoM81pZkNgEa", Wire4Auth::EnvironmentEnum::DEVELOPMENT)
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+    #oauth_wire4 = Wire4Auth::OAuthWire4.new("kIinyEIYWUIF3pflFxhRdKft2_ga",
+    #                                        "gca6FwUE_9Dk23UhWoM81pZkNgEa", Wire4Auth::EnvironmentEnum::DEVELOPMENT)
 
     begin
       # Obtain an access token use application flow and scope "general" and add to request
-      oauth_wire4.config_default_api_client(oauth_wire4.obtain_access_token_app('general'))
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e}"
       # Optional manage exception in access token flow
@@ -1041,7 +1109,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
     begin
       # Call the API
-      response = api_instance.billings_report_by_id_using_get("834BA74A-BBBB-43C4-8400-A4528153C2BD")
+      response = api_instance.billings_report_by_id_using_get(authorization, "834BA74A-BBBB-43C4-8400-A4528153C2BD")
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e}"
@@ -1052,9 +1120,9 @@ class Wire4ExamplesTest < Test::Unit::TestCase
 
   def test_check_web_hook_sign
 
+    omit('Reason')
     puts `cd .. && cd .. && find *`.split("\n").uniq.sort.select { |f| !f.empty? }
 
-    omit('Reason')
     payload = "{ \"responseCode\":0, \n" + \
               "  \"message\":\"Ya existe este beneficiario de pago a ctas nacionales en el contrato\",\n" + \
               "  \"statusCode\":\"ERROR\",\n" + \

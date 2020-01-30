@@ -35,6 +35,7 @@ describe 'CuentasDeBeneficiariosSPEIApi' do
   # unit tests for delete_account_using_delete
   # Elimina la cuenta del beneficiario
   # Borra la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción. La cuenta a borrar debe ser una cuenta que opere con SPEI.
+  # @param authorization Header para token
   # @param account La cuenta del beneciario que será eliminada
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
@@ -48,6 +49,7 @@ describe 'CuentasDeBeneficiariosSPEIApi' do
   # unit tests for get_available_relationships_monex_using_get
   # Consulta de relaciones
   # Obtiene las posibles relaciones existentes para registrar beneficiarios en Monex. Se debe invocar este recurso antes de pre-registrar una cuenta de beneficiario.
+  # @param authorization Header para token
   # @param subscription Identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
   # @return [RelationshipsResponse]
@@ -60,8 +62,10 @@ describe 'CuentasDeBeneficiariosSPEIApi' do
   # unit tests for get_beneficiaries_for_account_using_get
   # Consulta los beneficiarios registrados
   # Obtiene los beneficiarios registrados al contrato relacionado con la suscripción, Los beneficiarios son los que actualmente se encuentran registrados en banca Monex.
+  # @param authorization Header para token
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :account Cuenta del beneficiario, puede ser Clabe, TDD o Celular
   # @option opts [String] :rfc RFC del beneficiario
   # @return [BeneficiariesResponse]
   describe 'get_beneficiaries_for_account_using_get test' do
@@ -73,6 +77,7 @@ describe 'CuentasDeBeneficiariosSPEIApi' do
   # unit tests for pre_register_accounts_using_post
   # Pre-registro de cuentas de beneficiarios.
   # Pre-registra una o más cuentas de beneficiario en la plataforma, proporcionando una URL donde el cuentahabiente Monex debe ingresar un valor de su llave digital para confirmar el alta de las cuentas de beneficiarios.&lt;br/&gt;Los posibles valores de &lt;i&gt;relationship&lt;/i&gt; y &lt;i&gt;kind_of_relationship&lt;/i&gt; se deben  obtener de /subscriptions/{subscription}/beneficiaries/relationships.&lt;br/&gt;&lt;br/&gt;La confirmación de registro en Monex se realiza a través de una llamada a los webhooks registrados con el evento ACCOUNT.CREATED.
+  # @param authorization Header para token
   # @param request_dto Información de la cuenta del beneficiario
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
@@ -86,6 +91,7 @@ describe 'CuentasDeBeneficiariosSPEIApi' do
   # unit tests for remove_beneficiaries_pending_using_delete
   # Eliminación de beneficiarios SPEI® sin confirmar
   # Elimina un conjunto de beneficiarios a registrar en la cuenta del cliente Monex relacionada a la suscripción, los beneficiarios no deben haber sido confirmados por el cliente.
+  # @param authorization Header para token
   # @param request_id Identificador de los beneficiarios a eliminar
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
@@ -99,6 +105,7 @@ describe 'CuentasDeBeneficiariosSPEIApi' do
   # unit tests for update_amount_limit_account_using_put
   # Actualiza el monto límite
   # Actualiza el monto límite a la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción.
+  # @param authorization Header para token
   # @param account Cuenta a actualizar
   # @param request_dto Información de la cuenta y el monto límite a actualizar
   # @param subscription El identificador de la suscripción a esta API

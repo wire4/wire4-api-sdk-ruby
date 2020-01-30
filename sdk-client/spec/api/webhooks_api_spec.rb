@@ -35,6 +35,7 @@ describe 'WebhooksApi' do
   # unit tests for get_webhook
   # Consulta de Webhook
   # Obtiene un webhook registrado en la plataforma mediante su identificador.
+  # @param authorization Header para token
   # @param id Identificador del webhook
   # @param [Hash] opts the optional parameters
   # @return [WebhookResponse]
@@ -47,6 +48,7 @@ describe 'WebhooksApi' do
   # unit tests for get_webhooks
   # Consulta de Webhooks
   # Obtiene los webhooks registrados en la plataforma que tengan estatus &#39;ACTIVE&#39; e &#39;INACTIVE&#39;.
+  # @param authorization Header para token
   # @param [Hash] opts the optional parameters
   # @return [WebhooksList]
   describe 'get_webhooks test' do
@@ -58,6 +60,7 @@ describe 'WebhooksApi' do
   # unit tests for register_webhook
   # Alta de Webhook
   # Registra un webhook en la plataforma para su uso como notificador de eventos cuando estos ocurran.
+  # @param authorization Header para token
   # @param webhook_request Información para registrar un Webhook
   # @param [Hash] opts the optional parameters
   # @return [WebhookResponse]

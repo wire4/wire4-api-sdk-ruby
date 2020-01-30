@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_all_institutions_using_get**
-> InstitutionsList get_all_institutions_using_get
+> InstitutionsList get_all_institutions_using_get(authorization)
 
 Información de instituciones bancarias.
 
@@ -16,17 +16,15 @@ Información de instituciones bancarias.
 ```ruby
 # load the gem
 require 'wire4_client'
-# setup authorization
-Wire4Client.configure do |config|
-  # Configure OAuth2 access token for authorization: wire4_aut_app
-  config.access_token = 'YOUR ACCESS TOKEN'
-end
 
 api_instance = Wire4Client::InstitucionesApi.new
 
+authorization = 'authorization_example' # String | Header para token
+
+
 begin
   #Información de instituciones bancarias.
-  result = api_instance.get_all_institutions_using_get
+  result = api_instance.get_all_institutions_using_get(authorization)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling InstitucionesApi->get_all_institutions_using_get: #{e}"
@@ -34,7 +32,10 @@ end
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
 
 ### Return type
 
@@ -42,7 +43,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[wire4_aut_app](../README.md#wire4_aut_app)
+No authorization required
 
 ### HTTP request headers
 

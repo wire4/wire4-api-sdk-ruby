@@ -35,6 +35,7 @@ describe 'SuscripcionesApi' do
   # unit tests for pre_enrollment_monex_user_using_post
   # registra una pre-suscripción
   # Pre-registra una suscripción para operar un contrato a través de un aplicación socio de la plataforma, proporcionando una URL donde el cliente Monex debe autorizar el acceso a los datos de su cuenta a el socio.&lt;br/&gt;Una vez que el cuentahabiente autorice el acceso, se envia un webhook con el evento ENROLLMENT.CREATED, el cual contiene los datos de acceso.
+  # @param authorization Header para token
   # @param pre_enrollment_data Información para el enrolamiento
   # @param [Hash] opts the optional parameters
   # @return [PreEnrollmentResponse]
@@ -47,6 +48,7 @@ describe 'SuscripcionesApi' do
   # unit tests for remove_enrollment_user_using_delete
   # Elimna una suscripción por id
   # Elimina una suscripción, una ves eliminada la suscripcion ya no se podran realizar operacions en el API uilizando esta suscripción
+  # @param authorization Header para token
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -59,6 +61,7 @@ describe 'SuscripcionesApi' do
   # unit tests for remove_subscription_pending_status_using_delete
   # Elimna una pre-suscripción
   # Se elimina una pre-suscripción, sólo se elimina en caso de que cliente monex no haya concedio su autorización de acceso, es decir que la pre-suscripcion este pendiente.
+  # @param authorization Header para token
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
   # @return [nil]

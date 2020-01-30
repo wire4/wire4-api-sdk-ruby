@@ -35,6 +35,7 @@ describe 'TransferenciasSPIDApi' do
   # unit tests for get_spid_classifications_using_get
   # Consulta las clasificaciones para operaciones con SPID
   # Obtiene las clasificaciones para operaciones con dólares (SPID) de Monex.&lt;br/&gt;Este recurso se debe invocar previo al realizar una operación SPID.&lt;br/&gt;Se requiere que el token de autenticación se genere con scope spid_admin.
+  # @param authorization Header para token
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
   # @return [SpidClassificationsResponseDTO]
@@ -47,6 +48,7 @@ describe 'TransferenciasSPIDApi' do
   # unit tests for register_outgoing_spid_transaction_using_post
   # Registro de transferencias SPID
   # Registra un conjunto de transferencias a realizar en la cuenta del cliente Monex relacionada a la suscripción, las transferencias deben ser confirmadas por el cliente para que se efectuen.
+  # @param authorization Header para token
   # @param subscription El identificador de la suscripción a esta API
   # @param transactions Información de las transferencias SPID de salida
   # @param [Hash] opts the optional parameters
