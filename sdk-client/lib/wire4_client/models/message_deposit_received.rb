@@ -27,6 +27,9 @@ module Wire4Client
     # RFC del beneficiario
     attr_accessor :beneficiary_rfc
 
+    # Informacion del CEP
+    attr_accessor :cep
+
     # Clave de rastreo de la transferencia
     attr_accessor :clave_rastreo
 
@@ -82,6 +85,7 @@ module Wire4Client
         :'beneficiary_account' => :'beneficiary_account',
         :'beneficiary_name' => :'beneficiary_name',
         :'beneficiary_rfc' => :'beneficiary_rfc',
+        :'cep' => :'cep',
         :'clave_rastreo' => :'clave_rastreo',
         :'confirm_date' => :'confirm_date',
         :'currency_code' => :'currency_code',
@@ -108,6 +112,7 @@ module Wire4Client
         :'beneficiary_account' => :'String',
         :'beneficiary_name' => :'String',
         :'beneficiary_rfc' => :'String',
+        :'cep' => :'MessageCEP',
         :'clave_rastreo' => :'String',
         :'confirm_date' => :'DateTime',
         :'currency_code' => :'String',
@@ -149,6 +154,10 @@ module Wire4Client
 
       if attributes.has_key?(:'beneficiary_rfc')
         self.beneficiary_rfc = attributes[:'beneficiary_rfc']
+      end
+
+      if attributes.has_key?(:'cep')
+        self.cep = attributes[:'cep']
       end
 
       if attributes.has_key?(:'clave_rastreo')
@@ -238,6 +247,7 @@ module Wire4Client
           beneficiary_account == o.beneficiary_account &&
           beneficiary_name == o.beneficiary_name &&
           beneficiary_rfc == o.beneficiary_rfc &&
+          cep == o.cep &&
           clave_rastreo == o.clave_rastreo &&
           confirm_date == o.confirm_date &&
           currency_code == o.currency_code &&
@@ -265,7 +275,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount, beneficiary_account, beneficiary_name, beneficiary_rfc, clave_rastreo, confirm_date, currency_code, deposit_date, depositant, depositant_clabe, depositant_email, depositant_rfc, description, monex_description, monex_transaction_id, reference, sender_account, sender_bank, sender_name, sender_rfc].hash
+      [amount, beneficiary_account, beneficiary_name, beneficiary_rfc, cep, clave_rastreo, confirm_date, currency_code, deposit_date, depositant, depositant_clabe, depositant_email, depositant_rfc, description, monex_description, monex_transaction_id, reference, sender_account, sender_bank, sender_name, sender_rfc].hash
     end
 
     # Builds the object from hash
