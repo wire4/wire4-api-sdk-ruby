@@ -81,6 +81,7 @@ Class | Method | HTTP request | Description
 *Wire4Client::ContactoApi* | [**send_contact_using_post**](docs/ContactoApi.md#send_contact_using_post) | **POST** /contact | Solicitud de contacto
 *Wire4Client::CuentasDeBeneficiariosSPEIApi* | [**delete_account_using_delete**](docs/CuentasDeBeneficiariosSPEIApi.md#delete_account_using_delete) | **DELETE** /subscriptions/{subscription}/beneficiaries/spei/{account} | Elimina la cuenta del beneficiario
 *Wire4Client::CuentasDeBeneficiariosSPEIApi* | [**get_available_relationships_monex_using_get**](docs/CuentasDeBeneficiariosSPEIApi.md#get_available_relationships_monex_using_get) | **GET** /subscriptions/{subscription}/beneficiaries/relationships | Consulta de relaciones
+*Wire4Client::CuentasDeBeneficiariosSPEIApi* | [**get_beneficiaries_by_request_id**](docs/CuentasDeBeneficiariosSPEIApi.md#get_beneficiaries_by_request_id) | **GET** /subscriptions/{subscription}/beneficiaries/spei/{requestId} | Consulta los beneficiarios por el identificador de la petición de registro
 *Wire4Client::CuentasDeBeneficiariosSPEIApi* | [**get_beneficiaries_for_account_using_get**](docs/CuentasDeBeneficiariosSPEIApi.md#get_beneficiaries_for_account_using_get) | **GET** /subscriptions/{subscription}/beneficiaries/spei | Consulta los beneficiarios registrados
 *Wire4Client::CuentasDeBeneficiariosSPEIApi* | [**pre_register_accounts_using_post**](docs/CuentasDeBeneficiariosSPEIApi.md#pre_register_accounts_using_post) | **POST** /subscriptions/{subscription}/beneficiaries/spei | Pre-registro de cuentas de beneficiarios.
 *Wire4Client::CuentasDeBeneficiariosSPEIApi* | [**remove_beneficiaries_pending_using_delete**](docs/CuentasDeBeneficiariosSPEIApi.md#remove_beneficiaries_pending_using_delete) | **DELETE** /subscriptions/{subscription}/beneficiaries/spei/request/{requestId} | Eliminación de beneficiarios SPEI® sin confirmar
@@ -117,6 +118,7 @@ Class | Method | HTTP request | Description
  - [Wire4Client::AmountRequest](docs/AmountRequest.md)
  - [Wire4Client::Balance](docs/Balance.md)
  - [Wire4Client::BalanceListResponse](docs/BalanceListResponse.md)
+ - [Wire4Client::BeneficiariesQueryRegisterStatus](docs/BeneficiariesQueryRegisterStatus.md)
  - [Wire4Client::BeneficiariesResponse](docs/BeneficiariesResponse.md)
  - [Wire4Client::BeneficiaryInstitution](docs/BeneficiaryInstitution.md)
  - [Wire4Client::Billing](docs/Billing.md)

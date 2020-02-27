@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_account_using_delete**](CuentasDeBeneficiariosSPEIApi.md#delete_account_using_delete) | **DELETE** /subscriptions/{subscription}/beneficiaries/spei/{account} | Elimina la cuenta del beneficiario
 [**get_available_relationships_monex_using_get**](CuentasDeBeneficiariosSPEIApi.md#get_available_relationships_monex_using_get) | **GET** /subscriptions/{subscription}/beneficiaries/relationships | Consulta de relaciones
+[**get_beneficiaries_by_request_id**](CuentasDeBeneficiariosSPEIApi.md#get_beneficiaries_by_request_id) | **GET** /subscriptions/{subscription}/beneficiaries/spei/{requestId} | Consulta los beneficiarios por el identificador de la petición de registro
 [**get_beneficiaries_for_account_using_get**](CuentasDeBeneficiariosSPEIApi.md#get_beneficiaries_for_account_using_get) | **GET** /subscriptions/{subscription}/beneficiaries/spei | Consulta los beneficiarios registrados
 [**pre_register_accounts_using_post**](CuentasDeBeneficiariosSPEIApi.md#pre_register_accounts_using_post) | **POST** /subscriptions/{subscription}/beneficiaries/spei | Pre-registro de cuentas de beneficiarios.
 [**remove_beneficiaries_pending_using_delete**](CuentasDeBeneficiariosSPEIApi.md#remove_beneficiaries_pending_using_delete) | **DELETE** /subscriptions/{subscription}/beneficiaries/spei/request/{requestId} | Eliminación de beneficiarios SPEI® sin confirmar
@@ -102,6 +103,59 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RelationshipsResponse**](RelationshipsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+
+# **get_beneficiaries_by_request_id**
+> BeneficiariesResponse get_beneficiaries_by_request_id(authorization, request_id, subscription)
+
+Consulta los beneficiarios por el identificador de la petición de registro
+
+Obtiene los beneficiarios enviados para registro en una petición al contrato relacionado con la suscripción, Los beneficiarios son los que actualmente se encuentran registrados en banca Monex, que pertenezcan a la petición que se solicita.
+
+### Example
+```ruby
+# load the gem
+require 'wire4_client'
+
+api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
+
+authorization = 'authorization_example' # String | Header para token
+
+request_id = 'request_id_example' # String | El identificador de la petición del registro de beneficiarios a esta API
+
+subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
+
+
+begin
+  #Consulta los beneficiarios por el identificador de la petición de registro
+  result = api_instance.get_beneficiaries_by_request_id(authorization, request_id, subscription)
+  p result
+rescue Wire4Client::ApiError => e
+  puts "Exception when calling CuentasDeBeneficiariosSPEIApi->get_beneficiaries_by_request_id: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
+ **request_id** | **String**| El identificador de la petición del registro de beneficiarios a esta API | 
+ **subscription** | **String**| El identificador de la suscripción a esta API | 
+
+### Return type
+
+[**BeneficiariesResponse**](BeneficiariesResponse.md)
 
 ### Authorization
 

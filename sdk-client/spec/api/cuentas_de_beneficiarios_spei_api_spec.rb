@@ -59,6 +59,20 @@ describe 'CuentasDeBeneficiariosSPEIApi' do
     end
   end
 
+  # unit tests for get_beneficiaries_by_request_id
+  # Consulta los beneficiarios por el identificador de la petición de registro
+  # Obtiene los beneficiarios enviados para registro en una petición al contrato relacionado con la suscripción, Los beneficiarios son los que actualmente se encuentran registrados en banca Monex, que pertenezcan a la petición que se solicita.
+  # @param authorization Header para token
+  # @param request_id El identificador de la petición del registro de beneficiarios a esta API
+  # @param subscription El identificador de la suscripción a esta API
+  # @param [Hash] opts the optional parameters
+  # @return [BeneficiariesResponse]
+  describe 'get_beneficiaries_by_request_id test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_beneficiaries_for_account_using_get
   # Consulta los beneficiarios registrados
   # Obtiene los beneficiarios registrados al contrato relacionado con la suscripción, Los beneficiarios son los que actualmente se encuentran registrados en banca Monex.

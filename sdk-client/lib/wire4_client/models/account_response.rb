@@ -48,6 +48,9 @@ module Wire4Client
     # Registro federal de contribuyentes de la persona o institución propietaria de la cuenta
     attr_accessor :rfc
 
+    # El estado (status) en el que se encuentra el registro del beneficiario
+    attr_accessor :status
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -61,7 +64,8 @@ module Wire4Client
         :'payment_concept_spei' => :'payment_concept_spei',
         :'person' => :'person',
         :'relationship' => :'relationship',
-        :'rfc' => :'rfc'
+        :'rfc' => :'rfc',
+        :'status' => :'status'
       }
     end
 
@@ -78,7 +82,8 @@ module Wire4Client
         :'payment_concept_spei' => :'String',
         :'person' => :'Person',
         :'relationship' => :'String',
-        :'rfc' => :'String'
+        :'rfc' => :'String',
+        :'status' => :'String'
       }
     end
 
@@ -134,6 +139,10 @@ module Wire4Client
 
       if attributes.has_key?(:'rfc')
         self.rfc = attributes[:'rfc']
+      end
+
+      if attributes.has_key?(:'status')
+        self.status = attributes[:'status']
       end
     end
 
@@ -223,7 +232,8 @@ module Wire4Client
           payment_concept_spei == o.payment_concept_spei &&
           person == o.person &&
           relationship == o.relationship &&
-          rfc == o.rfc
+          rfc == o.rfc &&
+          status == o.status
     end
 
     # @see the `==` method
@@ -235,7 +245,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount_limit, bank, beneficiary_account, email, institution, kind_of_relationship, numeric_reference_spei, payment_concept_spei, person, relationship, rfc].hash
+      [amount_limit, bank, beneficiary_account, email, institution, kind_of_relationship, numeric_reference_spei, payment_concept_spei, person, relationship, rfc, status].hash
     end
 
     # Builds the object from hash
