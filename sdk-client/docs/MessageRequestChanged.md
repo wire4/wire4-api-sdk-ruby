@@ -1,4 +1,4 @@
-# Wire4Client::RequestChangedMessage
+# Wire4Client::MessageRequestChanged
 
 ## Properties
 Name | Type | Description | Notes

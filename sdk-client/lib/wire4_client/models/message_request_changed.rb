@@ -14,7 +14,7 @@ require 'date'
 
 module Wire4Client
   # El mensaje que se envía mediante (webHook) con la información acerca de algún cambio en el procesamiento de la petición a esta a esta API
-  class RequestChangedMessage
+  class MessageRequestChanged
     # Identificador de la petición realizada a está API
     attr_accessor :request_id
 
