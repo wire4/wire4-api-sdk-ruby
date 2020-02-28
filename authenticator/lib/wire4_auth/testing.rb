@@ -385,6 +385,43 @@ class Wire4ExamplesTest < Test::Unit::TestCase
     end
   end
 
+  def test_obtain_beneficiaries_by_request_id
+    #omit('Reason')
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new("kIinyEIYWUIF3pflFxhRdKft2_ga", "A_ffMFosMhm5j7l0L7Ptvbfrp9Ma", Wire4Auth::EnvironmentEnum::DEVELOPMENT)
+        #CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+
+    begin
+      # Obtain an access token use application flow and scope "spei_admin" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user("0bb13bfb99d461a8a0e18746b25e7d@develop.wire4.mx", "0b6ea839f33467a81631b380d37472", 'spei_admin')
+          # USER_KEY, SECRET_KEY, 'spei_admin')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
+
+    # build body with info (check references for more info: types, required fields, etc.)
+    subscription = SUBSCRIPTION
+    request_id = ""
+
+    begin
+      # Call the API
+      response = api_instance.get_beneficiaries_by_request_id(authorization, request_id, subscription)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
   #noinspection RubyInstanceMethodNamingConvention
   def test_change_amount_limit_beneficiary
     omit('Reason')

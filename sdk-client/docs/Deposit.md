@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **beneficiary_account** | **String** | La cuenta del beneficiario | [optional] 
 **beneficiary_name** | **String** | El nombre del beneficiario | [optional] 
 **beneficiary_rfc** | **String** | El RFC del beneficiario | [optional] 
+**cep** | [**MessageCEP**](MessageCEP.md) | CEP emitido por Banxico de la transferencia, sólo en caso de que este disponible en banxico, posteriomente  podrá usar la consulta de CEP del API | [optional] 
 **clave_rastreo** | **String** | La clave de rastreo de la transferencia | [optional] 
 **confirm_date** | **DateTime** | Fecha de confirmación del deposito | [optional] 
 **currency_code** | **String** | Código de moneda de la transferencia | [optional] 

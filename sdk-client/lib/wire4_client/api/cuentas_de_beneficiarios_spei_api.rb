@@ -174,6 +174,95 @@ module Wire4Client
       end
       return data, status_code, headers
     end
+    # Consulta los beneficiarios por el identificador de la petición de registro
+    # Obtiene los beneficiarios enviados para registro en una petición al contrato relacionado con la suscripción, Los beneficiarios son los que actualmente se encuentran registrados en banca Monex, que pertenezcan a la petición que se solicita.
+    # @param authorization Header para token
+    # @param request_id El identificador de la petición del registro de beneficiarios a esta API
+    # @param subscription El identificador de la suscripción a esta API
+    # @param [Hash] opts the optional parameters
+    # @return [BeneficiariesResponse]
+    def get_beneficiaries_by_request_id(authorization, request_id, subscription, opts = {})
+      data, _status_code, _headers = get_beneficiaries_by_request_id_with_http_info(authorization, request_id, subscription, opts)
+      data
+    end
+
+    # Consulta los beneficiarios por el identificador de la petición de registro
+    # Obtiene los beneficiarios enviados para registro en una petición al contrato relacionado con la suscripción, Los beneficiarios son los que actualmente se encuentran registrados en banca Monex, que pertenezcan a la petición que se solicita.
+    # @param authorization Header para token
+    # @param request_id El identificador de la petición del registro de beneficiarios a esta API
+    # @param subscription El identificador de la suscripción a esta API
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(BeneficiariesResponse, Fixnum, Hash)>] BeneficiariesResponse data, response status code and response headers
+    def get_beneficiaries_by_request_id_with_http_info(authorization, request_id, subscription, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: CuentasDeBeneficiariosSPEIApi.get_beneficiaries_by_request_id ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling CuentasDeBeneficiariosSPEIApi.get_beneficiaries_by_request_id"
+      end
+      # verify the required parameter 'request_id' is set
+      if @api_client.config.client_side_validation && request_id.nil?
+        fail ArgumentError, "Missing the required parameter 'request_id' when calling CuentasDeBeneficiariosSPEIApi.get_beneficiaries_by_request_id"
+      end
+      if @api_client.config.client_side_validation && request_id.to_s.length > 36
+        fail ArgumentError, 'invalid value for "request_id" when calling CuentasDeBeneficiariosSPEIApi.get_beneficiaries_by_request_id, the character length must be smaller than or equal to 36.'
+      end
+
+      if @api_client.config.client_side_validation && request_id.to_s.length < 36
+        fail ArgumentError, 'invalid value for "request_id" when calling CuentasDeBeneficiariosSPEIApi.get_beneficiaries_by_request_id, the character length must be great than or equal to 36.'
+      end
+
+      if @api_client.config.client_side_validation && request_id !~ Regexp.new(/[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[34][A-Fa-f0-9]{3}-[89ab][A-Fa-f0-9]{3}-[A-Fa-f0-9]{12}$/)
+        fail ArgumentError, "invalid value for 'request_id' when calling CuentasDeBeneficiariosSPEIApi.get_beneficiaries_by_request_id, must conform to the pattern /[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[34][A-Fa-f0-9]{3}-[89ab][A-Fa-f0-9]{3}-[A-Fa-f0-9]{12}$/."
+      end
+
+      # verify the required parameter 'subscription' is set
+      if @api_client.config.client_side_validation && subscription.nil?
+        fail ArgumentError, "Missing the required parameter 'subscription' when calling CuentasDeBeneficiariosSPEIApi.get_beneficiaries_by_request_id"
+      end
+      if @api_client.config.client_side_validation && subscription.to_s.length > 36
+        fail ArgumentError, 'invalid value for "subscription" when calling CuentasDeBeneficiariosSPEIApi.get_beneficiaries_by_request_id, the character length must be smaller than or equal to 36.'
+      end
+
+      if @api_client.config.client_side_validation && subscription.to_s.length < 36
+        fail ArgumentError, 'invalid value for "subscription" when calling CuentasDeBeneficiariosSPEIApi.get_beneficiaries_by_request_id, the character length must be great than or equal to 36.'
+      end
+
+      if @api_client.config.client_side_validation && subscription !~ Regexp.new(/[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[34][A-Fa-f0-9]{3}-[89ab][A-Fa-f0-9]{3}-[A-Fa-f0-9]{12}$/)
+        fail ArgumentError, "invalid value for 'subscription' when calling CuentasDeBeneficiariosSPEIApi.get_beneficiaries_by_request_id, must conform to the pattern /[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[34][A-Fa-f0-9]{3}-[89ab][A-Fa-f0-9]{3}-[A-Fa-f0-9]{12}$/."
+      end
+
+      # resource path
+      local_var_path = '/subscriptions/{subscription}/beneficiaries/spei/{requestId}'.sub('{' + 'requestId' + '}', request_id.to_s).sub('{' + 'subscription' + '}', subscription.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'Authorization'] = authorization
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'BeneficiariesResponse')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: CuentasDeBeneficiariosSPEIApi#get_beneficiaries_by_request_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
     # Consulta los beneficiarios registrados
     # Obtiene los beneficiarios registrados al contrato relacionado con la suscripción, Los beneficiarios son los que actualmente se encuentran registrados en banca Monex.
     # @param authorization Header para token
