@@ -13,37 +13,47 @@ Swagger Codegen version: 2.4.10
 require 'date'
 
 module Wire4Client
-  # Objeto que contiene la información del banco
-  class Institution
-    # Razón social de la institución
-    attr_accessor :company_name
+  # El mensaje que se envía mediante (webHook) con la información del usuario que se le autorizó el uso del API de Monex.
+  class MessageUserAuthorized
+    # El contrato al cual se le brinda el acceso a la API
+    attr_accessor :account
 
-    # La clabe BANXICO de la institución
-    attr_accessor :key
+    # El contrato enmascarado al cual se le brinda el acceso a la API
+    attr_accessor :masked_account
 
-    # Nombre de la institución
+    # El usuario enmascarado que se autorizó
+    attr_accessor :masked_name
+
+    # El nombre enmascarado del usuario de acceso que se autorizó
+    attr_accessor :masked_user_name
+
+    # El usuario que se autorizó
     attr_accessor :name
 
-    # RFC de la institución
-    attr_accessor :rfc
+    # El identificador de la petición cuando se solicitó la autorización
+    attr_accessor :request_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'company_name' => :'company_name',
-        :'key' => :'key',
+        :'account' => :'account',
+        :'masked_account' => :'masked_account',
+        :'masked_name' => :'masked_name',
+        :'masked_user_name' => :'masked_user_name',
         :'name' => :'name',
-        :'rfc' => :'rfc'
+        :'request_id' => :'request_id'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'company_name' => :'String',
-        :'key' => :'String',
+        :'account' => :'String',
+        :'masked_account' => :'String',
+        :'masked_name' => :'String',
+        :'masked_user_name' => :'String',
         :'name' => :'String',
-        :'rfc' => :'String'
+        :'request_id' => :'String'
       }
     end
 
@@ -55,20 +65,28 @@ module Wire4Client
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'company_name')
-        self.company_name = attributes[:'company_name']
+      if attributes.has_key?(:'account')
+        self.account = attributes[:'account']
       end
 
-      if attributes.has_key?(:'key')
-        self.key = attributes[:'key']
+      if attributes.has_key?(:'masked_account')
+        self.masked_account = attributes[:'masked_account']
+      end
+
+      if attributes.has_key?(:'masked_name')
+        self.masked_name = attributes[:'masked_name']
+      end
+
+      if attributes.has_key?(:'masked_user_name')
+        self.masked_user_name = attributes[:'masked_user_name']
       end
 
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'rfc')
-        self.rfc = attributes[:'rfc']
+      if attributes.has_key?(:'request_id')
+        self.request_id = attributes[:'request_id']
       end
     end
 
@@ -90,10 +108,12 @@ module Wire4Client
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          company_name == o.company_name &&
-          key == o.key &&
+          account == o.account &&
+          masked_account == o.masked_account &&
+          masked_name == o.masked_name &&
+          masked_user_name == o.masked_user_name &&
           name == o.name &&
-          rfc == o.rfc
+          request_id == o.request_id
     end
 
     # @see the `==` method
@@ -105,7 +125,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [company_name, key, name, rfc].hash
+      [account, masked_account, masked_name, masked_user_name, name, request_id].hash
     end
 
     # Builds the object from hash

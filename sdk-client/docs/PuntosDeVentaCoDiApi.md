@@ -4,12 +4,12 @@ All URIs are relative to *https://sandbox-api.wire4.mx/wire4/1.0.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_sales_point**](PuntosDeVentaCoDiApi.md#create_sales_point) | **POST** /codi/companies/{company_id}/salespoint | Registra un punto de venta asociado a una empresa
-[**obtain_sale_points**](PuntosDeVentaCoDiApi.md#obtain_sale_points) | **GET** /codi/companies/{company_id}/salespoint | Obtiene los puntos de venta asociados a una empresa
+[**create_sales_point**](PuntosDeVentaCoDiApi.md#create_sales_point) | **POST** /codi/companies/salespoint | Registra un punto de venta asociado a una empresa
+[**obtain_sale_points**](PuntosDeVentaCoDiApi.md#obtain_sale_points) | **GET** /codi/companies/salespoint | Obtiene los puntos de venta asociados a una empresa
 
 
 # **create_sales_point**
-> SalesPointRespose create_sales_point(authorization, company_id, sales_point_request, opts)
+> SalesPointRespose create_sales_point(authorization, company_id, sales_point_info)
 
 Registra un punto de venta asociado a una empresa
 
@@ -24,17 +24,14 @@ api_instance = Wire4Client::PuntosDeVentaCoDiApi.new
 
 authorization = 'authorization_example' # String | Header para token
 
-company_id = 'company_id_example' # String | company_id
+company_id = 'company_id_example' # String | El identificador de la empresa
 
-sales_point_request = Wire4Client::SalesPointRequest.new # SalesPointRequest | salesPointRequest
+sales_point_info = Wire4Client::SalesPointRequest.new # SalesPointRequest | Información del punto de venta CODI®
 
-opts = { 
-  name: 'name_example' # String | 
-}
 
 begin
   #Registra un punto de venta asociado a una empresa
-  result = api_instance.create_sales_point(authorization, company_id, sales_point_request, opts)
+  result = api_instance.create_sales_point(authorization, company_id, sales_point_info)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling PuntosDeVentaCoDiApi->create_sales_point: #{e}"
@@ -46,9 +43,8 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| Header para token | 
- **company_id** | **String**| company_id | 
- **sales_point_request** | [**SalesPointRequest**](SalesPointRequest.md)| salesPointRequest | 
- **name** | **String**|  | [optional] 
+ **company_id** | **String**| El identificador de la empresa | 
+ **sales_point_info** | [**SalesPointRequest**](SalesPointRequest.md)| Información del punto de venta CODI® | 
 
 ### Return type
 

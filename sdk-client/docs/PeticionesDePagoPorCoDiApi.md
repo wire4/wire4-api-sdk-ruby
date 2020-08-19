@@ -4,8 +4,8 @@ All URIs are relative to *https://sandbox-api.wire4.mx/wire4/1.0.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**consult_codi_request_by_order_id**](PeticionesDePagoPorCoDiApi.md#consult_codi_request_by_order_id) | **GET** /codi/sales-point/{sales_point_id}/charges/{order_id} | Obtiene la información de una petición de pago CODI® por orderId para un punto de venta
-[**generate_codi_code_qr**](PeticionesDePagoPorCoDiApi.md#generate_codi_code_qr) | **POST** /codi/sales-point/{salesPointId}/charges | Genera un código QR para un pago mediante CODI®
+[**consult_codi_request_by_order_id**](PeticionesDePagoPorCoDiApi.md#consult_codi_request_by_order_id) | **GET** /codi/sales-point/charges | Obtiene la información de una petición de pago CODI® por orderId para un punto de venta
+[**generate_codi_code_qr**](PeticionesDePagoPorCoDiApi.md#generate_codi_code_qr) | **POST** /codi/sales-point/charges | Genera un código QR para un pago mediante CODI®
 
 
 # **consult_codi_request_by_order_id**
@@ -24,7 +24,7 @@ api_instance = Wire4Client::PeticionesDePagoPorCoDiApi.new
 
 authorization = 'authorization_example' # String | Header para token
 
-order_id = 'order_id_example' # String | OrderId
+order_id = 'order_id_example' # String | Identificador del pago CODI®
 
 sales_point_id = 'sales_point_id_example' # String | Identificador del punto de venta
 
@@ -43,7 +43,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| Header para token | 
- **order_id** | **String**| OrderId | 
+ **order_id** | **String**| Identificador del pago CODI® | 
  **sales_point_id** | **String**| Identificador del punto de venta | 
 
 ### Return type
