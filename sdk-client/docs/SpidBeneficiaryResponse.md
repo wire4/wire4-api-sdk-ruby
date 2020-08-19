@@ -11,7 +11,9 @@ Name | Type | Description | Notes
 **kind_of_relationship** | **String** | Tipo de relación de la cuenta, este valor debe ser igual a uno de los obtenidos del recurso de consulta de relationships | 
 **numeric_reference_spid** | **String** | Referencia numérica | [optional] 
 **payment_concept_spid** | **String** | Concepto de pago | [optional] 
+**register_date** | **DateTime** | La fecha en la que se registro el beneficiario | [optional] 
 **relationship** | **String** | Código de relación de la cuenta, este valor debe ser igual a uno de los obtenidos del recurso de consulta de  relationship | 
 **rfc** | **String** | Registro federal de contribuyentes | [optional] 
+**status** | **String** | El estado en el que se encuentra el registo del beneficiario | [optional] 
 
 

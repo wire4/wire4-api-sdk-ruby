@@ -4,6 +4,7 @@ All URIs are relative to *https://sandbox-api.wire4.mx/wire4/1.0.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**authorize_accounts_pending_put**](CuentasDeBeneficiariosSPEIApi.md#authorize_accounts_pending_put) | **PUT** /subscriptions/{subscription}/beneficiaries/pending | Recibe la solicitud para agrupar las cuentas SPEI/SPID de beneficiarios en estado pendiente que deben ser autorizadas
 [**delete_account_using_delete**](CuentasDeBeneficiariosSPEIApi.md#delete_account_using_delete) | **DELETE** /subscriptions/{subscription}/beneficiaries/spei/{account} | Elimina la cuenta del beneficiario
 [**get_available_relationships_monex_using_get**](CuentasDeBeneficiariosSPEIApi.md#get_available_relationships_monex_using_get) | **GET** /subscriptions/{subscription}/beneficiaries/relationships | Consulta de relaciones
 [**get_beneficiaries_by_request_id**](CuentasDeBeneficiariosSPEIApi.md#get_beneficiaries_by_request_id) | **GET** /subscriptions/{subscription}/beneficiaries/spei/{requestId} | Consulta los beneficiarios por el identificador de la petición de registro
@@ -11,6 +12,59 @@ Method | HTTP request | Description
 [**pre_register_accounts_using_post**](CuentasDeBeneficiariosSPEIApi.md#pre_register_accounts_using_post) | **POST** /subscriptions/{subscription}/beneficiaries/spei | Pre-registro de cuentas de beneficiarios.
 [**remove_beneficiaries_pending_using_delete**](CuentasDeBeneficiariosSPEIApi.md#remove_beneficiaries_pending_using_delete) | **DELETE** /subscriptions/{subscription}/beneficiaries/spei/request/{requestId} | Eliminación de beneficiarios SPEI® sin confirmar
 [**update_amount_limit_account_using_put**](CuentasDeBeneficiariosSPEIApi.md#update_amount_limit_account_using_put) | **PUT** /subscriptions/{subscription}/beneficiaries/spei/{account} | Actualiza el monto límite
+
+
+# **authorize_accounts_pending_put**
+> AuthorizedBeneficiariesResponse authorize_accounts_pending_put(authorization, subscription, urls_redirect_dto)
+
+Recibe la solicitud para agrupar las cuentas SPEI/SPID de beneficiarios en estado pendiente que deben ser autorizadas
+
+Solicta autorizar las cuentas de beneficiarios en estado pendiente agrupandolas en un set de cuentas que pueden incluir tanto cuentas de SPI como de SPID, debe indicar las urls de redireccion en caso de error y en caso de exito<br/>
+
+### Example
+```ruby
+# load the gem
+require 'wire4_client'
+
+api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
+
+authorization = 'authorization_example' # String | Header para token
+
+subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
+
+urls_redirect_dto = Wire4Client::UrlsRedirect.new # UrlsRedirect | Información de la cuenta del beneficiario
+
+
+begin
+  #Recibe la solicitud para agrupar las cuentas SPEI/SPID de beneficiarios en estado pendiente que deben ser autorizadas
+  result = api_instance.authorize_accounts_pending_put(authorization, subscription, urls_redirect_dto)
+  p result
+rescue Wire4Client::ApiError => e
+  puts "Exception when calling CuentasDeBeneficiariosSPEIApi->authorize_accounts_pending_put: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
+ **subscription** | **String**| El identificador de la suscripción a esta API | 
+ **urls_redirect_dto** | [**UrlsRedirect**](UrlsRedirect.md)| Información de la cuenta del beneficiario | 
+
+### Return type
+
+[**AuthorizedBeneficiariesResponse**](AuthorizedBeneficiariesResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 
 
 # **delete_account_using_delete**
@@ -188,7 +242,12 @@ subscription = 'subscription_example' # String | El identificador de la suscripc
 
 opts = { 
   account: 'account_example', # String | Cuenta del beneficiario, puede ser Clabe, TDD o Celular
-  rfc: 'rfc_example' # String | RFC del beneficiario
+  beneficiary_bank: 'beneficiary_bank_example', # String | Clave del banco beneficiario
+  beneficiary_name: 'beneficiary_name_example', # String | Nombre del beneficiario
+  end_date: 'end_date_example', # String | Fecha de inicio del perido a filtrar en formato dd-mm-yyyy
+  init_date: 'init_date_example', # String | Fecha de inicio del perido a filtrar en formato dd-mm-yyyy
+  rfc: 'rfc_example', # String | RFC del beneficiario
+  status: 'status_example' # String | Estatus de la cuenta
 }
 
 begin
@@ -207,7 +266,12 @@ Name | Type | Description  | Notes
  **authorization** | **String**| Header para token | 
  **subscription** | **String**| El identificador de la suscripción a esta API | 
  **account** | **String**| Cuenta del beneficiario, puede ser Clabe, TDD o Celular | [optional] 
+ **beneficiary_bank** | **String**| Clave del banco beneficiario | [optional] 
+ **beneficiary_name** | **String**| Nombre del beneficiario | [optional] 
+ **end_date** | **String**| Fecha de inicio del perido a filtrar en formato dd-mm-yyyy | [optional] 
+ **init_date** | **String**| Fecha de inicio del perido a filtrar en formato dd-mm-yyyy | [optional] 
  **rfc** | **String**| RFC del beneficiario | [optional] 
+ **status** | **String**| Estatus de la cuenta | [optional] 
 
 ### Return type
 
