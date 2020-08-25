@@ -9,14 +9,10 @@ Name | Type | Description | Notes
 **concept** | **String** | Concepto de pago. | [optional] 
 **creation_date** | **DateTime** | Fecha de creación. | [optional] 
 **due_date** | **DateTime** | Fecha de vencimiento. | [optional] 
-**id** | **String** | Identificador de la operacion. | [optional] 
-**operation_date** | **DateTime** | Fecha de la operacion. | [optional] 
-**operations** | [**Array&lt;PaymentRequestCodiResponseDTO&gt;**](PaymentRequestCodiResponseDTO.md) | Listado de pagos realizados sobre la petición. | [optional] 
+**operations** | [**Array&lt;CodiOperationResponseDTO&gt;**](CodiOperationResponseDTO.md) | Listado de pagos realizados sobre la petición. | [optional] 
 **order_id** | **String** | OrderId asignada a la solicitud. | [optional] 
-**payment_type** | **String** | Tipo de pago. | [optional] 
 **phone_number** | **String** | Numero de teléfono. | [optional] 
 **status** | **String** | Estatus de la orden de pago. | [optional] 
-**transaction_id** | **String** | Identificador de la transacción. | [optional] 
 **type** | **String** | Tipo de petición. | [optional] 
 
 

@@ -146,6 +146,7 @@ Class | Method | HTTP request | Description
  - [Wire4Client::CertificateRequest](docs/CertificateRequest.md)
  - [Wire4Client::CodiCodeQrResponseDTO](docs/CodiCodeQrResponseDTO.md)
  - [Wire4Client::CodiCodeRequestDTO](docs/CodiCodeRequestDTO.md)
+ - [Wire4Client::CodiOperationResponseDTO](docs/CodiOperationResponseDTO.md)
  - [Wire4Client::CodiOperationsFiltersRequestDTO](docs/CodiOperationsFiltersRequestDTO.md)
  - [Wire4Client::CompanyRegistered](docs/CompanyRegistered.md)
  - [Wire4Client::CompanyRequested](docs/CompanyRequested.md)

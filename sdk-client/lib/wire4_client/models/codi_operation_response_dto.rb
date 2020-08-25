@@ -14,54 +14,38 @@ require 'date'
 
 module Wire4Client
   # Objeto que contiene la información de solicitud de pago por CODI®.
-  class PaymentRequestCodiResponseDTO
-    # Monto del pago.
+  class CodiOperationResponseDTO
+    # Monto de la operacion.
     attr_accessor :amount
 
-    # Imagen QR en formato Base64 para el CODI®.
-    attr_accessor :barcode_base64
-
-    # URL de la imagen QR para el CODI®.
-    attr_accessor :barcode_url
-
-    # Concepto de pago.
+    # Concepto del pago.
     attr_accessor :concept
 
-    # Fecha de creación.
-    attr_accessor :creation_date
+    # Identificador de la operacion.
+    attr_accessor :id
 
-    # Fecha de vencimiento.
-    attr_accessor :due_date
+    # Fecha de la operacion.
+    attr_accessor :operation_date
 
-    # Listado de pagos realizados sobre la petición.
-    attr_accessor :operations
+    # Tipo de pago.
+    attr_accessor :payment_type
 
-    # OrderId asignada a la solicitud.
-    attr_accessor :order_id
-
-    # Numero de teléfono.
-    attr_accessor :phone_number
-
-    # Estatus de la orden de pago.
+    # Estatus.
     attr_accessor :status
 
-    # Tipo de petición.
-    attr_accessor :type
+    # Identificador de la transacción.
+    attr_accessor :transaction_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'amount' => :'amount',
-        :'barcode_base64' => :'barcode_base64',
-        :'barcode_url' => :'barcode_url',
         :'concept' => :'concept',
-        :'creation_date' => :'creation_date',
-        :'due_date' => :'due_date',
-        :'operations' => :'operations',
-        :'order_id' => :'order_id',
-        :'phone_number' => :'phone_number',
+        :'id' => :'id',
+        :'operation_date' => :'operation_date',
+        :'payment_type' => :'payment_type',
         :'status' => :'status',
-        :'type' => :'type'
+        :'transaction_id' => :'transaction_id'
       }
     end
 
@@ -69,16 +53,12 @@ module Wire4Client
     def self.swagger_types
       {
         :'amount' => :'Float',
-        :'barcode_base64' => :'String',
-        :'barcode_url' => :'String',
         :'concept' => :'String',
-        :'creation_date' => :'DateTime',
-        :'due_date' => :'DateTime',
-        :'operations' => :'Array<CodiOperationResponseDTO>',
-        :'order_id' => :'String',
-        :'phone_number' => :'String',
+        :'id' => :'String',
+        :'operation_date' => :'DateTime',
+        :'payment_type' => :'String',
         :'status' => :'String',
-        :'type' => :'String'
+        :'transaction_id' => :'String'
       }
     end
 
@@ -94,46 +74,28 @@ module Wire4Client
         self.amount = attributes[:'amount']
       end
 
-      if attributes.has_key?(:'barcode_base64')
-        self.barcode_base64 = attributes[:'barcode_base64']
-      end
-
-      if attributes.has_key?(:'barcode_url')
-        self.barcode_url = attributes[:'barcode_url']
-      end
-
       if attributes.has_key?(:'concept')
         self.concept = attributes[:'concept']
       end
 
-      if attributes.has_key?(:'creation_date')
-        self.creation_date = attributes[:'creation_date']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'due_date')
-        self.due_date = attributes[:'due_date']
+      if attributes.has_key?(:'operation_date')
+        self.operation_date = attributes[:'operation_date']
       end
 
-      if attributes.has_key?(:'operations')
-        if (value = attributes[:'operations']).is_a?(Array)
-          self.operations = value
-        end
-      end
-
-      if attributes.has_key?(:'order_id')
-        self.order_id = attributes[:'order_id']
-      end
-
-      if attributes.has_key?(:'phone_number')
-        self.phone_number = attributes[:'phone_number']
+      if attributes.has_key?(:'payment_type')
+        self.payment_type = attributes[:'payment_type']
       end
 
       if attributes.has_key?(:'status')
         self.status = attributes[:'status']
       end
 
-      if attributes.has_key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.has_key?(:'transaction_id')
+        self.transaction_id = attributes[:'transaction_id']
       end
     end
 
@@ -156,16 +118,12 @@ module Wire4Client
       return true if self.equal?(o)
       self.class == o.class &&
           amount == o.amount &&
-          barcode_base64 == o.barcode_base64 &&
-          barcode_url == o.barcode_url &&
           concept == o.concept &&
-          creation_date == o.creation_date &&
-          due_date == o.due_date &&
-          operations == o.operations &&
-          order_id == o.order_id &&
-          phone_number == o.phone_number &&
+          id == o.id &&
+          operation_date == o.operation_date &&
+          payment_type == o.payment_type &&
           status == o.status &&
-          type == o.type
+          transaction_id == o.transaction_id
     end
 
     # @see the `==` method
@@ -177,7 +135,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount, barcode_base64, barcode_url, concept, creation_date, due_date, operations, order_id, phone_number, status, type].hash
+      [amount, concept, id, operation_date, payment_type, status, transaction_id].hash
     end
 
     # Builds the object from hash
