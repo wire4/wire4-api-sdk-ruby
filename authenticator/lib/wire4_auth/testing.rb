@@ -385,8 +385,9 @@ class Wire4ExamplesTest < Test::Unit::TestCase
     end
   end
 
+  #noinspection RubyInstanceMethodNamingConvention
   def test_obtain_beneficiaries_by_request_id
-    #omit('Reason')
+    omit('Reason')
     # Create the authenticator to obtain access token
     # The token URL and Service URL are defined for this environment enum value.
     # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
@@ -1172,5 +1173,479 @@ class Wire4ExamplesTest < Test::Unit::TestCase
     puts "WebHook signature verification, correct:  #{result}"
 
     assert result
+  end
+
+  #noinspection RubyInstanceMethodNamingConvention
+  def test_authorize_accounts_pending
+    omit('Reason')
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+
+    begin
+      # Obtain an access token use application flow and scope "spei_admin" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
+
+    # build body with info (check references for more info, types, required fields)
+    subscription = SUBSCRIPTION
+    body = Wire4Client::UrlsRedirect.new
+    body.cancel_return_url = "https://your-app-url.mx/return"
+    body.return_url = "https://your-app-url.mx/cancel"
+
+    begin
+      # Call the API
+      response = api_instance.authorize_accounts_pending_put(authorization, subscription, body)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  #noinspection RubyInstanceMethodNamingConvention
+  def test_create_authorization_transactions_group
+    omit('Reason')
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+
+    begin
+      # Obtain an access token use application flow and scope "spei_admin" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::TransferenciasSPEIApi.new
+
+    # build body with info (check references for more info, types, required fields)
+    subscription = SUBSCRIPTION
+    body = Wire4Client::AuthorizationTransactionGroup.new
+    body.transactions = ["2454ffb2-a699-408f-9812-9a12eed11bfc"]  # Add N transactions order identifiers
+
+    body.redirect_urls = Wire4Client::UrlsRedirect.new
+    body.redirect_urls.cancel_return_url = "https://your-app-url.mx/return"
+    body.redirect_urls.return_url = "https://your-app-url.mx/cancel"
+
+    begin
+      # Call the API
+      response = api_instance.create_authorization_transactions_group(authorization, body, subscription)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  def test_register_company_using
+    omit('Reason')
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+
+    begin
+      # Obtain an access token use application flow and scope "codi_general" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('codi_general')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::EmpresasCoDiApi.new
+
+    # build body with info (check references for more info, types, required fields)
+    body = Wire4Client::CompanyRequested.new
+    body.business_name = "Tacos"
+    body.comercial_name = "Tacos el Compa"
+    body.rfc = "TACO580926LA1"
+    body.certificate = Wire4Client::CertificateRequest.new
+    body.certificate.certificate_number = "4908439084390849084"
+    body.certificate._alias = "00040390904903904909"
+    body.certificate.check_digit = "1"
+    body.certificate.cipher_data = "4309jij3490j43jf0j3490fFFFDSDS4393490"
+
+    begin
+      # Call the API
+      response = api_instance.register_company_using_post(authorization, body)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  def test_obtain_companies
+    omit('Reason')
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+
+    begin
+      # Obtain an access token use application flow and scope "codi_general" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('codi_general')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::EmpresasCoDiApi.new
+
+    begin
+      # Call the API
+      response = api_instance.obtain_companies(authorization)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  COMPANY_ID = "0b43cbd2-2a86-4eb5-a51c-49a53d521295"
+
+  def test_create_sales_point
+    omit('Reason')
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+
+    begin
+      # Obtain an access token use application flow and scope "spei_admin" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('codi_general')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::PuntosDeVentaCoDiApi.new
+
+    # build body with info (check references for more info, types, required fields)
+    company_id = COMPANY_ID
+    body = Wire4Client::SalesPointRequest.new
+    body.name = "Taqueria Sur, caja 1"
+    body.access_ip = "189.180.255.229"
+    body.notifications_url = "https://webhook.site/3e32e1c4-1346-4f5a-92d5-2a921c5c85df"
+    body.account = "044680035044988526"
+
+    begin
+      # Call the API
+      response = api_instance.create_sales_point(authorization, company_id, body)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  def test_obtain_sale_points
+    omit('Reason')
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+
+    begin
+      # Obtain an access token use application flow and scope "codi_general" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('codi_general')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::PuntosDeVentaCoDiApi.new
+
+    # build body with info (check references for more info, types, required fields)
+    company_id = COMPANY_ID
+
+    begin
+      # Call the API
+      response = api_instance.obtain_sale_points(authorization, company_id)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  SALES_POINT_ID = "465ffc2c-10b5-4475-8d64-bc58e4ff098d"
+  SALES_POINT_KEY = "097db4157b74619b88f40550e7c1ee@develop.wire4.mx"
+  SALES_POINT_SECRET = "b722b8c8fc24d4bae0b1cd41b4c6af"
+
+  def test_generate_codi_code_qr
+    omit('Reason')
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+
+    begin
+      # Obtain an access token use application flow and scope "codi_admin" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(SALES_POINT_KEY, SALES_POINT_SECRET, 'codi_admin')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::PeticionesDePagoPorCoDiApi.new
+
+    # build body with info (check references for more info, types, required fields)
+    sales_point_id = SALES_POINT_ID
+    body = Wire4Client::CodiCodeRequestDTO.new
+    body.amount = 178.8
+    body.concept = "consumo saintiago"
+    body.order_id = "b4408b4d-17a0-4d39-85f2-f3da1e2825e9"
+    body.due_date = "2020-08-25T13:45:00"
+    body.type = "QR_CODE"
+
+    begin
+      # Call the API
+      response = api_instance.generate_codi_code_qr(authorization, body, sales_point_id)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  ORDER_ID = "b4408b4d-17a0-4d39-85f2-f3da1e2825e9"
+
+  #noinspection RubyInstanceMethodNamingConvention
+  def test_consult_codi_request_by_order_id
+    #omit('Reason')
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+
+    begin
+      # Obtain an access token use application flow and scope "codi_admin" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(SALES_POINT_KEY, SALES_POINT_SECRET, 'codi_admin')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::PeticionesDePagoPorCoDiApi.new
+
+    # build body with info (check references for more info, types, required fields)
+    sales_point_id = SALES_POINT_ID # Sales point identifier
+    order_id = ORDER_ID # Order identifier
+
+    begin
+      # Call the API
+      response = api_instance.consult_codi_request_by_order_id(authorization, order_id, sales_point_id)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  def test_consult_codi_operations
+    omit('Reason')
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+
+    begin
+      # Obtain an access token use application flow and scope "codi_report" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(SALES_POINT_KEY, SALES_POINT_SECRET, 'codi_report')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::OperacionesCoDiApi.new
+
+    # build body with info (check references for more info, types, required fields)
+    company_id = COMPANY_ID # Company identifier
+    sales_point_id = SALES_POINT_ID # Sales point identifier
+
+    body = Wire4Client::CodiOperationsFiltersRequestDTO.new
+    # All filters options are optional
+    # order_id,
+    # operation_date_from, operation_date_to,
+    # request_date_from, request_date_to,
+    # status (RECEIVED, COMPLETED, CANCELLED),
+    # amount_from, amount_to
+    body.order_id = ORDER_ID
+
+    begin
+      # Call the API
+      # consult_codi_operations(authorization, company_id: company_id, sales_point_id: sales_point_id,
+      #                                                 page: "0", size: "20")
+      # With filters:
+      # consult_codi_operations(authorization, company_id: company_id, sales_point_id: sales_point_id,
+      #                                                 page: "0", size: "20", request_filters: body)
+      response = api_instance.consult_codi_operations(authorization, company_id: company_id, sales_point_id: sales_point_id,
+                                                      page: "0", size: "20", request_filters: body)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  ACCESS_KEY = "AccessK3y!" #"YOUR_ACCESS_KEY_HERE"
+  def test_obtain_contract_details
+    omit('Reason')
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+
+    begin
+      # Obtain an access token use application flow and scope "general" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::ContractsDetailsApi.new
+
+    # build body with info (check references for more info, types, required fields)
+    x_access_key = ACCESS_KEY
+    body = Wire4Client::ContractDetailRequest.new
+    body.contract = "1234567"
+    body.user_name = "amolina"
+    body.password = "whatever"
+    body.token_code = "258963"
+
+    begin
+      # Call the API
+      response = api_instance.obtain_contract_details(authorization, x_access_key, body)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  def test_create_authorization
+    omit('Reason')
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+
+    begin
+      # Obtain an access token use application flow and scope "general" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::ContractsDetailsApi.new
+
+    # build body with info (check references for more info, types, required fields)
+    body = Wire4Client::PreMonexAuthorization.new
+    body.return_url = "https://your-app-url.mx/return"
+    body.cancel_return_url = "https://your-app-url.mx/cancel"
+    body.rfc = "TACO890101LO0"
+    body.business_name = "Compa Tacos"
+
+    begin
+      # Call the API
+      response = api_instance.create_authorization(authorization, body)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  REQUEST_ID = "17fa79db-759f-4105-bc47-688fed75ddac"
+
+  def test_obtain_authorized_users
+    omit('Reason')
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+
+    begin
+      # Obtain an access token use application flow and scope "general" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::ContractsDetailsApi.new
+
+    # build body with info (check references for more info, types, required fields)
+    x_access_key = ACCESS_KEY; # This ACCESS_KEY is provider from Wire4, contact support
+    request_id = REQUEST_ID
+
+    begin
+      # Call the API
+      response = api_instance.obtain_authorized_users(authorization, x_access_key, request_id)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e}"
+      # Optional manage exception in call API
+      return
+    end
   end
 end
