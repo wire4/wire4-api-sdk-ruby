@@ -48,26 +48,35 @@ module Wire4Auth
     end
 
     def obtain_access_token_app(scope = "general")
+      key_search = @client_id + scope
+      token_cached = @tokens_cached_app_user[key_search]
+      if !token_cached.nil? and !token_cached.access_token.nil? and !token_cached.access_token.params.nil? and
+          !token_cached.access_token.params['scope'].nil?  and !token_cached.access_token.expires_at.nil? and
+          token_cached.access_token.expires_at.is_a? Integer and is_expire(token_cached.access_token.expires_at) and
+           !token_cached.access_token.token.nil?
 
-      if !@token_cached_app.access_token.nil? and !@token_cached_app.access_token.params.nil? and
-          !@token_cached_app.access_token.params['scope'].nil? and
-          @token_cached_app.access_token.params['scope'].include? scope and
-          !@token_cached_app.access_token.expires_at.nil? and @token_cached_app.access_token.expires_at.is_a? Integer and
-          is_expire(@token_cached_app.access_token.expires_at) and !@token_cached_app.access_token.token.nil?
-
-        return format_to_header(@token_cached_app.access_token.token)
+        return format_to_header(token_cached.access_token.token)
       end
 
       begin
         client = OAuth2::Client.new(@client_id, @client_secret, :token_url => @environment.token_url)
-        access_token = client.get_token({:grant_type => "client_credentials", :scope => scope})
-        @token_cached_app.access_token = access_token
+        access_token = client.get_token({ :grant_type => "client_credentials", :scope => scope})
+
+        if @tokens_cached_app_user.length + 1 > MAX_APP_USER_SIZE_CACHED
+          @tokens_cached_app_user.each_key do |key|
+            @tokens_cached_app_user.delete(key)
+            break
+          end
+        end
+
+        @tokens_cached_app_user[key_search] = Wire4Auth::CachedToken.new(@client_id, @client_secret, access_token)
 
         return format_to_header(access_token.token)
       rescue OAuth2::Error => e
         raise Wire4Client::ApiError.new(:code => e.code,
                            :message => e.description)
       end
+
     end
 
     def obtain_access_token_app_user(user_key, secret_key, scope = "spei_admin")
@@ -75,9 +84,9 @@ module Wire4Auth
       key_search = user_key + scope
       token_cached = @tokens_cached_app_user[key_search]
       if !token_cached.nil? and !token_cached.access_token.nil? and !token_cached.access_token.params.nil? and
-          !token_cached.access_token.params['scope'].nil? and token_cached.access_token.params['scope'].include? scope and
-          !token_cached.access_token.expires_at.nil? and token_cached.access_token.expires_at.is_a? Integer and
-          is_expire(token_cached.access_token.expires_at) and !token_cached.access_token.token.nil?
+          !token_cached.access_token.params['scope'].nil? and !token_cached.access_token.expires_at.nil? and
+          token_cached.access_token.expires_at.is_a? Integer and is_expire(token_cached.access_token.expires_at) and
+          !token_cached.access_token.token.nil?
 
         return format_to_header(token_cached.access_token.token)
       end
@@ -107,14 +116,25 @@ module Wire4Auth
 
       begin
         client = OAuth2::Client.new(@client_id, @client_secret, :token_url => @environment.token_url)
-        access_token = client.get_token({:grant_type => "client_credentials", :scope => scope})
-        @token_cached_app.access_token = access_token
+        access_token = client.get_token({ :grant_type => "client_credentials", :scope => scope})
+
+        key_search = @client_id + scope
+        token_cached = @tokens_cached_app_user[key_search]
+        if token_cached.nil? and @tokens_cached_app_user.length + 1 > MAX_APP_USER_SIZE_CACHED
+          @tokens_cached_app_user.each_key do |key|
+            @tokens_cached_app_user.delete(key)
+            break
+          end
+        end
+
+        @tokens_cached_app_user[key_search] = Wire4Auth::CachedToken.new(@client_id, @client_secret, access_token)
 
         return format_to_header(access_token.token)
       rescue OAuth2::Error => e
         raise Wire4Client::ApiError.new(:code => e.code,
                                         :message => e.description)
       end
+
     end
 
     def regenerate_access_token_app_user(user_key, secret_key, scope = "spei_admin")
