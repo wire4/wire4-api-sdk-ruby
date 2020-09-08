@@ -47,12 +47,13 @@ module Wire4Auth
       @tokens_cached_app_user = {}
     end
 
+    #noinspection DuplicatedCode
     def obtain_access_token_app(scope = "general")
       key_search = @client_id + scope
       token_cached = @tokens_cached_app_user[key_search]
       if !token_cached.nil? and !token_cached.access_token.nil? and !token_cached.access_token.params.nil? and
           !token_cached.access_token.params['scope'].nil?  and !token_cached.access_token.expires_at.nil? and
-          token_cached.access_token.expires_at.is_a? Integer and is_expire(token_cached.access_token.expires_at) and
+          token_cached.access_token.expires_at.is_a? Integer and is_valid(token_cached.access_token.expires_at) and
            !token_cached.access_token.token.nil?
 
         return format_to_header(token_cached.access_token.token)
@@ -79,13 +80,14 @@ module Wire4Auth
 
     end
 
+    #noinspection DuplicatedCode
     def obtain_access_token_app_user(user_key, secret_key, scope = "spei_admin")
 
       key_search = user_key + scope
       token_cached = @tokens_cached_app_user[key_search]
       if !token_cached.nil? and !token_cached.access_token.nil? and !token_cached.access_token.params.nil? and
           !token_cached.access_token.params['scope'].nil? and !token_cached.access_token.expires_at.nil? and
-          token_cached.access_token.expires_at.is_a? Integer and is_expire(token_cached.access_token.expires_at) and
+          token_cached.access_token.expires_at.is_a? Integer and is_valid(token_cached.access_token.expires_at) and
           !token_cached.access_token.token.nil?
 
         return format_to_header(token_cached.access_token.token)
@@ -137,6 +139,7 @@ module Wire4Auth
 
     end
 
+    #noinspection RubyInstanceMethodNamingConvention
     def regenerate_access_token_app_user(user_key, secret_key, scope = "spei_admin")
 
       begin
@@ -167,16 +170,17 @@ module Wire4Auth
       Wire4Client.configure do |config|
         # Configure OAuth2 access token for authorization
         config.host = @environment.service_url
+        config.base_path = @environment.base_path
       end
     end
 
     private
 
-    def is_expire(expires_at)
+    def is_valid(expires_at)
 
       time = Time.at(expires_at)
       # Get current time using the time zone
-      now = Time.now - 5 * 60 # minus 5 minutes
+      now = Time.now + 5 * 60 # plus 5 minutes
 
       time > now
     end
