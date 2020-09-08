@@ -394,7 +394,7 @@ No authorization required
 
 
 # **update_amount_limit_account_using_put**
-> update_amount_limit_account_using_put(authorization, account, request_dto, subscription)
+> TokenRequiredResponse update_amount_limit_account_using_put(authorization, account, request_dto, subscription)
 
 Actualiza el monto límite
 
@@ -418,7 +418,8 @@ subscription = 'subscription_example' # String | El identificador de la suscripc
 
 begin
   #Actualiza el monto límite
-  api_instance.update_amount_limit_account_using_put(authorization, account, request_dto, subscription)
+  result = api_instance.update_amount_limit_account_using_put(authorization, account, request_dto, subscription)
+  p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling CuentasDeBeneficiariosSPEIApi->update_amount_limit_account_using_put: #{e}"
 end
@@ -435,7 +436,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-nil (empty response body)
+[**TokenRequiredResponse**](TokenRequiredResponse.md)
 
 ### Authorization
 

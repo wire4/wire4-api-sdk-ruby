@@ -592,10 +592,10 @@ module Wire4Client
     # @param request_dto Información de la cuenta y el monto límite a actualizar
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [TokenRequiredResponse]
     def update_amount_limit_account_using_put(authorization, account, request_dto, subscription, opts = {})
-      update_amount_limit_account_using_put_with_http_info(authorization, account, request_dto, subscription, opts)
-      nil
+      data, _status_code, _headers = update_amount_limit_account_using_put_with_http_info(authorization, account, request_dto, subscription, opts)
+      data
     end
 
     # Actualiza el monto límite
@@ -605,7 +605,7 @@ module Wire4Client
     # @param request_dto Información de la cuenta y el monto límite a actualizar
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    # @return [Array<(TokenRequiredResponse, Fixnum, Hash)>] TokenRequiredResponse data, response status code and response headers
     def update_amount_limit_account_using_put_with_http_info(authorization, account, request_dto, subscription, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CuentasDeBeneficiariosSPEIApi.update_amount_limit_account_using_put ...'
@@ -671,7 +671,8 @@ module Wire4Client
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'TokenRequiredResponse')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: CuentasDeBeneficiariosSPEIApi#update_amount_limit_account_using_put\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end

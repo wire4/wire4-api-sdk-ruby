@@ -143,7 +143,7 @@ describe 'CuentasDeBeneficiariosSPEIApi' do
   # @param request_dto Información de la cuenta y el monto límite a actualizar
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
-  # @return [nil]
+  # @return [TokenRequiredResponse]
   describe 'update_amount_limit_account_using_put test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

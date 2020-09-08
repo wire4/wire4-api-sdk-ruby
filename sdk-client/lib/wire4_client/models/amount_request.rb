@@ -18,18 +18,26 @@ module Wire4Client
     # Nuevo monto límite que reemplazará al actual, un monto de 0.0 implica que no hay límite
     attr_accessor :amount_limit
 
+    # Url a la que se redirigirá en caso de que el cliente cancele el registro
+    attr_accessor :cancel_return_url
+
     # Código de moneda de la cuenta
     attr_accessor :currency_code
 
     # Monto límite registrado actualmente, un monto de 0.0 implica que no hay límite
     attr_accessor :previous_amount_limit
 
+    # Url a la que se redirigirá en caso de éxito
+    attr_accessor :return_url
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'amount_limit' => :'amount_limit',
+        :'cancel_return_url' => :'cancel_return_url',
         :'currency_code' => :'currency_code',
-        :'previous_amount_limit' => :'previous_amount_limit'
+        :'previous_amount_limit' => :'previous_amount_limit',
+        :'return_url' => :'return_url'
       }
     end
 
@@ -37,8 +45,10 @@ module Wire4Client
     def self.swagger_types
       {
         :'amount_limit' => :'Float',
+        :'cancel_return_url' => :'String',
         :'currency_code' => :'String',
-        :'previous_amount_limit' => :'Float'
+        :'previous_amount_limit' => :'Float',
+        :'return_url' => :'String'
       }
     end
 
@@ -54,12 +64,20 @@ module Wire4Client
         self.amount_limit = attributes[:'amount_limit']
       end
 
+      if attributes.has_key?(:'cancel_return_url')
+        self.cancel_return_url = attributes[:'cancel_return_url']
+      end
+
       if attributes.has_key?(:'currency_code')
         self.currency_code = attributes[:'currency_code']
       end
 
       if attributes.has_key?(:'previous_amount_limit')
         self.previous_amount_limit = attributes[:'previous_amount_limit']
+      end
+
+      if attributes.has_key?(:'return_url')
+        self.return_url = attributes[:'return_url']
       end
     end
 
@@ -75,6 +93,18 @@ module Wire4Client
         invalid_properties.push('invalid value for "amount_limit", must be greater than or equal to 0.0.')
       end
 
+      if @cancel_return_url.nil?
+        invalid_properties.push('invalid value for "cancel_return_url", cancel_return_url cannot be nil.')
+      end
+
+      if @cancel_return_url.to_s.length > 512
+        invalid_properties.push('invalid value for "cancel_return_url", the character length must be smaller than or equal to 512.')
+      end
+
+      if @cancel_return_url.to_s.length < 10
+        invalid_properties.push('invalid value for "cancel_return_url", the character length must be great than or equal to 10.')
+      end
+
       if @currency_code.nil?
         invalid_properties.push('invalid value for "currency_code", currency_code cannot be nil.')
       end
@@ -87,6 +117,18 @@ module Wire4Client
         invalid_properties.push('invalid value for "previous_amount_limit", must be greater than or equal to 0.0.')
       end
 
+      if @return_url.nil?
+        invalid_properties.push('invalid value for "return_url", return_url cannot be nil.')
+      end
+
+      if @return_url.to_s.length > 512
+        invalid_properties.push('invalid value for "return_url", the character length must be smaller than or equal to 512.')
+      end
+
+      if @return_url.to_s.length < 10
+        invalid_properties.push('invalid value for "return_url", the character length must be great than or equal to 10.')
+      end
+
       invalid_properties
     end
 
@@ -95,9 +137,15 @@ module Wire4Client
     def valid?
       return false if @amount_limit.nil?
       return false if @amount_limit < 0.0
+      return false if @cancel_return_url.nil?
+      return false if @cancel_return_url.to_s.length > 512
+      return false if @cancel_return_url.to_s.length < 10
       return false if @currency_code.nil?
       return false if @previous_amount_limit.nil?
       return false if @previous_amount_limit < 0.0
+      return false if @return_url.nil?
+      return false if @return_url.to_s.length > 512
+      return false if @return_url.to_s.length < 10
       true
     end
 
@@ -116,6 +164,24 @@ module Wire4Client
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] cancel_return_url Value to be assigned
+    def cancel_return_url=(cancel_return_url)
+      if cancel_return_url.nil?
+        fail ArgumentError, 'cancel_return_url cannot be nil'
+      end
+
+      if cancel_return_url.to_s.length > 512
+        fail ArgumentError, 'invalid value for "cancel_return_url", the character length must be smaller than or equal to 512.'
+      end
+
+      if cancel_return_url.to_s.length < 10
+        fail ArgumentError, 'invalid value for "cancel_return_url", the character length must be great than or equal to 10.'
+      end
+
+      @cancel_return_url = cancel_return_url
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] previous_amount_limit Value to be assigned
     def previous_amount_limit=(previous_amount_limit)
       if previous_amount_limit.nil?
@@ -129,14 +195,34 @@ module Wire4Client
       @previous_amount_limit = previous_amount_limit
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] return_url Value to be assigned
+    def return_url=(return_url)
+      if return_url.nil?
+        fail ArgumentError, 'return_url cannot be nil'
+      end
+
+      if return_url.to_s.length > 512
+        fail ArgumentError, 'invalid value for "return_url", the character length must be smaller than or equal to 512.'
+      end
+
+      if return_url.to_s.length < 10
+        fail ArgumentError, 'invalid value for "return_url", the character length must be great than or equal to 10.'
+      end
+
+      @return_url = return_url
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           amount_limit == o.amount_limit &&
+          cancel_return_url == o.cancel_return_url &&
           currency_code == o.currency_code &&
-          previous_amount_limit == o.previous_amount_limit
+          previous_amount_limit == o.previous_amount_limit &&
+          return_url == o.return_url
     end
 
     # @see the `==` method
@@ -148,7 +234,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount_limit, currency_code, previous_amount_limit].hash
+      [amount_limit, cancel_return_url, currency_code, previous_amount_limit, return_url].hash
     end
 
     # Builds the object from hash

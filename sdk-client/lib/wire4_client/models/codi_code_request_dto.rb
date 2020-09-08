@@ -23,6 +23,9 @@ module Wire4Client
     # Fecha de operación pago CODI®, formato: yyyy-MM-dd'T'HH:mm:ss
     attr_accessor :due_date
 
+    # Campo de metada CODI®, longitud máxima determinada por configuracion de la empresa, por defecto 100 caracteres
+    attr_accessor :metadata
+
     # Referencia de la transferencia asignada por el cliente
     attr_accessor :order_id
 
@@ -60,6 +63,7 @@ module Wire4Client
         :'amount' => :'amount',
         :'concept' => :'concept',
         :'due_date' => :'due_date',
+        :'metadata' => :'metadata',
         :'order_id' => :'order_id',
         :'phone_number' => :'phone_number',
         :'type' => :'type'
@@ -72,6 +76,7 @@ module Wire4Client
         :'amount' => :'Float',
         :'concept' => :'String',
         :'due_date' => :'DateTime',
+        :'metadata' => :'String',
         :'order_id' => :'String',
         :'phone_number' => :'String',
         :'type' => :'String'
@@ -96,6 +101,10 @@ module Wire4Client
 
       if attributes.has_key?(:'due_date')
         self.due_date = attributes[:'due_date']
+      end
+
+      if attributes.has_key?(:'metadata')
+        self.metadata = attributes[:'metadata']
       end
 
       if attributes.has_key?(:'order_id')
@@ -268,6 +277,7 @@ module Wire4Client
           amount == o.amount &&
           concept == o.concept &&
           due_date == o.due_date &&
+          metadata == o.metadata &&
           order_id == o.order_id &&
           phone_number == o.phone_number &&
           type == o.type
@@ -282,7 +292,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount, concept, due_date, order_id, phone_number, type].hash
+      [amount, concept, due_date, metadata, order_id, phone_number, type].hash
     end
 
     # Builds the object from hash

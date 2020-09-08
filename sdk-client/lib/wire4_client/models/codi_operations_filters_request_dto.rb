@@ -133,20 +133,20 @@ module Wire4Client
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@amount_from.nil? && @amount_from > 8000.0
-        invalid_properties.push('invalid value for "amount_from", must be smaller than or equal to 8000.0.')
+      if !@amount_from.nil? && @amount_from > 9999999.99
+        invalid_properties.push('invalid value for "amount_from", must be smaller than or equal to 9999999.99.')
       end
 
-      if !@amount_from.nil? && @amount_from < 1.0
-        invalid_properties.push('invalid value for "amount_from", must be greater than or equal to 1.0.')
+      if !@amount_from.nil? && @amount_from < 0.01
+        invalid_properties.push('invalid value for "amount_from", must be greater than or equal to 0.01.')
       end
 
-      if !@amount_to.nil? && @amount_to > 8000.0
-        invalid_properties.push('invalid value for "amount_to", must be smaller than or equal to 8000.0.')
+      if !@amount_to.nil? && @amount_to > 9999999.99
+        invalid_properties.push('invalid value for "amount_to", must be smaller than or equal to 9999999.99.')
       end
 
-      if !@amount_to.nil? && @amount_to < 1.0
-        invalid_properties.push('invalid value for "amount_to", must be greater than or equal to 1.0.')
+      if !@amount_to.nil? && @amount_to < 0.01
+        invalid_properties.push('invalid value for "amount_to", must be greater than or equal to 0.01.')
       end
 
       invalid_properties
@@ -155,10 +155,10 @@ module Wire4Client
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@amount_from.nil? && @amount_from > 8000.0
-      return false if !@amount_from.nil? && @amount_from < 1.0
-      return false if !@amount_to.nil? && @amount_to > 8000.0
-      return false if !@amount_to.nil? && @amount_to < 1.0
+      return false if !@amount_from.nil? && @amount_from > 9999999.99
+      return false if !@amount_from.nil? && @amount_from < 0.01
+      return false if !@amount_to.nil? && @amount_to > 9999999.99
+      return false if !@amount_to.nil? && @amount_to < 0.01
       status_validator = EnumAttributeValidator.new('String', ['RECEIVED', 'COMPLETED', 'CANCELLED'])
       return false unless status_validator.valid?(@status)
       true
@@ -167,12 +167,12 @@ module Wire4Client
     # Custom attribute writer method with validation
     # @param [Object] amount_from Value to be assigned
     def amount_from=(amount_from)
-      if !amount_from.nil? && amount_from > 8000.0
-        fail ArgumentError, 'invalid value for "amount_from", must be smaller than or equal to 8000.0.'
+      if !amount_from.nil? && amount_from > 9999999.99
+        fail ArgumentError, 'invalid value for "amount_from", must be smaller than or equal to 9999999.99.'
       end
 
-      if !amount_from.nil? && amount_from < 1.0
-        fail ArgumentError, 'invalid value for "amount_from", must be greater than or equal to 1.0.'
+      if !amount_from.nil? && amount_from < 0.01
+        fail ArgumentError, 'invalid value for "amount_from", must be greater than or equal to 0.01.'
       end
 
       @amount_from = amount_from
@@ -181,12 +181,12 @@ module Wire4Client
     # Custom attribute writer method with validation
     # @param [Object] amount_to Value to be assigned
     def amount_to=(amount_to)
-      if !amount_to.nil? && amount_to > 8000.0
-        fail ArgumentError, 'invalid value for "amount_to", must be smaller than or equal to 8000.0.'
+      if !amount_to.nil? && amount_to > 9999999.99
+        fail ArgumentError, 'invalid value for "amount_to", must be smaller than or equal to 9999999.99.'
       end
 
-      if !amount_to.nil? && amount_to < 1.0
-        fail ArgumentError, 'invalid value for "amount_to", must be greater than or equal to 1.0.'
+      if !amount_to.nil? && amount_to < 0.01
+        fail ArgumentError, 'invalid value for "amount_to", must be greater than or equal to 0.01.'
       end
 
       @amount_to = amount_to

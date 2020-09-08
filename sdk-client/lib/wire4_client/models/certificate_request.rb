@@ -85,7 +85,7 @@ module Wire4Client
       end
 
       if !@check_digit.nil? && @check_digit !~ Regexp.new(/\d/)
-        invalid_properties.push('invalid value for "check_digit", must conform to the pattern /\\d/.')
+        invalid_properties.push('invalid value for "check_digit", must conform to the pattern /\d/.')
       end
 
       invalid_properties
@@ -112,7 +112,7 @@ module Wire4Client
       end
 
       if !check_digit.nil? && check_digit !~ Regexp.new(/\d/)
-        fail ArgumentError, 'invalid value for "check_digit", must conform to the pattern /\\d/.'
+        fail ArgumentError, 'invalid value for "check_digit", must conform to the pattern /\d/.'
       end
 
       @check_digit = check_digit
