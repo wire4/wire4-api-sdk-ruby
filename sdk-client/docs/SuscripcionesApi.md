@@ -4,17 +4,17 @@ All URIs are relative to *https://sandbox-api.wire4.mx/wire4/1.0.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**pre_enrollment_monex_user_using_post**](SuscripcionesApi.md#pre_enrollment_monex_user_using_post) | **POST** /subscriptions/pre-subscription | registra una pre-suscripción
-[**remove_enrollment_user_using_delete**](SuscripcionesApi.md#remove_enrollment_user_using_delete) | **DELETE** /subscriptions/{subscription} | Elimna una suscripción por id
-[**remove_subscription_pending_status_using_delete**](SuscripcionesApi.md#remove_subscription_pending_status_using_delete) | **DELETE** /subscriptions/pre-subscription/{subscription} | Elimna una pre-suscripción
+[**pre_enrollment_monex_user_using_post**](SuscripcionesApi.md#pre_enrollment_monex_user_using_post) | **POST** /subscriptions/pre-subscription | Registra una pre-suscripción
+[**remove_enrollment_user_using_delete**](SuscripcionesApi.md#remove_enrollment_user_using_delete) | **DELETE** /subscriptions/{subscription} | Elimina una suscripción por el identificador de la suscripción
+[**remove_subscription_pending_status_using_delete**](SuscripcionesApi.md#remove_subscription_pending_status_using_delete) | **DELETE** /subscriptions/pre-subscription/{subscription} | Elimina una pre-suscripción
 
 
 # **pre_enrollment_monex_user_using_post**
 > PreEnrollmentResponse pre_enrollment_monex_user_using_post(authorization, pre_enrollment_data)
 
-registra una pre-suscripción
+Registra una pre-suscripción
 
-Pre-registra una suscripción para operar un contrato a través de un aplicación socio de la plataforma, proporcionando una URL donde el cliente Monex debe autorizar el acceso a los datos de su cuenta a el socio.<br/>Una vez que el cuentahabiente autorice el acceso, se envia un webhook con el evento ENROLLMENT.CREATED, el cual contiene los datos de acceso.
+Registra una pre-suscripción para operar un contrato a través de un aplicación socio de la plataforma, proporcionando una URL donde el cliente Monex debe autorizar el acceso a los datos de su cuenta a el socio.<br/>Una vez que el cuentahabiente autorice el acceso, se envía un mensaje webhook con el evento 'ENROLLMENT.CREATED', el cuál contiene los datos de acceso a esta API.
 
 ### Example
 ```ruby
@@ -25,11 +25,11 @@ api_instance = Wire4Client::SuscripcionesApi.new
 
 authorization = 'authorization_example' # String | Header para token
 
-pre_enrollment_data = Wire4Client::PreEnrollmentData.new # PreEnrollmentData | Información para el enrolamiento
+pre_enrollment_data = Wire4Client::PreEnrollmentData.new # PreEnrollmentData | Información para la pre-suscripción
 
 
 begin
-  #registra una pre-suscripción
+  #Registra una pre-suscripción
   result = api_instance.pre_enrollment_monex_user_using_post(authorization, pre_enrollment_data)
   p result
 rescue Wire4Client::ApiError => e
@@ -42,7 +42,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| Header para token | 
- **pre_enrollment_data** | [**PreEnrollmentData**](PreEnrollmentData.md)| Información para el enrolamiento | 
+ **pre_enrollment_data** | [**PreEnrollmentData**](PreEnrollmentData.md)| Información para la pre-suscripción | 
 
 ### Return type
 
@@ -62,9 +62,9 @@ No authorization required
 # **remove_enrollment_user_using_delete**
 > remove_enrollment_user_using_delete(authorization, subscription)
 
-Elimna una suscripción por id
+Elimina una suscripción por el identificador de la suscripción
 
-Elimina una suscripción, una ves eliminada la suscripcion ya no se podran realizar operacions en el API uilizando esta suscripción
+Elimina una suscripción, una vez eliminada ya no se podrán realizar operacions en el API utilizando esta suscripción
 
 ### Example
 ```ruby
@@ -79,7 +79,7 @@ subscription = 'subscription_example' # String | El identificador de la suscripc
 
 
 begin
-  #Elimna una suscripción por id
+  #Elimina una suscripción por el identificador de la suscripción
   api_instance.remove_enrollment_user_using_delete(authorization, subscription)
 rescue Wire4Client::ApiError => e
   puts "Exception when calling SuscripcionesApi->remove_enrollment_user_using_delete: #{e}"
@@ -111,9 +111,9 @@ No authorization required
 # **remove_subscription_pending_status_using_delete**
 > remove_subscription_pending_status_using_delete(authorization, subscription)
 
-Elimna una pre-suscripción
+Elimina una pre-suscripción
 
-Se elimina una pre-suscripción, sólo se elimina en caso de que cliente monex no haya concedio su autorización de acceso, es decir que la pre-suscripcion este pendiente.
+Se elimina una pre-suscripción, sólo se elimina en caso de que el cliente Monex no haya concedido su autorización de acceso (token), es decir que la pre-suscripcion este pendiente.
 
 ### Example
 ```ruby
@@ -128,7 +128,7 @@ subscription = 'subscription_example' # String | El identificador de la suscripc
 
 
 begin
-  #Elimna una pre-suscripción
+  #Elimina una pre-suscripción
   api_instance.remove_subscription_pending_status_using_delete(authorization, subscription)
 rescue Wire4Client::ApiError => e
   puts "Exception when calling SuscripcionesApi->remove_subscription_pending_status_using_delete: #{e}"

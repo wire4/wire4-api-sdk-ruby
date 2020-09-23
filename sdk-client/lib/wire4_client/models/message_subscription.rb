@@ -13,24 +13,24 @@ Swagger Codegen version: 2.4.10
 require 'date'
 
 module Wire4Client
-  # El mensaje que se envía mediante (webHook) con la información del la suscripción a esta a esta API
+  # El mensaje que se envía mediante (webHook) con la información de la suscripción a esta a esta API
   class MessageSubscription
-    # Contrato Monex, con el cual se suscribió el cliente Monex en Wire4
+    # Contrato Monex, con el cuál se suscribió el cliente Monex en Wire4
     attr_accessor :contract
 
-    # Contrato enmascarado de Monex, con el cual se suscribió el cliente Monex en Wire4
+    # Contrato enmascarado de Monex, con el cuál se suscribió el cliente Monex en Wire4
     attr_accessor :masked_contract
 
-    # Identificador de la suscripción, el cual se utiliza en las operaciones que solicitan una suscripción
+    # Identificador de la suscripción, el cual se utilizará en las operaciones que solicitan una suscripción
     attr_accessor :subscription
 
-    # Usuario enmascardo, con el cual se suscribió el cliente Monex en Wire4
+    # Usuario enmascardo, con el cuál se suscribió el cliente Monex en Wire4
     attr_accessor :user
 
-    # Usuario proporcionado por Wire4, el cual se debe utilizar para autenticar a esta suscripción
+    # Usuario proporcionado por Wire4, el cuál se debe utilizar para autenticar a esta suscripción
     attr_accessor :user_key
 
-    # Contraseña proporcionada por Wire4, la cual se debe utilizar para autenticar a esta suscripción
+    # Contraseña proporcionada por Wire4, la cuál se debe utilizar para autenticar a esta suscripción
     attr_accessor :user_secret
 
     # Attribute mapping from ruby-style variable name to JSON key.

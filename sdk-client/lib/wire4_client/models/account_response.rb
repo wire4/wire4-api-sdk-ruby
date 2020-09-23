@@ -30,7 +30,7 @@ module Wire4Client
     # Objeto que contiene el nombre de la institución, es mutuamente exclusivo con el objeto Person
     attr_accessor :institution
 
-    # Tipo de relación con el propietario de la cuenta, para registrar una cuenta este valor se debe obtener  del recurso relationships
+    # Tipo de relación con el propietario de la cuenta, para registrar una cuenta este valor se debe obtener  del recurso relationships. <br> Nota: Si en la respuesta de Monex esta propiedad es nula, tampoco estará presente en esta respuesta.
     attr_accessor :kind_of_relationship
 
     # Referencia numérica a utilizar cuando se realice una transferencia y no se especifique una referencia
@@ -42,10 +42,13 @@ module Wire4Client
     # Objeto que contiene los datos de la persona propietaria de la cuenta, si se incluye este atributo, el atributo institution no debe estar presente
     attr_accessor :person
 
-    # Relación con el propietario de la cuenta, para registrar una cuenta este valor se debe obtener  del recurso relationships
+    # La fecha en la que se registro el beneficiario
+    attr_accessor :register_date
+
+    # Relación con el propietario de la cuenta, para registrar una cuenta este valor se debe obtener  del recurso relationships. <br> Nota: Si en la respuesta de Monex esta propiedad es nula, tampoco estará presente en esta respuesta.
     attr_accessor :relationship
 
-    # Registro federal de contribuyentes de la persona o institución propietaria de la cuenta
+    # Registro federal de contribuyentes de la persona o institución propietaria de la cuenta. <br> Nota: Si en la respuesta de Monex esta propiedad es nula, tampoco estará presente en esta respuesta.
     attr_accessor :rfc
 
     # El estado (status) en el que se encuentra el registro del beneficiario
@@ -63,6 +66,7 @@ module Wire4Client
         :'numeric_reference_spei' => :'numeric_reference_spei',
         :'payment_concept_spei' => :'payment_concept_spei',
         :'person' => :'person',
+        :'register_date' => :'register_date',
         :'relationship' => :'relationship',
         :'rfc' => :'rfc',
         :'status' => :'status'
@@ -81,6 +85,7 @@ module Wire4Client
         :'numeric_reference_spei' => :'String',
         :'payment_concept_spei' => :'String',
         :'person' => :'Person',
+        :'register_date' => :'DateTime',
         :'relationship' => :'String',
         :'rfc' => :'String',
         :'status' => :'String'
@@ -131,6 +136,10 @@ module Wire4Client
 
       if attributes.has_key?(:'person')
         self.person = attributes[:'person']
+      end
+
+      if attributes.has_key?(:'register_date')
+        self.register_date = attributes[:'register_date']
       end
 
       if attributes.has_key?(:'relationship')
@@ -231,6 +240,7 @@ module Wire4Client
           numeric_reference_spei == o.numeric_reference_spei &&
           payment_concept_spei == o.payment_concept_spei &&
           person == o.person &&
+          register_date == o.register_date &&
           relationship == o.relationship &&
           rfc == o.rfc &&
           status == o.status
@@ -245,7 +255,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount_limit, bank, beneficiary_account, email, institution, kind_of_relationship, numeric_reference_spei, payment_concept_spei, person, relationship, rfc, status].hash
+      [amount_limit, bank, beneficiary_account, email, institution, kind_of_relationship, numeric_reference_spei, payment_concept_spei, person, register_date, relationship, rfc, status].hash
     end
 
     # Builds the object from hash

@@ -23,16 +23,19 @@ module Wire4Auth
 
     attr_reader :service_url
 
-    def initialize(token_url, service_url)
+    attr_reader :base_path
+
+    def initialize(token_url, service_url, base_path)
       @token_url = token_url
       @service_url = service_url
+      @base_path = base_path
     end
 
-    SANDBOX = new("https://sandbox-api.wire4.mx/token", "sandbox-api.wire4.mx")
+    SANDBOX = new('https://sandbox-api.wire4.mx/token', 'sandbox-api.wire4.mx', '/wire4/1.0.0')
 
-    DEVELOPMENT  = new('https://development-api.wire4.mx/token', 'development-api.wire4.mx')
+    DEVELOPMENT = new('https://development-api.wire4.mx/token', 'development-api.wire4.mx', '/wire4/1.0.0')
 
-    PRODUCTION = new("https://api.wire4.mx/token", "api.wire4.mx")
+    PRODUCTION = new('https://api.wire4.mx/token', 'api.wire4.mx', '/wire4/1.0.0')
 
     class << self
       private :new

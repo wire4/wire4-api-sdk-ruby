@@ -13,7 +13,7 @@ Swagger Codegen version: 2.4.10
 require 'date'
 
 module Wire4Client
-  # El mensaje que se envía mediante (webHook) con la información del transferencia de salida realizada
+  # El mensaje que se envía mediante (webHook) con la información de la transferencia de salida realizada
   class MessagePayment
     # Cuenta del ordenante
     attr_accessor :account
@@ -30,6 +30,7 @@ module Wire4Client
     # Nombre del beneficiario
     attr_accessor :beneficiary_name
 
+    # Informacion del CEP
     attr_accessor :cep
 
     # Clave de rastreo de la transferencia
@@ -47,6 +48,9 @@ module Wire4Client
     # Mensaje de detención de Monex de la transferencia de salida
     attr_accessor :detention_message
 
+    # Mensaje de error
+    attr_accessor :error_message
+
     # La descripción de Monex de la transferencia de salida
     attr_accessor :monex_description
 
@@ -55,6 +59,9 @@ module Wire4Client
 
     # El identificador de la orden de pago de Monex de la transferencia de salida
     attr_accessor :payment_order_id
+
+    # Razón de porque está pendiente aún cuando se autorizó la transferencia
+    attr_accessor :pending_reason
 
     # Referecia de la transferencia
     attr_accessor :reference
@@ -82,9 +89,11 @@ module Wire4Client
         :'confirm_date' => :'confirm_date',
         :'currency_code' => :'currency_code',
         :'detention_message' => :'detention_message',
+        :'error_message' => :'error_message',
         :'monex_description' => :'monex_description',
         :'order_id' => :'order_id',
         :'payment_order_id' => :'payment_order_id',
+        :'pending_reason' => :'pending_reason',
         :'reference' => :'reference',
         :'request_id' => :'request_id',
         :'status_code' => :'status_code',
@@ -106,9 +115,11 @@ module Wire4Client
         :'confirm_date' => :'DateTime',
         :'currency_code' => :'String',
         :'detention_message' => :'String',
+        :'error_message' => :'String',
         :'monex_description' => :'String',
         :'order_id' => :'String',
         :'payment_order_id' => :'Integer',
+        :'pending_reason' => :'String',
         :'reference' => :'Integer',
         :'request_id' => :'String',
         :'status_code' => :'String',
@@ -168,6 +179,10 @@ module Wire4Client
         self.detention_message = attributes[:'detention_message']
       end
 
+      if attributes.has_key?(:'error_message')
+        self.error_message = attributes[:'error_message']
+      end
+
       if attributes.has_key?(:'monex_description')
         self.monex_description = attributes[:'monex_description']
       end
@@ -178,6 +193,10 @@ module Wire4Client
 
       if attributes.has_key?(:'payment_order_id')
         self.payment_order_id = attributes[:'payment_order_id']
+      end
+
+      if attributes.has_key?(:'pending_reason')
+        self.pending_reason = attributes[:'pending_reason']
       end
 
       if attributes.has_key?(:'reference')
@@ -226,9 +245,11 @@ module Wire4Client
           confirm_date == o.confirm_date &&
           currency_code == o.currency_code &&
           detention_message == o.detention_message &&
+          error_message == o.error_message &&
           monex_description == o.monex_description &&
           order_id == o.order_id &&
           payment_order_id == o.payment_order_id &&
+          pending_reason == o.pending_reason &&
           reference == o.reference &&
           request_id == o.request_id &&
           status_code == o.status_code &&
@@ -244,7 +265,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [account, amount, beneficiary_account, beneficiary_bank, beneficiary_name, cep, clave_rastreo, concept, confirm_date, currency_code, detention_message, monex_description, order_id, payment_order_id, reference, request_id, status_code, transaction_id].hash
+      [account, amount, beneficiary_account, beneficiary_bank, beneficiary_name, cep, clave_rastreo, concept, confirm_date, currency_code, detention_message, error_message, monex_description, order_id, payment_order_id, pending_reason, reference, request_id, status_code, transaction_id].hash
     end
 
     # Builds the object from hash

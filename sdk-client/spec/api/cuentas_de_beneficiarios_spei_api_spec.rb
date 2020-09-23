@@ -32,6 +32,20 @@ describe 'CuentasDeBeneficiariosSPEIApi' do
     end
   end
 
+  # unit tests for authorize_accounts_pending_put
+  # Recibe la solicitud para agrupar las cuentas SPEI/SPID de beneficiarios en estado pendiente que deben ser autorizadas
+  # Solicta autorizar las cuentas de beneficiarios en estado pendiente agrupandolas en un set de cuentas que pueden incluir tanto cuentas de SPI como de SPID, debe indicar las urls de redireccion en caso de error y en caso de exito&lt;br/&gt;
+  # @param authorization Header para token
+  # @param subscription El identificador de la suscripción a esta API
+  # @param urls_redirect_dto Información de la cuenta del beneficiario
+  # @param [Hash] opts the optional parameters
+  # @return [AuthorizedBeneficiariesResponse]
+  describe 'authorize_accounts_pending_put test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for delete_account_using_delete
   # Elimina la cuenta del beneficiario
   # Borra la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción. La cuenta a borrar debe ser una cuenta que opere con SPEI.
@@ -80,7 +94,12 @@ describe 'CuentasDeBeneficiariosSPEIApi' do
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
   # @option opts [String] :account Cuenta del beneficiario, puede ser Clabe, TDD o Celular
+  # @option opts [String] :beneficiary_bank Clave del banco beneficiario
+  # @option opts [String] :beneficiary_name Nombre del beneficiario
+  # @option opts [String] :end_date Fecha de inicio del perido a filtrar en formato dd-mm-yyyy
+  # @option opts [String] :init_date Fecha de inicio del perido a filtrar en formato dd-mm-yyyy
   # @option opts [String] :rfc RFC del beneficiario
+  # @option opts [String] :status Estatus de la cuenta
   # @return [BeneficiariesResponse]
   describe 'get_beneficiaries_for_account_using_get test' do
     it 'should work' do
@@ -124,7 +143,7 @@ describe 'CuentasDeBeneficiariosSPEIApi' do
   # @param request_dto Información de la cuenta y el monto límite a actualizar
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
-  # @return [nil]
+  # @return [TokenRequiredResponse]
   describe 'update_amount_limit_account_using_put test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

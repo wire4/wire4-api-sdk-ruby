@@ -32,6 +32,20 @@ describe 'TransferenciasSPEIApi' do
     end
   end
 
+  # unit tests for create_authorization_transactions_group
+  # Agrupa un conjunto de transacciones bajo un mismo request_id para autorizar
+  # Agrupa transacciones SPEI/SPID en un transaction_id, generando la URL para su autorización. Las transacciones deben estar en estatus PENDING y pertenecer a un mmismo contrato
+  # @param authorization Header para token
+  # @param authorization_transactions_group_request_dto authorizationTransactionsGroupRequestDTO
+  # @param subscription Identificador de la suscripcion
+  # @param [Hash] opts the optional parameters
+  # @return [TokenRequiredResponse]
+  describe 'create_authorization_transactions_group test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for drop_transactions_pending_using_delete
   # Eliminación de transferencias SPEI® pendientes
   # Elimina un conjunto de transferencias a realizar en la cuenta del cliente Monex relacionada a la suscripción, las transferencias no deben haber sido confirmadas por el cliente.
@@ -39,6 +53,7 @@ describe 'TransferenciasSPEIApi' do
   # @param request_id Identificador de las transferencias a eliminar
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :order_id Listado de identificadores dentro del request_id para eliminar
   # @return [nil]
   describe 'drop_transactions_pending_using_delete test' do
     it 'should work' do

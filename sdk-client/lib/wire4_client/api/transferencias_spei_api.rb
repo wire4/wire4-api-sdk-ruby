@@ -19,12 +19,92 @@ module Wire4Client
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Agrupa un conjunto de transacciones bajo un mismo request_id para autorizar
+    # Agrupa transacciones SPEI/SPID en un transaction_id, generando la URL para su autorización. Las transacciones deben estar en estatus PENDING y pertenecer a un mmismo contrato
+    # @param authorization Header para token
+    # @param authorization_transactions_group_request_dto authorizationTransactionsGroupRequestDTO
+    # @param subscription Identificador de la suscripcion
+    # @param [Hash] opts the optional parameters
+    # @return [TokenRequiredResponse]
+    def create_authorization_transactions_group(authorization, authorization_transactions_group_request_dto, subscription, opts = {})
+      data, _status_code, _headers = create_authorization_transactions_group_with_http_info(authorization, authorization_transactions_group_request_dto, subscription, opts)
+      data
+    end
+
+    # Agrupa un conjunto de transacciones bajo un mismo request_id para autorizar
+    # Agrupa transacciones SPEI/SPID en un transaction_id, generando la URL para su autorización. Las transacciones deben estar en estatus PENDING y pertenecer a un mmismo contrato
+    # @param authorization Header para token
+    # @param authorization_transactions_group_request_dto authorizationTransactionsGroupRequestDTO
+    # @param subscription Identificador de la suscripcion
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(TokenRequiredResponse, Fixnum, Hash)>] TokenRequiredResponse data, response status code and response headers
+    def create_authorization_transactions_group_with_http_info(authorization, authorization_transactions_group_request_dto, subscription, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TransferenciasSPEIApi.create_authorization_transactions_group ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling TransferenciasSPEIApi.create_authorization_transactions_group"
+      end
+      # verify the required parameter 'authorization_transactions_group_request_dto' is set
+      if @api_client.config.client_side_validation && authorization_transactions_group_request_dto.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization_transactions_group_request_dto' when calling TransferenciasSPEIApi.create_authorization_transactions_group"
+      end
+      # verify the required parameter 'subscription' is set
+      if @api_client.config.client_side_validation && subscription.nil?
+        fail ArgumentError, "Missing the required parameter 'subscription' when calling TransferenciasSPEIApi.create_authorization_transactions_group"
+      end
+      if @api_client.config.client_side_validation && subscription.to_s.length > 36
+        fail ArgumentError, 'invalid value for "subscription" when calling TransferenciasSPEIApi.create_authorization_transactions_group, the character length must be smaller than or equal to 36.'
+      end
+
+      if @api_client.config.client_side_validation && subscription.to_s.length < 36
+        fail ArgumentError, 'invalid value for "subscription" when calling TransferenciasSPEIApi.create_authorization_transactions_group, the character length must be great than or equal to 36.'
+      end
+
+      if @api_client.config.client_side_validation && subscription !~ Regexp.new(/[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[34][A-Fa-f0-9]{3}-[89ab][A-Fa-f0-9]{3}-[A-Fa-f0-9]{12}$/)
+        fail ArgumentError, "invalid value for 'subscription' when calling TransferenciasSPEIApi.create_authorization_transactions_group, must conform to the pattern /[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[34][A-Fa-f0-9]{3}-[89ab][A-Fa-f0-9]{3}-[A-Fa-f0-9]{12}$/."
+      end
+
+      # resource path
+      local_var_path = '/subscriptions/{subscription}/transactions/group'.sub('{' + 'subscription' + '}', subscription.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+      header_params[:'Authorization'] = authorization
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(authorization_transactions_group_request_dto)
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'TokenRequiredResponse')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TransferenciasSPEIApi#create_authorization_transactions_group\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
     # Eliminación de transferencias SPEI® pendientes
     # Elimina un conjunto de transferencias a realizar en la cuenta del cliente Monex relacionada a la suscripción, las transferencias no deben haber sido confirmadas por el cliente.
     # @param authorization Header para token
     # @param request_id Identificador de las transferencias a eliminar
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :order_id Listado de identificadores dentro del request_id para eliminar
     # @return [nil]
     def drop_transactions_pending_using_delete(authorization, request_id, subscription, opts = {})
       drop_transactions_pending_using_delete_with_http_info(authorization, request_id, subscription, opts)
@@ -37,6 +117,7 @@ module Wire4Client
     # @param request_id Identificador de las transferencias a eliminar
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :order_id Listado de identificadores dentro del request_id para eliminar
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
     def drop_transactions_pending_using_delete_with_http_info(authorization, request_id, subscription, opts = {})
       if @api_client.config.debugging
@@ -83,6 +164,7 @@ module Wire4Client
 
       # query parameters
       query_params = {}
+      query_params[:'order_id'] = opts[:'order_id'] if !opts[:'order_id'].nil?
 
       # header parameters
       header_params = {}

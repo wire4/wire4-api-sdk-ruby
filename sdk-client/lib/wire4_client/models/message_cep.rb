@@ -13,7 +13,7 @@ Swagger Codegen version: 2.4.10
 require 'date'
 
 module Wire4Client
-  # El CEP emitido por Banxico de la transferencia. Solo cuando este disponible, en otro caso se podrá usar la Consulta de CEP que esta misma API ofrece
+  # El CEP emitido por Banxico de la transferencia. Solo cuando esté disponible, en otro caso se podrá usar la Consulta de CEP que esta misma API ofrece
   class MessageCEP
     # Cuenta del beneficiario
     attr_accessor :account_beneficiary
@@ -24,13 +24,13 @@ module Wire4Client
     # Monto de la operación
     attr_accessor :amount
 
-    # Bander para saber si el cep esta disponible
+    # Indica sí el CEP está disponible
     attr_accessor :available
 
     # Clave del banco beneficiario
     attr_accessor :bank_beneficiary
 
-    # Clave del banco que envia la operación
+    # Clave del banco que envía la operación
     attr_accessor :bank_sender
 
     # Nombre del beneficiario
@@ -45,7 +45,7 @@ module Wire4Client
     # Fecha de captura
     attr_accessor :capture_date
 
-    # Numero de serie emitido por el SAT
+    # Número de serie emitido por el SAT
     attr_accessor :certificate_serial_number
 
     # Clave de rastreo de la operación
@@ -54,28 +54,28 @@ module Wire4Client
     # Descripción de la operación
     attr_accessor :description
 
-    # Iva de la operación
+    # IVA de la operación
     attr_accessor :iva
 
     # Fecha en la que se realizó la operación
     attr_accessor :operation_date
 
-    # Fecha en la que genera el cep
+    # Fecha en la que genera el CEP
     attr_accessor :operation_date_cep
 
     # Referencia de la operación
     attr_accessor :reference
 
-    # Nombre de quien envia la operación
+    # Nombre de quién envía la operación
     attr_accessor :sender_name
 
-    # RFC de quien envia la operación
+    # RFC de quién envía la operación
     attr_accessor :sender_rfc
 
-    # Firma del Cep
+    # Firma del CEP
     attr_accessor :signature
 
-    # Url que contiene el PDF y XML del CEP proporcionado por banxico
+    # Dirección URL de descarga del archivo ZIP que contiene el PDF y XML del CEP proporcionado por BANXICO
     attr_accessor :url_zip
 
     # Attribute mapping from ruby-style variable name to JSON key.

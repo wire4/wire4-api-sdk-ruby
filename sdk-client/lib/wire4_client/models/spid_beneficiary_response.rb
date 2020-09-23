@@ -39,11 +39,17 @@ module Wire4Client
     # Concepto de pago
     attr_accessor :payment_concept_spid
 
+    # La fecha en la que se registro el beneficiario
+    attr_accessor :register_date
+
     # Código de relación de la cuenta, este valor debe ser igual a uno de los obtenidos del recurso de consulta de  relationship
     attr_accessor :relationship
 
     # Registro federal de contribuyentes
     attr_accessor :rfc
+
+    # El estado en el que se encuentra el registo del beneficiario
+    attr_accessor :status
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -56,8 +62,10 @@ module Wire4Client
         :'kind_of_relationship' => :'kind_of_relationship',
         :'numeric_reference_spid' => :'numeric_reference_spid',
         :'payment_concept_spid' => :'payment_concept_spid',
+        :'register_date' => :'register_date',
         :'relationship' => :'relationship',
-        :'rfc' => :'rfc'
+        :'rfc' => :'rfc',
+        :'status' => :'status'
       }
     end
 
@@ -72,8 +80,10 @@ module Wire4Client
         :'kind_of_relationship' => :'String',
         :'numeric_reference_spid' => :'String',
         :'payment_concept_spid' => :'String',
+        :'register_date' => :'DateTime',
         :'relationship' => :'String',
-        :'rfc' => :'String'
+        :'rfc' => :'String',
+        :'status' => :'String'
       }
     end
 
@@ -119,12 +129,20 @@ module Wire4Client
         self.payment_concept_spid = attributes[:'payment_concept_spid']
       end
 
+      if attributes.has_key?(:'register_date')
+        self.register_date = attributes[:'register_date']
+      end
+
       if attributes.has_key?(:'relationship')
         self.relationship = attributes[:'relationship']
       end
 
       if attributes.has_key?(:'rfc')
         self.rfc = attributes[:'rfc']
+      end
+
+      if attributes.has_key?(:'status')
+        self.status = attributes[:'status']
       end
     end
 
@@ -212,8 +230,10 @@ module Wire4Client
           kind_of_relationship == o.kind_of_relationship &&
           numeric_reference_spid == o.numeric_reference_spid &&
           payment_concept_spid == o.payment_concept_spid &&
+          register_date == o.register_date &&
           relationship == o.relationship &&
-          rfc == o.rfc
+          rfc == o.rfc &&
+          status == o.status
     end
 
     # @see the `==` method
@@ -225,7 +245,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount_limit, bank, beneficiary_account, email, institution, kind_of_relationship, numeric_reference_spid, payment_concept_spid, relationship, rfc].hash
+      [amount_limit, bank, beneficiary_account, email, institution, kind_of_relationship, numeric_reference_spid, payment_concept_spid, register_date, relationship, rfc, status].hash
     end
 
     # Builds the object from hash

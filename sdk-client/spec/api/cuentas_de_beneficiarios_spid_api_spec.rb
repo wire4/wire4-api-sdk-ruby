@@ -39,7 +39,12 @@ describe 'CuentasDeBeneficiariosSPIDApi' do
   # @param subscription El identificador de la suscripción a esta API
   # @param [Hash] opts the optional parameters
   # @option opts [String] :account Cuenta del beneficiario, puede ser Clabe, TDD o Celular
+  # @option opts [String] :beneficiary_bank Clave del banco beneficiario
+  # @option opts [String] :beneficiary_name Nombre del beneficiario
+  # @option opts [String] :end_date Fecha de inicio del perido a filtrar en formato dd-mm-yyyy
+  # @option opts [String] :init_date Fecha de inicio del perido a filtrar en formato dd-mm-yyyy
   # @option opts [String] :rfc RFC del beneficiario
+  # @option opts [String] :status Estatus de la cuenta
   # @return [SpidBeneficiariesResponse]
   describe 'get_spid_beneficiaries_for_account test' do
     it 'should work' do

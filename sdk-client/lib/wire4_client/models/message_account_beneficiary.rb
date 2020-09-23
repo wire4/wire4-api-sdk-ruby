@@ -15,13 +15,13 @@ require 'date'
 module Wire4Client
   # El mensaje que se envía mediante (webHook) con la información del registro de la cuenta del beneficiario
   class MessageAccountBeneficiary
-    # Cuenta del beneficiario
+    # Cuenta del beneficiario registrado
     attr_accessor :account
 
     # Mensaje de error en caso de existir, el valor de este atributo contiene el mensaje
     attr_accessor :error_message
 
-    # El identificador, en esta API, de la petición de registro de la cuenta del beneficiario
+    # El identificador en esta API, de la petición de registro de la cuenta del beneficiario
     attr_accessor :request_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

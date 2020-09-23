@@ -15,7 +15,7 @@ require 'date'
 module Wire4Client
   # El objeto que se envía mediante un mensaje WebHook
   class MessageWebHook
-    # La versión de la API
+    # La versión de esta API
     attr_accessor :api_version
 
     # Fecha de creación del mensaje
@@ -30,7 +30,7 @@ module Wire4Client
     # Indica si proviene de un entorno productivo
     attr_accessor :livemode
 
-    # Tipo de objeto  que contiene el mensaje en el atributo data los posibles valores son: subscription, beneficiary, spei_outgoing, spei_incoming, spid_outgoing 
+    # Tipo de objeto  que contiene el mensaje en el atributo 'data' los posibles valores son: subscription, beneficiary, spei_outgoing, spei_incoming, spid_outgoing, request_outgoing 
     attr_accessor :object
 
     # Número de  mensajes pendientes de enviar

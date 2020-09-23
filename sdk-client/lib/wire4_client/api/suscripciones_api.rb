@@ -19,10 +19,10 @@ module Wire4Client
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # registra una pre-suscripción
-    # Pre-registra una suscripción para operar un contrato a través de un aplicación socio de la plataforma, proporcionando una URL donde el cliente Monex debe autorizar el acceso a los datos de su cuenta a el socio.<br/>Una vez que el cuentahabiente autorice el acceso, se envia un webhook con el evento ENROLLMENT.CREATED, el cual contiene los datos de acceso.
+    # Registra una pre-suscripción
+    # Registra una pre-suscripción para operar un contrato a través de un aplicación socio de la plataforma, proporcionando una URL donde el cliente Monex debe autorizar el acceso a los datos de su cuenta a el socio.<br/>Una vez que el cuentahabiente autorice el acceso, se envía un mensaje webhook con el evento 'ENROLLMENT.CREATED', el cuál contiene los datos de acceso a esta API.
     # @param authorization Header para token
-    # @param pre_enrollment_data Información para el enrolamiento
+    # @param pre_enrollment_data Información para la pre-suscripción
     # @param [Hash] opts the optional parameters
     # @return [PreEnrollmentResponse]
     def pre_enrollment_monex_user_using_post(authorization, pre_enrollment_data, opts = {})
@@ -30,10 +30,10 @@ module Wire4Client
       data
     end
 
-    # registra una pre-suscripción
-    # Pre-registra una suscripción para operar un contrato a través de un aplicación socio de la plataforma, proporcionando una URL donde el cliente Monex debe autorizar el acceso a los datos de su cuenta a el socio.&lt;br/&gt;Una vez que el cuentahabiente autorice el acceso, se envia un webhook con el evento ENROLLMENT.CREATED, el cual contiene los datos de acceso.
+    # Registra una pre-suscripción
+    # Registra una pre-suscripción para operar un contrato a través de un aplicación socio de la plataforma, proporcionando una URL donde el cliente Monex debe autorizar el acceso a los datos de su cuenta a el socio.&lt;br/&gt;Una vez que el cuentahabiente autorice el acceso, se envía un mensaje webhook con el evento &#39;ENROLLMENT.CREATED&#39;, el cuál contiene los datos de acceso a esta API.
     # @param authorization Header para token
-    # @param pre_enrollment_data Información para el enrolamiento
+    # @param pre_enrollment_data Información para la pre-suscripción
     # @param [Hash] opts the optional parameters
     # @return [Array<(PreEnrollmentResponse, Fixnum, Hash)>] PreEnrollmentResponse data, response status code and response headers
     def pre_enrollment_monex_user_using_post_with_http_info(authorization, pre_enrollment_data, opts = {})
@@ -80,8 +80,8 @@ module Wire4Client
       end
       return data, status_code, headers
     end
-    # Elimna una suscripción por id
-    # Elimina una suscripción, una ves eliminada la suscripcion ya no se podran realizar operacions en el API uilizando esta suscripción
+    # Elimina una suscripción por el identificador de la suscripción
+    # Elimina una suscripción, una vez eliminada ya no se podrán realizar operacions en el API utilizando esta suscripción
     # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
@@ -91,8 +91,8 @@ module Wire4Client
       nil
     end
 
-    # Elimna una suscripción por id
-    # Elimina una suscripción, una ves eliminada la suscripcion ya no se podran realizar operacions en el API uilizando esta suscripción
+    # Elimina una suscripción por el identificador de la suscripción
+    # Elimina una suscripción, una vez eliminada ya no se podrán realizar operacions en el API utilizando esta suscripción
     # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
@@ -150,8 +150,8 @@ module Wire4Client
       end
       return data, status_code, headers
     end
-    # Elimna una pre-suscripción
-    # Se elimina una pre-suscripción, sólo se elimina en caso de que cliente monex no haya concedio su autorización de acceso, es decir que la pre-suscripcion este pendiente.
+    # Elimina una pre-suscripción
+    # Se elimina una pre-suscripción, sólo se elimina en caso de que el cliente Monex no haya concedido su autorización de acceso (token), es decir que la pre-suscripcion este pendiente.
     # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
@@ -161,8 +161,8 @@ module Wire4Client
       nil
     end
 
-    # Elimna una pre-suscripción
-    # Se elimina una pre-suscripción, sólo se elimina en caso de que cliente monex no haya concedio su autorización de acceso, es decir que la pre-suscripcion este pendiente.
+    # Elimina una pre-suscripción
+    # Se elimina una pre-suscripción, sólo se elimina en caso de que el cliente Monex no haya concedido su autorización de acceso (token), es decir que la pre-suscripcion este pendiente.
     # @param authorization Header para token
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters

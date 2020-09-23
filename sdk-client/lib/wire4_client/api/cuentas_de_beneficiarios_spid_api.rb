@@ -25,7 +25,12 @@ module Wire4Client
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @option opts [String] :account Cuenta del beneficiario, puede ser Clabe, TDD o Celular
+    # @option opts [String] :beneficiary_bank Clave del banco beneficiario
+    # @option opts [String] :beneficiary_name Nombre del beneficiario
+    # @option opts [String] :end_date Fecha de inicio del perido a filtrar en formato dd-mm-yyyy
+    # @option opts [String] :init_date Fecha de inicio del perido a filtrar en formato dd-mm-yyyy
     # @option opts [String] :rfc RFC del beneficiario
+    # @option opts [String] :status Estatus de la cuenta
     # @return [SpidBeneficiariesResponse]
     def get_spid_beneficiaries_for_account(authorization, subscription, opts = {})
       data, _status_code, _headers = get_spid_beneficiaries_for_account_with_http_info(authorization, subscription, opts)
@@ -38,7 +43,12 @@ module Wire4Client
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @option opts [String] :account Cuenta del beneficiario, puede ser Clabe, TDD o Celular
+    # @option opts [String] :beneficiary_bank Clave del banco beneficiario
+    # @option opts [String] :beneficiary_name Nombre del beneficiario
+    # @option opts [String] :end_date Fecha de inicio del perido a filtrar en formato dd-mm-yyyy
+    # @option opts [String] :init_date Fecha de inicio del perido a filtrar en formato dd-mm-yyyy
     # @option opts [String] :rfc RFC del beneficiario
+    # @option opts [String] :status Estatus de la cuenta
     # @return [Array<(SpidBeneficiariesResponse, Fixnum, Hash)>] SpidBeneficiariesResponse data, response status code and response headers
     def get_spid_beneficiaries_for_account_with_http_info(authorization, subscription, opts = {})
       if @api_client.config.debugging
@@ -70,7 +80,12 @@ module Wire4Client
       # query parameters
       query_params = {}
       query_params[:'account'] = opts[:'account'] if !opts[:'account'].nil?
+      query_params[:'beneficiary_bank'] = opts[:'beneficiary_bank'] if !opts[:'beneficiary_bank'].nil?
+      query_params[:'beneficiary_name'] = opts[:'beneficiary_name'] if !opts[:'beneficiary_name'].nil?
+      query_params[:'end_date'] = opts[:'end_date'] if !opts[:'end_date'].nil?
+      query_params[:'init_date'] = opts[:'init_date'] if !opts[:'init_date'].nil?
       query_params[:'rfc'] = opts[:'rfc'] if !opts[:'rfc'].nil?
+      query_params[:'status'] = opts[:'status'] if !opts[:'status'].nil?
 
       # header parameters
       header_params = {}

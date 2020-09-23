@@ -30,7 +30,7 @@ module Wire4Client
     # Objeto que contiene el nombre de la institución, es mutuamente exclusivo con el objeto Person
     attr_accessor :institution
 
-    # Tipo de relación con el propietario de la cuenta, para registrar una cuenta este valor se debe obtener  del recurso relationships
+    # Tipo de relación con el propietario de la cuenta, para registrar una cuenta este valor se debe obtener  del recurso relationships. <br> Nota: Si en la respuesta de Monex esta propiedad es nula, tampoco estará presente en esta respuesta.
     attr_accessor :kind_of_relationship
 
     # Referencia numérica a utilizar cuando se realice una transferencia y no se especifique una referencia
@@ -42,10 +42,10 @@ module Wire4Client
     # Objeto que contiene los datos de la persona propietaria de la cuenta, si se incluye este atributo, el atributo institution no debe estar presente
     attr_accessor :person
 
-    # Relación con el propietario de la cuenta, para registrar una cuenta este valor se debe obtener  del recurso relationships
+    # Relación con el propietario de la cuenta, para registrar una cuenta este valor se debe obtener  del recurso relationships. <br> Nota: Si en la respuesta de Monex esta propiedad es nula, tampoco estará presente en esta respuesta.
     attr_accessor :relationship
 
-    # Registro federal de contribuyentes de la persona o institución propietaria de la cuenta
+    # Registro federal de contribuyentes de la persona o institución propietaria de la cuenta. <br> Nota: Si en la respuesta de Monex esta propiedad es nula, tampoco estará presente en esta respuesta.
     attr_accessor :rfc
 
     # Attribute mapping from ruby-style variable name to JSON key.

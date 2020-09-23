@@ -19,6 +19,85 @@ module Wire4Client
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Recibe la solicitud para agrupar las cuentas SPEI/SPID de beneficiarios en estado pendiente que deben ser autorizadas
+    # Solicta autorizar las cuentas de beneficiarios en estado pendiente agrupandolas en un set de cuentas que pueden incluir tanto cuentas de SPI como de SPID, debe indicar las urls de redireccion en caso de error y en caso de exito<br/>
+    # @param authorization Header para token
+    # @param subscription El identificador de la suscripción a esta API
+    # @param urls_redirect_dto Información de la cuenta del beneficiario
+    # @param [Hash] opts the optional parameters
+    # @return [AuthorizedBeneficiariesResponse]
+    def authorize_accounts_pending_put(authorization, subscription, urls_redirect_dto, opts = {})
+      data, _status_code, _headers = authorize_accounts_pending_put_with_http_info(authorization, subscription, urls_redirect_dto, opts)
+      data
+    end
+
+    # Recibe la solicitud para agrupar las cuentas SPEI/SPID de beneficiarios en estado pendiente que deben ser autorizadas
+    # Solicta autorizar las cuentas de beneficiarios en estado pendiente agrupandolas en un set de cuentas que pueden incluir tanto cuentas de SPI como de SPID, debe indicar las urls de redireccion en caso de error y en caso de exito&lt;br/&gt;
+    # @param authorization Header para token
+    # @param subscription El identificador de la suscripción a esta API
+    # @param urls_redirect_dto Información de la cuenta del beneficiario
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AuthorizedBeneficiariesResponse, Fixnum, Hash)>] AuthorizedBeneficiariesResponse data, response status code and response headers
+    def authorize_accounts_pending_put_with_http_info(authorization, subscription, urls_redirect_dto, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: CuentasDeBeneficiariosSPEIApi.authorize_accounts_pending_put ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling CuentasDeBeneficiariosSPEIApi.authorize_accounts_pending_put"
+      end
+      # verify the required parameter 'subscription' is set
+      if @api_client.config.client_side_validation && subscription.nil?
+        fail ArgumentError, "Missing the required parameter 'subscription' when calling CuentasDeBeneficiariosSPEIApi.authorize_accounts_pending_put"
+      end
+      if @api_client.config.client_side_validation && subscription.to_s.length > 36
+        fail ArgumentError, 'invalid value for "subscription" when calling CuentasDeBeneficiariosSPEIApi.authorize_accounts_pending_put, the character length must be smaller than or equal to 36.'
+      end
+
+      if @api_client.config.client_side_validation && subscription.to_s.length < 36
+        fail ArgumentError, 'invalid value for "subscription" when calling CuentasDeBeneficiariosSPEIApi.authorize_accounts_pending_put, the character length must be great than or equal to 36.'
+      end
+
+      if @api_client.config.client_side_validation && subscription !~ Regexp.new(/[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[34][A-Fa-f0-9]{3}-[89ab][A-Fa-f0-9]{3}-[A-Fa-f0-9]{12}$/)
+        fail ArgumentError, "invalid value for 'subscription' when calling CuentasDeBeneficiariosSPEIApi.authorize_accounts_pending_put, must conform to the pattern /[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[34][A-Fa-f0-9]{3}-[89ab][A-Fa-f0-9]{3}-[A-Fa-f0-9]{12}$/."
+      end
+
+      # verify the required parameter 'urls_redirect_dto' is set
+      if @api_client.config.client_side_validation && urls_redirect_dto.nil?
+        fail ArgumentError, "Missing the required parameter 'urls_redirect_dto' when calling CuentasDeBeneficiariosSPEIApi.authorize_accounts_pending_put"
+      end
+      # resource path
+      local_var_path = '/subscriptions/{subscription}/beneficiaries/pending'.sub('{' + 'subscription' + '}', subscription.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+      header_params[:'Authorization'] = authorization
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(urls_redirect_dto)
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'AuthorizedBeneficiariesResponse')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: CuentasDeBeneficiariosSPEIApi#authorize_accounts_pending_put\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
     # Elimina la cuenta del beneficiario
     # Borra la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción. La cuenta a borrar debe ser una cuenta que opere con SPEI.
     # @param authorization Header para token
@@ -269,7 +348,12 @@ module Wire4Client
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @option opts [String] :account Cuenta del beneficiario, puede ser Clabe, TDD o Celular
+    # @option opts [String] :beneficiary_bank Clave del banco beneficiario
+    # @option opts [String] :beneficiary_name Nombre del beneficiario
+    # @option opts [String] :end_date Fecha de inicio del perido a filtrar en formato dd-mm-yyyy
+    # @option opts [String] :init_date Fecha de inicio del perido a filtrar en formato dd-mm-yyyy
     # @option opts [String] :rfc RFC del beneficiario
+    # @option opts [String] :status Estatus de la cuenta
     # @return [BeneficiariesResponse]
     def get_beneficiaries_for_account_using_get(authorization, subscription, opts = {})
       data, _status_code, _headers = get_beneficiaries_for_account_using_get_with_http_info(authorization, subscription, opts)
@@ -282,7 +366,12 @@ module Wire4Client
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
     # @option opts [String] :account Cuenta del beneficiario, puede ser Clabe, TDD o Celular
+    # @option opts [String] :beneficiary_bank Clave del banco beneficiario
+    # @option opts [String] :beneficiary_name Nombre del beneficiario
+    # @option opts [String] :end_date Fecha de inicio del perido a filtrar en formato dd-mm-yyyy
+    # @option opts [String] :init_date Fecha de inicio del perido a filtrar en formato dd-mm-yyyy
     # @option opts [String] :rfc RFC del beneficiario
+    # @option opts [String] :status Estatus de la cuenta
     # @return [Array<(BeneficiariesResponse, Fixnum, Hash)>] BeneficiariesResponse data, response status code and response headers
     def get_beneficiaries_for_account_using_get_with_http_info(authorization, subscription, opts = {})
       if @api_client.config.debugging
@@ -314,7 +403,12 @@ module Wire4Client
       # query parameters
       query_params = {}
       query_params[:'account'] = opts[:'account'] if !opts[:'account'].nil?
+      query_params[:'beneficiary_bank'] = opts[:'beneficiary_bank'] if !opts[:'beneficiary_bank'].nil?
+      query_params[:'beneficiary_name'] = opts[:'beneficiary_name'] if !opts[:'beneficiary_name'].nil?
+      query_params[:'end_date'] = opts[:'end_date'] if !opts[:'end_date'].nil?
+      query_params[:'init_date'] = opts[:'init_date'] if !opts[:'init_date'].nil?
       query_params[:'rfc'] = opts[:'rfc'] if !opts[:'rfc'].nil?
+      query_params[:'status'] = opts[:'status'] if !opts[:'status'].nil?
 
       # header parameters
       header_params = {}
@@ -498,10 +592,10 @@ module Wire4Client
     # @param request_dto Información de la cuenta y el monto límite a actualizar
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [TokenRequiredResponse]
     def update_amount_limit_account_using_put(authorization, account, request_dto, subscription, opts = {})
-      update_amount_limit_account_using_put_with_http_info(authorization, account, request_dto, subscription, opts)
-      nil
+      data, _status_code, _headers = update_amount_limit_account_using_put_with_http_info(authorization, account, request_dto, subscription, opts)
+      data
     end
 
     # Actualiza el monto límite
@@ -511,7 +605,7 @@ module Wire4Client
     # @param request_dto Información de la cuenta y el monto límite a actualizar
     # @param subscription El identificador de la suscripción a esta API
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    # @return [Array<(TokenRequiredResponse, Fixnum, Hash)>] TokenRequiredResponse data, response status code and response headers
     def update_amount_limit_account_using_put_with_http_info(authorization, account, request_dto, subscription, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CuentasDeBeneficiariosSPEIApi.update_amount_limit_account_using_put ...'
@@ -577,7 +671,8 @@ module Wire4Client
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'TokenRequiredResponse')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: CuentasDeBeneficiariosSPEIApi#update_amount_limit_account_using_put\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end

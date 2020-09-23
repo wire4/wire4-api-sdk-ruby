@@ -18,8 +18,11 @@ module Wire4Client
     # Monto de la transferencia
     attr_accessor :amount
 
-    # Cuenta del beneficiario, podría ser un numero celular, TDD o Cuenta CLABE interbancaria 
+    # Cuenta del beneficiario, podría ser un número celular, TDD o Cuenta CLABE interbancaria 
     attr_accessor :beneficiary_account
+
+    # La clave del banco beneficiario, proprocionada por BANXICO, este campo solo es obligatario cuando la cuenta beneficiaria es un número celular (*).
+    attr_accessor :beneficiary_bank_key
 
     # Concepto de la transferencia
     attr_accessor :concept
@@ -41,6 +44,7 @@ module Wire4Client
       {
         :'amount' => :'amount',
         :'beneficiary_account' => :'beneficiary_account',
+        :'beneficiary_bank_key' => :'beneficiary_bank_key',
         :'concept' => :'concept',
         :'currency_code' => :'currency_code',
         :'email' => :'email',
@@ -54,6 +58,7 @@ module Wire4Client
       {
         :'amount' => :'Float',
         :'beneficiary_account' => :'String',
+        :'beneficiary_bank_key' => :'String',
         :'concept' => :'String',
         :'currency_code' => :'String',
         :'email' => :'Array<String>',
@@ -76,6 +81,10 @@ module Wire4Client
 
       if attributes.has_key?(:'beneficiary_account')
         self.beneficiary_account = attributes[:'beneficiary_account']
+      end
+
+      if attributes.has_key?(:'beneficiary_bank_key')
+        self.beneficiary_bank_key = attributes[:'beneficiary_bank_key']
       end
 
       if attributes.has_key?(:'concept')
@@ -254,6 +263,7 @@ module Wire4Client
       self.class == o.class &&
           amount == o.amount &&
           beneficiary_account == o.beneficiary_account &&
+          beneficiary_bank_key == o.beneficiary_bank_key &&
           concept == o.concept &&
           currency_code == o.currency_code &&
           email == o.email &&
@@ -270,7 +280,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount, beneficiary_account, concept, currency_code, email, order_id, reference].hash
+      [amount, beneficiary_account, beneficiary_bank_key, concept, currency_code, email, order_id, reference].hash
     end
 
     # Builds the object from hash

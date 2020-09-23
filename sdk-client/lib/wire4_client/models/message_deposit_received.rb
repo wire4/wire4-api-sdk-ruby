@@ -13,7 +13,7 @@ Swagger Codegen version: 2.4.10
 require 'date'
 
 module Wire4Client
-  # El mensaje que se envía mediante (webHook) con la informaciónde una transferencia de entrada recibida
+  # El mensaje que se envía mediante (webHook) con la información de una transferencia de entrada recibida
   class MessageDepositReceived
     # Monto de la transferencia
     attr_accessor :amount
