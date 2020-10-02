@@ -59,6 +59,20 @@ describe 'ContractsDetailsApi' do
     end
   end
 
+  # unit tests for obtain_authorized_users_by_contract
+  # Obtiene los usuarios autorizados por contrato
+  # Obtienen los detalles de los usuarios autorizados por contrato Monex.
+  # @param authorization Header para token
+  # @param x_access_key La llave de acceso de la aplicación
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :contract El contrato Monex
+  # @return [Array<AuthorizedUsers>]
+  describe 'obtain_authorized_users_by_contract test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for obtain_contract_details
   # Obtiene los detalles de la empresa del contrato
   # Detalles de la compañía relacionada con el contrato de Monex.

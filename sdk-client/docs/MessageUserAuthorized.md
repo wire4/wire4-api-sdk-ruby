@@ -9,5 +9,6 @@ Name | Type | Description | Notes
 **masked_user_name** | **String** | El nombre enmascarado del usuario de acceso que se autorizó | [optional] 
 **name** | **String** | El usuario que se autorizó | [optional] 
 **request_id** | **String** | El identificador de la petición cuando se solicitó la autorización | [optional] 
+**user_name** | **String** | El nombre del usuario de acceso que se autorizó | [optional] 
 
 

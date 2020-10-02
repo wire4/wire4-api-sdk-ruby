@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**get_beneficiaries_for_account_using_get**](CuentasDeBeneficiariosSPEIApi.md#get_beneficiaries_for_account_using_get) | **GET** /subscriptions/{subscription}/beneficiaries/spei | Consulta los beneficiarios registrados
 [**pre_register_accounts_using_post**](CuentasDeBeneficiariosSPEIApi.md#pre_register_accounts_using_post) | **POST** /subscriptions/{subscription}/beneficiaries/spei | Pre-registro de cuentas de beneficiarios.
 [**remove_beneficiaries_pending_using_delete**](CuentasDeBeneficiariosSPEIApi.md#remove_beneficiaries_pending_using_delete) | **DELETE** /subscriptions/{subscription}/beneficiaries/spei/request/{requestId} | Eliminación de beneficiarios SPEI® sin confirmar
-[**update_amount_limit_account_using_put**](CuentasDeBeneficiariosSPEIApi.md#update_amount_limit_account_using_put) | **PUT** /subscriptions/{subscription}/beneficiaries/spei/{account} | Actualiza el monto límite
+[**update_amount_limit_account_using_put**](CuentasDeBeneficiariosSPEIApi.md#update_amount_limit_account_using_put) | **PUT** /subscriptions/{subscription}/beneficiaries/spei/{account} | Solicitud para actualizar el monto límite
 
 
 # **authorize_accounts_pending_put**
@@ -396,9 +396,9 @@ No authorization required
 # **update_amount_limit_account_using_put**
 > TokenRequiredResponse update_amount_limit_account_using_put(authorization, account, request_dto, subscription)
 
-Actualiza el monto límite
+Solicitud para actualizar el monto límite
 
-Actualiza el monto límite a la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción.
+Inicia una solicitud para actualizar el monto límite a la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción.
 
 ### Example
 ```ruby
@@ -417,7 +417,7 @@ subscription = 'subscription_example' # String | El identificador de la suscripc
 
 
 begin
-  #Actualiza el monto límite
+  #Solicitud para actualizar el monto límite
   result = api_instance.update_amount_limit_account_using_put(authorization, account, request_dto, subscription)
   p result
 rescue Wire4Client::ApiError => e

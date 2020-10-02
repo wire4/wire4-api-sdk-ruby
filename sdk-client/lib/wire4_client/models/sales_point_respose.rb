@@ -24,7 +24,7 @@ module Wire4Client
     # Contraseña para el API Wire4
     attr_accessor :user_secret
 
-    # Webhook registrado para enviar las notificaciones CoDi
+    # codiWebhook
     attr_accessor :webhook
 
     # Attribute mapping from ruby-style variable name to JSON key.

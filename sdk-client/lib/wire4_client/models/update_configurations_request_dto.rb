@@ -13,37 +13,22 @@ Swagger Codegen version: 2.4.10
 require 'date'
 
 module Wire4Client
-  # Información para registrar un punto de venta asociado una empresa
-  class SalesPointRequest
-    # IP desde donde se recibiran las peticiones de este punto de venta
-    attr_accessor :access_ip
-
-    # Número de cuenta CLABE donde se realizará el deposito del cobro CoDi
-    attr_accessor :account
-
-    # Nombre del punto de venta
-    attr_accessor :name
-
-    # URL para envíar notificaciones CoDi al punto de venta
-    attr_accessor :notifications_url
+  # Contiene el listado de grupo de configuraciones para actualizar
+  class UpdateConfigurationsRequestDTO
+    # Listado de configuraciones para actualizar
+    attr_accessor :configurations
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'access_ip' => :'access_ip',
-        :'account' => :'account',
-        :'name' => :'name',
-        :'notifications_url' => :'notifications_url'
+        :'configurations' => :'configurations'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'access_ip' => :'String',
-        :'account' => :'String',
-        :'name' => :'String',
-        :'notifications_url' => :'String'
+        :'configurations' => :'Array<ConfigurationsLimits>'
       }
     end
 
@@ -55,20 +40,10 @@ module Wire4Client
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'access_ip')
-        self.access_ip = attributes[:'access_ip']
-      end
-
-      if attributes.has_key?(:'account')
-        self.account = attributes[:'account']
-      end
-
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.has_key?(:'notifications_url')
-        self.notifications_url = attributes[:'notifications_url']
+      if attributes.has_key?(:'configurations')
+        if (value = attributes[:'configurations']).is_a?(Array)
+          self.configurations = value
+        end
       end
     end
 
@@ -76,24 +51,8 @@ module Wire4Client
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @access_ip.nil?
-        invalid_properties.push('invalid value for "access_ip", access_ip cannot be nil.')
-      end
-
-      if @access_ip !~ Regexp.new(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/)
-        invalid_properties.push('invalid value for "access_ip", must conform to the pattern /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/.')
-      end
-
-      if @account.nil?
-        invalid_properties.push('invalid value for "account", account cannot be nil.')
-      end
-
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @notifications_url.nil?
-        invalid_properties.push('invalid value for "notifications_url", notifications_url cannot be nil.')
+      if @configurations.nil?
+        invalid_properties.push('invalid value for "configurations", configurations cannot be nil.')
       end
 
       invalid_properties
@@ -102,26 +61,8 @@ module Wire4Client
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @access_ip.nil?
-      return false if @access_ip !~ Regexp.new(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/)
-      return false if @account.nil?
-      return false if @name.nil?
-      return false if @notifications_url.nil?
+      return false if @configurations.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] access_ip Value to be assigned
-    def access_ip=(access_ip)
-      if access_ip.nil?
-        fail ArgumentError, 'access_ip cannot be nil'
-      end
-
-      if access_ip !~ Regexp.new(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/)
-        fail ArgumentError, 'invalid value for "access_ip", must conform to the pattern /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/.'
-      end
-
-      @access_ip = access_ip
     end
 
     # Checks equality by comparing each attribute.
@@ -129,10 +70,7 @@ module Wire4Client
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          access_ip == o.access_ip &&
-          account == o.account &&
-          name == o.name &&
-          notifications_url == o.notifications_url
+          configurations == o.configurations
     end
 
     # @see the `==` method
@@ -144,7 +82,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [access_ip, account, name, notifications_url].hash
+      [configurations].hash
     end
 
     # Builds the object from hash

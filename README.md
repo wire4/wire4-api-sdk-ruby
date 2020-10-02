@@ -7,7 +7,7 @@ Referencia del SDK para el consumo del API de Wire4
 Este SDK es hecho y distrubuido por Wire4:
 
 - Versión del API de Wire4: 1.0.0
-- Versión del paquete SDK: 1.0.5
+- Versión del paquete SDK: 1.0.6
 
 ## Instalación
 
@@ -47,22 +47,22 @@ gem build wire4_auth.gemspec
 Después podemos instalar el gem localmente. Para instalar el client:
 
 ```shell
-gem install ./wire4_client-1.0.5.gem
+gem install ./wire4_client-1.0.6.gem
 ```
-(para entornos de desarrollo, run `gem install --dev ./wire4_client-1.0.5.gem` esto instalará las dependencias para desarrollo)
+(para entornos de desarrollo, run `gem install --dev ./wire4_client-1.0.6.gem` esto instalará las dependencias para desarrollo)
 
 Para instalar el autenticador:
 
 ```shell
-gem install ./wire4_auth-1.0.5.gem
+gem install ./wire4_auth-1.0.6.gem
 ```
-(para entornos de desarrollo, run `gem install --dev ./wire4_auth-1.0.5.gem` esto instalará las dependencias para desarrollo)
+(para entornos de desarrollo, run `gem install --dev ./wire4_auth-1.0.6.gem` esto instalará las dependencias para desarrollo)
 
 
 Finalmente agregamos los gems a nuestro 'Gemfile':
 
-    gem 'wire4_client', '~> 1.0', '>= 1.0.5'
-    gem 'wire4_auth', '~> 1.0', '>= 1.0.5'
+    gem 'wire4_client', '~> 1.0', '>= 1.0.6'
+    gem 'wire4_auth', '~> 1.0', '>= 1.0.6'
 
 ## Para comenzar a usar
 

@@ -136,8 +136,8 @@ describe 'CuentasDeBeneficiariosSPEIApi' do
   end
 
   # unit tests for update_amount_limit_account_using_put
-  # Actualiza el monto límite
-  # Actualiza el monto límite a la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción.
+  # Solicitud para actualizar el monto límite
+  # Inicia una solicitud para actualizar el monto límite a la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción.
   # @param authorization Header para token
   # @param account Cuenta a actualizar
   # @param request_dto Información de la cuenta y el monto límite a actualizar

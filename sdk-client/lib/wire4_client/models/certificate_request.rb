@@ -84,8 +84,8 @@ module Wire4Client
         invalid_properties.push('invalid value for "check_digit", the character length must be great than or equal to 1.')
       end
 
-      if !@check_digit.nil? && @check_digit !~ Regexp.new(/\d/)
-        invalid_properties.push('invalid value for "check_digit", must conform to the pattern /\d/.')
+      if !@check_digit.nil? && @check_digit !~ Regexp.new(/\\d/)
+        invalid_properties.push('invalid value for "check_digit", must conform to the pattern /\\d/.')
       end
 
       invalid_properties
@@ -96,7 +96,7 @@ module Wire4Client
     def valid?
       return false if !@check_digit.nil? && @check_digit.to_s.length > 1
       return false if !@check_digit.nil? && @check_digit.to_s.length < 1
-      return false if !@check_digit.nil? && @check_digit !~ Regexp.new(/\d/)
+      return false if !@check_digit.nil? && @check_digit !~ Regexp.new(/\\d/)
       true
     end
 
@@ -111,8 +111,8 @@ module Wire4Client
         fail ArgumentError, 'invalid value for "check_digit", the character length must be great than or equal to 1.'
       end
 
-      if !check_digit.nil? && check_digit !~ Regexp.new(/\d/)
-        fail ArgumentError, 'invalid value for "check_digit", must conform to the pattern /\d/.'
+      if !check_digit.nil? && check_digit !~ Regexp.new(/\\d/)
+        fail ArgumentError, 'invalid value for "check_digit", must conform to the pattern /\\d/.'
       end
 
       @check_digit = check_digit

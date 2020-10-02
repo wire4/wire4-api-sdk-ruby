@@ -585,8 +585,8 @@ module Wire4Client
       end
       return data, status_code, headers
     end
-    # Actualiza el monto límite
-    # Actualiza el monto límite a la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción.
+    # Solicitud para actualizar el monto límite
+    # Inicia una solicitud para actualizar el monto límite a la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción.
     # @param authorization Header para token
     # @param account Cuenta a actualizar
     # @param request_dto Información de la cuenta y el monto límite a actualizar
@@ -598,8 +598,8 @@ module Wire4Client
       data
     end
 
-    # Actualiza el monto límite
-    # Actualiza el monto límite a la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción.
+    # Solicitud para actualizar el monto límite
+    # Inicia una solicitud para actualizar el monto límite a la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción.
     # @param authorization Header para token
     # @param account Cuenta a actualizar
     # @param request_dto Información de la cuenta y el monto límite a actualizar
