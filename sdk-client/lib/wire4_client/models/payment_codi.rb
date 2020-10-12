@@ -10,75 +10,260 @@ Swagger Codegen version: 2.4.10
 
 =end
 
-require 'uri'
+require 'date'
 
 module Wire4Client
-  class ComprobanteElectrnicoDePagoCEPApi
-    attr_accessor :api_client
+  # Objeto que contiene la información del pago realizado
+  class PaymentCODI
+    # Monto del pago
+    attr_accessor :amount
 
-    def initialize(api_client = ApiClient.default)
-      @api_client = api_client
+    # Descripción del pago
+    attr_accessor :description
+
+    # Mensaje de error
+    attr_accessor :error_message
+
+    # Identificador del pago
+    attr_accessor :id
+
+    # Fecha en que se efectuo el pago
+    attr_accessor :operation_date
+
+    # Estatus del pago
+    attr_accessor :status
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
     end
-    # Consulta de CEP
-    # Consulta el CEP de un pago realizado a través del SPEI, si es que este se encuentra disponible en BANXICO.
-    # @param authorization Header para token
-    # @param cep_data Información para buscar un CEP
-    # @param [Hash] opts the optional parameters
-    # @return [CepResponse]
-    def obtain_transaction_cep_using_post(authorization, cep_data, opts = {})
-      data, _status_code, _headers = obtain_transaction_cep_using_post_with_http_info(authorization, cep_data, opts)
-      data
+
+    # Attribute mapping from ruby-style variable name to JSON key.
+    def self.attribute_map
+      {
+        :'amount' => :'amount',
+        :'description' => :'description',
+        :'error_message' => :'error_message',
+        :'id' => :'id',
+        :'operation_date' => :'operation_date',
+        :'status' => :'status'
+      }
     end
 
-    # Consulta de CEP
-    # Consulta el CEP de un pago realizado a través del SPEI, si es que este se encuentra disponible en BANXICO.
-    # @param authorization Header para token
-    # @param cep_data Información para buscar un CEP
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(CepResponse, Fixnum, Hash)>] CepResponse data, response status code and response headers
-    def obtain_transaction_cep_using_post_with_http_info(authorization, cep_data, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ComprobanteElectrnicoDePagoCEPApi.obtain_transaction_cep_using_post ...'
-      end
-      # verify the required parameter 'authorization' is set
-      if @api_client.config.client_side_validation && authorization.nil?
-        fail ArgumentError, "Missing the required parameter 'authorization' when calling ComprobanteElectrnicoDePagoCEPApi.obtain_transaction_cep_using_post"
-      end
-      # verify the required parameter 'cep_data' is set
-      if @api_client.config.client_side_validation && cep_data.nil?
-        fail ArgumentError, "Missing the required parameter 'cep_data' when calling ComprobanteElectrnicoDePagoCEPApi.obtain_transaction_cep_using_post"
-      end
-      # resource path
-      local_var_path = '/ceps'
+    # Attribute type mapping.
+    def self.swagger_types
+      {
+        :'amount' => :'Float',
+        :'description' => :'String',
+        :'error_message' => :'String',
+        :'id' => :'String',
+        :'operation_date' => :'DateTime',
+        :'status' => :'String'
+      }
+    end
 
-      # query parameters
-      query_params = {}
+    # Initializes the object
+    # @param [Hash] attributes Model attributes in the form of hash
+    def initialize(attributes = {})
+      return unless attributes.is_a?(Hash)
 
-      # header parameters
-      header_params = {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-      header_params[:'Authorization'] = authorization
+      # convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      # form parameters
-      form_params = {}
-
-      # http body (model)
-      post_body = @api_client.object_to_http_body(cep_data)
-      auth_names = []
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => 'CepResponse')
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ComprobanteElectrnicoDePagoCEPApi#obtain_transaction_cep_using_post\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      if attributes.has_key?(:'amount')
+        self.amount = attributes[:'amount']
       end
-      return data, status_code, headers
+
+      if attributes.has_key?(:'description')
+        self.description = attributes[:'description']
+      end
+
+      if attributes.has_key?(:'error_message')
+        self.error_message = attributes[:'error_message']
+      end
+
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'operation_date')
+        self.operation_date = attributes[:'operation_date']
+      end
+
+      if attributes.has_key?(:'status')
+        self.status = attributes[:'status']
+      end
+    end
+
+    # Show invalid properties with the reasons. Usually used together with valid?
+    # @return Array for valid properties with the reasons
+    def list_invalid_properties
+      invalid_properties = Array.new
+      invalid_properties
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    def valid?
+      status_validator = EnumAttributeValidator.new('String', ['RECEIVED', 'COMPLETED', 'CANCELLED'])
+      return false unless status_validator.valid?(@status)
+      true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ['RECEIVED', 'COMPLETED', 'CANCELLED'])
+      unless validator.valid?(status)
+        fail ArgumentError, 'invalid value for "status", must be one of #{validator.allowable_values}.'
+      end
+      @status = status
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param [Object] Object to be compared
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          amount == o.amount &&
+          description == o.description &&
+          error_message == o.error_message &&
+          id == o.id &&
+          operation_date == o.operation_date &&
+          status == o.status
+    end
+
+    # @see the `==` method
+    # @param [Object] Object to be compared
+    def eql?(o)
+      self == o
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Fixnum] Hash code
+    def hash
+      [amount, description, error_message, id, operation_date, status].hash
+    end
+
+    # Builds the object from hash
+    # @param [Hash] attributes Model attributes in the form of hash
+    # @return [Object] Returns the model itself
+    def build_from_hash(attributes)
+      return nil unless attributes.is_a?(Hash)
+      self.class.swagger_types.each_pair do |key, type|
+        if type =~ /\AArray<(.*)>/i
+          # check to ensure the input is an array given that the the attribute
+          # is documented as an array but the input is not
+          if attributes[self.class.attribute_map[key]].is_a?(Array)
+            self.send("#{key}=", attributes[self.class.attribute_map[key]].map { |v| _deserialize($1, v) })
+          end
+        elsif !attributes[self.class.attribute_map[key]].nil?
+          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
+        end # or else data not found in attributes(hash), not an issue as the data can be optional
+      end
+
+      self
+    end
+
+    # Deserializes the data based on type
+    # @param string type Data type
+    # @param string value Value to be deserialized
+    # @return [Object] Deserialized data
+    def _deserialize(type, value)
+      case type.to_sym
+      when :DateTime
+        DateTime.parse(value)
+      when :Date
+        Date.parse(value)
+      when :String
+        value.to_s
+      when :Integer
+        value.to_i
+      when :Float
+        value.to_f
+      when :BOOLEAN
+        if value.to_s =~ /\A(true|t|yes|y|1)\z/i
+          true
+        else
+          false
+        end
+      when :Object
+        # generic object (usually a Hash), return directly
+        value
+      when /\AArray<(?<inner_type>.+)>\z/
+        inner_type = Regexp.last_match[:inner_type]
+        value.map { |v| _deserialize(inner_type, v) }
+      when /\AHash<(?<k_type>.+?), (?<v_type>.+)>\z/
+        k_type = Regexp.last_match[:k_type]
+        v_type = Regexp.last_match[:v_type]
+        {}.tap do |hash|
+          value.each do |k, v|
+            hash[_deserialize(k_type, k)] = _deserialize(v_type, v)
+          end
+        end
+      else # model
+        temp_model = Wire4Client.const_get(type).new
+        temp_model.build_from_hash(value)
+      end
+    end
+
+    # Returns the string representation of the object
+    # @return [String] String presentation of the object
+    def to_s
+      to_hash.to_s
+    end
+
+    # to_body is an alias to to_hash (backward compatibility)
+    # @return [Hash] Returns the object in the form of hash
+    def to_body
+      to_hash
+    end
+
+    # Returns the object in the form of hash
+    # @return [Hash] Returns the object in the form of hash
+    def to_hash
+      hash = {}
+      self.class.attribute_map.each_pair do |attr, param|
+        value = self.send(attr)
+        next if value.nil?
+        hash[param] = _to_hash(value)
+      end
+      hash
+    end
+
+    # Outputs non-array value in the form of hash
+    # For object, use to_hash. Otherwise, just return the value
+    # @param [Object] value Any valid value
+    # @return [Hash] Returns the value in the form of hash
+    def _to_hash(value)
+      if value.is_a?(Array)
+        value.compact.map { |v| _to_hash(v) }
+      elsif value.is_a?(Hash)
+        {}.tap do |hash|
+          value.each { |k, v| hash[k] = _to_hash(v) }
+        end
+      elsif value.respond_to? :to_hash
+        value.to_hash
+      else
+        value
+      end
     end
   end
 end
