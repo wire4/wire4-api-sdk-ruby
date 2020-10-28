@@ -13,37 +13,25 @@ Swagger Codegen version: 2.4.10
 require 'date'
 
 module Wire4Client
-  # Objeto que contiene la información de las operaciones
-  class Operations
-    # Monto de la petición
+  # Objeto que contiene la información del pago realizado
+  class PaymentCODI
+    # Monto del pago
     attr_accessor :amount
 
-    # Empresa CoDi
-    attr_accessor :company
-
-    # Descripción de la petición
+    # Descripción del pago
     attr_accessor :description
 
-    # Fecha de vencimiento de la petición
-    attr_accessor :due_date
+    # Mensaje de error
+    attr_accessor :error_message
 
-    # Order id de la petición
-    attr_accessor :order_id
+    # Identificador del pago
+    attr_accessor :id
 
-    # Pago
-    attr_accessor :payment
+    # Fecha en que se efectuo el pago
+    attr_accessor :operation_date
 
-    # Numero de telefono
-    attr_accessor :phone_number
-
-    # Punto de venta
-    attr_accessor :sales_point
-
-    # Estatus de la petición
+    # Estatus del pago
     attr_accessor :status
-
-    # Tipo de petición de cobro
-    attr_accessor :type
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -71,15 +59,11 @@ module Wire4Client
     def self.attribute_map
       {
         :'amount' => :'amount',
-        :'company' => :'company',
         :'description' => :'description',
-        :'due_date' => :'due_date',
-        :'order_id' => :'order_id',
-        :'payment' => :'payment',
-        :'phone_number' => :'phone_number',
-        :'sales_point' => :'sales_point',
-        :'status' => :'status',
-        :'type' => :'type'
+        :'error_message' => :'error_message',
+        :'id' => :'id',
+        :'operation_date' => :'operation_date',
+        :'status' => :'status'
       }
     end
 
@@ -87,15 +71,11 @@ module Wire4Client
     def self.swagger_types
       {
         :'amount' => :'Float',
-        :'company' => :'Compay',
         :'description' => :'String',
-        :'due_date' => :'DateTime',
-        :'order_id' => :'String',
-        :'payment' => :'PaymentCODI',
-        :'phone_number' => :'String',
-        :'sales_point' => :'SalesPoint',
-        :'status' => :'String',
-        :'type' => :'String'
+        :'error_message' => :'String',
+        :'id' => :'String',
+        :'operation_date' => :'DateTime',
+        :'status' => :'String'
       }
     end
 
@@ -111,40 +91,24 @@ module Wire4Client
         self.amount = attributes[:'amount']
       end
 
-      if attributes.has_key?(:'company')
-        self.company = attributes[:'company']
-      end
-
       if attributes.has_key?(:'description')
         self.description = attributes[:'description']
       end
 
-      if attributes.has_key?(:'due_date')
-        self.due_date = attributes[:'due_date']
+      if attributes.has_key?(:'error_message')
+        self.error_message = attributes[:'error_message']
       end
 
-      if attributes.has_key?(:'order_id')
-        self.order_id = attributes[:'order_id']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'payment')
-        self.payment = attributes[:'payment']
-      end
-
-      if attributes.has_key?(:'phone_number')
-        self.phone_number = attributes[:'phone_number']
-      end
-
-      if attributes.has_key?(:'sales_point')
-        self.sales_point = attributes[:'sales_point']
+      if attributes.has_key?(:'operation_date')
+        self.operation_date = attributes[:'operation_date']
       end
 
       if attributes.has_key?(:'status')
         self.status = attributes[:'status']
-      end
-
-      if attributes.has_key?(:'type')
-        self.type = attributes[:'type']
       end
     end
 
@@ -160,8 +124,6 @@ module Wire4Client
     def valid?
       status_validator = EnumAttributeValidator.new('String', ['RECEIVED', 'COMPLETED', 'CANCELLED'])
       return false unless status_validator.valid?(@status)
-      type_validator = EnumAttributeValidator.new('String', ['PUSH_NOTIFICATION', 'QR_CODE'])
-      return false unless type_validator.valid?(@type)
       true
     end
 
@@ -175,31 +137,17 @@ module Wire4Client
       @status = status
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ['PUSH_NOTIFICATION', 'QR_CODE'])
-      unless validator.valid?(type)
-        fail ArgumentError, 'invalid value for "type", must be one of #{validator.allowable_values}.'
-      end
-      @type = type
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           amount == o.amount &&
-          company == o.company &&
           description == o.description &&
-          due_date == o.due_date &&
-          order_id == o.order_id &&
-          payment == o.payment &&
-          phone_number == o.phone_number &&
-          sales_point == o.sales_point &&
-          status == o.status &&
-          type == o.type
+          error_message == o.error_message &&
+          id == o.id &&
+          operation_date == o.operation_date &&
+          status == o.status
     end
 
     # @see the `==` method
@@ -211,7 +159,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount, company, description, due_date, order_id, payment, phone_number, sales_point, status, type].hash
+      [amount, description, error_message, id, operation_date, status].hash
     end
 
     # Builds the object from hash

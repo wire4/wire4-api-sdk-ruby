@@ -81,7 +81,7 @@ module Wire4Client
         :'amount' => :'Float',
         :'clave_rastreo' => :'String',
         :'monex_id' => :'Integer',
-        :'operation_date' => :'Timestamp',
+        :'operation_date' => :'DateTime',
         :'order_id' => :'String',
         :'payment_order_id' => :'String',
         :'transaction_id' => :'Integer',

@@ -76,11 +76,11 @@ module Wire4Client
       {
         :'access_ip' => :'String',
         :'account' => :'String',
-        :'created_at' => :'Timestamp',
+        :'created_at' => :'DateTime',
         :'name' => :'String',
         :'public_id' => :'String',
         :'status' => :'String',
-        :'updated_at' => :'Timestamp'
+        :'updated_at' => :'DateTime'
       }
     end
 

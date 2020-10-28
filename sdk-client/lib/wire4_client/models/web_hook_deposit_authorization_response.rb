@@ -13,89 +13,47 @@ Swagger Codegen version: 2.4.10
 require 'date'
 
 module Wire4Client
-  # Objeto que contiene la información de las operaciones
-  class Operations
-    # Monto de la petición
-    attr_accessor :amount
+  # Contiene la información de un WebHook para autorización de depósitos.
+  class WebHookDepositAuthorizationResponse
+    # Tipo de evento manejado por el webhook, para mas referencia sobre los tipos de eventos soportados, revise la siguiente liga: https://developers.wire4.mx/#section/Eventos.
+    attr_accessor :events
 
-    # Empresa CoDi
-    attr_accessor :company
+    # Nombre del webhook.
+    attr_accessor :name
 
-    # Descripción de la petición
-    attr_accessor :description
+    # Llave con la cual se debe de identificar que el webhook fue enviado por Wire4, para mayor información revisar la guía de notificaciones (https://wire4.mx/#/guides/notificaciones), en la sección de  \"Comprobación de firmas de Webhook\".
+    attr_accessor :secret
 
-    # Fecha de vencimiento de la petición
-    attr_accessor :due_date
-
-    # Order id de la petición
-    attr_accessor :order_id
-
-    # Pago
-    attr_accessor :payment
-
-    # Numero de telefono
-    attr_accessor :phone_number
-
-    # Punto de venta
-    attr_accessor :sales_point
-
-    # Estatus de la petición
+    # Estatus en el que se encuentra el webhook.
     attr_accessor :status
 
-    # Tipo de petición de cobro
-    attr_accessor :type
+    # URL a la cual Wire4 enviará las notificaciones cuando un evento ocurra.
+    attr_accessor :url
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Identificador del webhook.
+    attr_accessor :wh_uuid
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'amount' => :'amount',
-        :'company' => :'company',
-        :'description' => :'description',
-        :'due_date' => :'due_date',
-        :'order_id' => :'order_id',
-        :'payment' => :'payment',
-        :'phone_number' => :'phone_number',
-        :'sales_point' => :'sales_point',
+        :'events' => :'events',
+        :'name' => :'name',
+        :'secret' => :'secret',
         :'status' => :'status',
-        :'type' => :'type'
+        :'url' => :'url',
+        :'wh_uuid' => :'wh_uuid'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'amount' => :'Float',
-        :'company' => :'Compay',
-        :'description' => :'String',
-        :'due_date' => :'DateTime',
-        :'order_id' => :'String',
-        :'payment' => :'PaymentCODI',
-        :'phone_number' => :'String',
-        :'sales_point' => :'SalesPoint',
+        :'events' => :'Array<String>',
+        :'name' => :'String',
+        :'secret' => :'String',
         :'status' => :'String',
-        :'type' => :'String'
+        :'url' => :'String',
+        :'wh_uuid' => :'String'
       }
     end
 
@@ -107,44 +65,30 @@ module Wire4Client
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'amount')
-        self.amount = attributes[:'amount']
+      if attributes.has_key?(:'events')
+        if (value = attributes[:'events']).is_a?(Array)
+          self.events = value
+        end
       end
 
-      if attributes.has_key?(:'company')
-        self.company = attributes[:'company']
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
-      end
-
-      if attributes.has_key?(:'due_date')
-        self.due_date = attributes[:'due_date']
-      end
-
-      if attributes.has_key?(:'order_id')
-        self.order_id = attributes[:'order_id']
-      end
-
-      if attributes.has_key?(:'payment')
-        self.payment = attributes[:'payment']
-      end
-
-      if attributes.has_key?(:'phone_number')
-        self.phone_number = attributes[:'phone_number']
-      end
-
-      if attributes.has_key?(:'sales_point')
-        self.sales_point = attributes[:'sales_point']
+      if attributes.has_key?(:'secret')
+        self.secret = attributes[:'secret']
       end
 
       if attributes.has_key?(:'status')
         self.status = attributes[:'status']
       end
 
-      if attributes.has_key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.has_key?(:'url')
+        self.url = attributes[:'url']
+      end
+
+      if attributes.has_key?(:'wh_uuid')
+        self.wh_uuid = attributes[:'wh_uuid']
       end
     end
 
@@ -158,31 +102,7 @@ module Wire4Client
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      status_validator = EnumAttributeValidator.new('String', ['RECEIVED', 'COMPLETED', 'CANCELLED'])
-      return false unless status_validator.valid?(@status)
-      type_validator = EnumAttributeValidator.new('String', ['PUSH_NOTIFICATION', 'QR_CODE'])
-      return false unless type_validator.valid?(@type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ['RECEIVED', 'COMPLETED', 'CANCELLED'])
-      unless validator.valid?(status)
-        fail ArgumentError, 'invalid value for "status", must be one of #{validator.allowable_values}.'
-      end
-      @status = status
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ['PUSH_NOTIFICATION', 'QR_CODE'])
-      unless validator.valid?(type)
-        fail ArgumentError, 'invalid value for "type", must be one of #{validator.allowable_values}.'
-      end
-      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -190,16 +110,12 @@ module Wire4Client
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          amount == o.amount &&
-          company == o.company &&
-          description == o.description &&
-          due_date == o.due_date &&
-          order_id == o.order_id &&
-          payment == o.payment &&
-          phone_number == o.phone_number &&
-          sales_point == o.sales_point &&
+          events == o.events &&
+          name == o.name &&
+          secret == o.secret &&
           status == o.status &&
-          type == o.type
+          url == o.url &&
+          wh_uuid == o.wh_uuid
     end
 
     # @see the `==` method
@@ -211,7 +127,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount, company, description, due_date, order_id, payment, phone_number, sales_point, status, type].hash
+      [events, name, secret, status, url, wh_uuid].hash
     end
 
     # Builds the object from hash

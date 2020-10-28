@@ -33,6 +33,9 @@ module Wire4Client
     # El identificador de la petición cuando se solicitó la autorización
     attr_accessor :request_id
 
+    # El nombre del usuario de acceso que se autorizó
+    attr_accessor :user_name
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -41,7 +44,8 @@ module Wire4Client
         :'masked_name' => :'masked_name',
         :'masked_user_name' => :'masked_user_name',
         :'name' => :'name',
-        :'request_id' => :'request_id'
+        :'request_id' => :'request_id',
+        :'user_name' => :'user_name'
       }
     end
 
@@ -53,7 +57,8 @@ module Wire4Client
         :'masked_name' => :'String',
         :'masked_user_name' => :'String',
         :'name' => :'String',
-        :'request_id' => :'String'
+        :'request_id' => :'String',
+        :'user_name' => :'String'
       }
     end
 
@@ -88,6 +93,10 @@ module Wire4Client
       if attributes.has_key?(:'request_id')
         self.request_id = attributes[:'request_id']
       end
+
+      if attributes.has_key?(:'user_name')
+        self.user_name = attributes[:'user_name']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -113,7 +122,8 @@ module Wire4Client
           masked_name == o.masked_name &&
           masked_user_name == o.masked_user_name &&
           name == o.name &&
-          request_id == o.request_id
+          request_id == o.request_id &&
+          user_name == o.user_name
     end
 
     # @see the `==` method
@@ -125,7 +135,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [account, masked_account, masked_name, masked_user_name, name, request_id].hash
+      [account, masked_account, masked_name, masked_user_name, name, request_id, user_name].hash
     end
 
     # Builds the object from hash

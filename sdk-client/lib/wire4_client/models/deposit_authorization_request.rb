@@ -13,56 +13,32 @@ Swagger Codegen version: 2.4.10
 require 'date'
 
 module Wire4Client
-  class Timestamp
-    attr_accessor :date
+  # Contiene la información de la autorización de depósitos
+  class DepositAuthorizationRequest
+    # Indica sí se aplica autorización de depósitos
+    attr_accessor :enabled
 
-    attr_accessor :day
+    # La información del WebHook de autorización de depósitos
+    attr_accessor :webhook
 
-    attr_accessor :hours
-
-    attr_accessor :minutes
-
-    attr_accessor :month
-
-    attr_accessor :nanos
-
-    attr_accessor :seconds
-
-    attr_accessor :time
-
-    attr_accessor :timezone_offset
-
-    attr_accessor :year
+    # Identificador del webhook.
+    attr_accessor :wh_uuid
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'date' => :'date',
-        :'day' => :'day',
-        :'hours' => :'hours',
-        :'minutes' => :'minutes',
-        :'month' => :'month',
-        :'nanos' => :'nanos',
-        :'seconds' => :'seconds',
-        :'time' => :'time',
-        :'timezone_offset' => :'timezone_offset',
-        :'year' => :'year'
+        :'enabled' => :'enabled',
+        :'webhook' => :'webhook',
+        :'wh_uuid' => :'wh_uuid'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'date' => :'Integer',
-        :'day' => :'Integer',
-        :'hours' => :'Integer',
-        :'minutes' => :'Integer',
-        :'month' => :'Integer',
-        :'nanos' => :'Integer',
-        :'seconds' => :'Integer',
-        :'time' => :'Integer',
-        :'timezone_offset' => :'Integer',
-        :'year' => :'Integer'
+        :'enabled' => :'BOOLEAN',
+        :'webhook' => :'WebHookDepositAuthorizationRequest',
+        :'wh_uuid' => :'String'
       }
     end
 
@@ -74,44 +50,16 @@ module Wire4Client
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'date')
-        self.date = attributes[:'date']
+      if attributes.has_key?(:'enabled')
+        self.enabled = attributes[:'enabled']
       end
 
-      if attributes.has_key?(:'day')
-        self.day = attributes[:'day']
+      if attributes.has_key?(:'webhook')
+        self.webhook = attributes[:'webhook']
       end
 
-      if attributes.has_key?(:'hours')
-        self.hours = attributes[:'hours']
-      end
-
-      if attributes.has_key?(:'minutes')
-        self.minutes = attributes[:'minutes']
-      end
-
-      if attributes.has_key?(:'month')
-        self.month = attributes[:'month']
-      end
-
-      if attributes.has_key?(:'nanos')
-        self.nanos = attributes[:'nanos']
-      end
-
-      if attributes.has_key?(:'seconds')
-        self.seconds = attributes[:'seconds']
-      end
-
-      if attributes.has_key?(:'time')
-        self.time = attributes[:'time']
-      end
-
-      if attributes.has_key?(:'timezone_offset')
-        self.timezone_offset = attributes[:'timezone_offset']
-      end
-
-      if attributes.has_key?(:'year')
-        self.year = attributes[:'year']
+      if attributes.has_key?(:'wh_uuid')
+        self.wh_uuid = attributes[:'wh_uuid']
       end
     end
 
@@ -133,16 +81,9 @@ module Wire4Client
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          date == o.date &&
-          day == o.day &&
-          hours == o.hours &&
-          minutes == o.minutes &&
-          month == o.month &&
-          nanos == o.nanos &&
-          seconds == o.seconds &&
-          time == o.time &&
-          timezone_offset == o.timezone_offset &&
-          year == o.year
+          enabled == o.enabled &&
+          webhook == o.webhook &&
+          wh_uuid == o.wh_uuid
     end
 
     # @see the `==` method
@@ -154,7 +95,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [date, day, hours, minutes, month, nanos, seconds, time, timezone_offset, year].hash
+      [enabled, webhook, wh_uuid].hash
     end
 
     # Builds the object from hash

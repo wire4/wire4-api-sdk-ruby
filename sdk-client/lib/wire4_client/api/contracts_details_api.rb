@@ -158,6 +158,77 @@ module Wire4Client
       end
       return data, status_code, headers
     end
+    # Obtiene los usuarios autorizados por contrato
+    # Obtienen los detalles de los usuarios autorizados por contrato Monex.
+    # @param authorization Header para token
+    # @param x_access_key La llave de acceso de la aplicación
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :contract El contrato Monex
+    # @return [Array<AuthorizedUsers>]
+    def obtain_authorized_users_by_contract(authorization, x_access_key, opts = {})
+      data, _status_code, _headers = obtain_authorized_users_by_contract_with_http_info(authorization, x_access_key, opts)
+      data
+    end
+
+    # Obtiene los usuarios autorizados por contrato
+    # Obtienen los detalles de los usuarios autorizados por contrato Monex.
+    # @param authorization Header para token
+    # @param x_access_key La llave de acceso de la aplicación
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :contract El contrato Monex
+    # @return [Array<(Array<AuthorizedUsers>, Fixnum, Hash)>] Array<AuthorizedUsers> data, response status code and response headers
+    def obtain_authorized_users_by_contract_with_http_info(authorization, x_access_key, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ContractsDetailsApi.obtain_authorized_users_by_contract ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling ContractsDetailsApi.obtain_authorized_users_by_contract"
+      end
+      # verify the required parameter 'x_access_key' is set
+      if @api_client.config.client_side_validation && x_access_key.nil?
+        fail ArgumentError, "Missing the required parameter 'x_access_key' when calling ContractsDetailsApi.obtain_authorized_users_by_contract"
+      end
+      if @api_client.config.client_side_validation && !opts[:'contract'].nil? && opts[:'contract'].to_s.length > 11
+        fail ArgumentError, 'invalid value for "opts[:"contract"]" when calling ContractsDetailsApi.obtain_authorized_users_by_contract, the character length must be smaller than or equal to 11.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'contract'].nil? && opts[:'contract'].to_s.length < 1
+        fail ArgumentError, 'invalid value for "opts[:"contract"]" when calling ContractsDetailsApi.obtain_authorized_users_by_contract, the character length must be great than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/onboarding/accounts/authorized-users'
+
+      # query parameters
+      query_params = {}
+      query_params[:'contract'] = opts[:'contract'] if !opts[:'contract'].nil?
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'Authorization'] = authorization
+      header_params[:'X-ACCESS-KEY'] = x_access_key
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Array<AuthorizedUsers>')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ContractsDetailsApi#obtain_authorized_users_by_contract\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
     # Obtiene los detalles de la empresa del contrato
     # Detalles de la compañía relacionada con el contrato de Monex.
     # @param authorization Header para token
