@@ -18,6 +18,9 @@ module Wire4Client
     # Debe ser BY_AMOUNT para indicar la configuración por monto o BY_OPERATION para indicar la configuración por número de operaciones
     attr_accessor :key
 
+    # El tipo de dato del grupo de configuraciones.
+    attr_accessor :type
+
     # Valor configurado
     attr_accessor :value
 
@@ -25,6 +28,7 @@ module Wire4Client
     def self.attribute_map
       {
         :'key' => :'key',
+        :'type' => :'type',
         :'value' => :'value'
       }
     end
@@ -33,6 +37,7 @@ module Wire4Client
     def self.swagger_types
       {
         :'key' => :'String',
+        :'type' => :'String',
         :'value' => :'String'
       }
     end
@@ -47,6 +52,10 @@ module Wire4Client
 
       if attributes.has_key?(:'key')
         self.key = attributes[:'key']
+      end
+
+      if attributes.has_key?(:'type')
+        self.type = attributes[:'type']
       end
 
       if attributes.has_key?(:'value')
@@ -73,6 +82,7 @@ module Wire4Client
       return true if self.equal?(o)
       self.class == o.class &&
           key == o.key &&
+          type == o.type &&
           value == o.value
     end
 
@@ -85,7 +95,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [key, value].hash
+      [key, type, value].hash
     end
 
     # Builds the object from hash

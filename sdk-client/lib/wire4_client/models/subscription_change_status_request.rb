@@ -13,37 +13,42 @@ Swagger Codegen version: 2.4.10
 require 'date'
 
 module Wire4Client
-  # Información para registrar un punto de venta asociado una empresa
-  class SalesPointRequest
-    # IP desde donde se recibiran las peticiones de este punto de venta
-    attr_accessor :access_ip
+  class SubscriptionChangeStatusRequest
+    attr_accessor :status
 
-    # Número de cuenta CLABE donde se realizará el deposito del cobro CoDi
-    attr_accessor :account
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    # Nombre del punto de venta
-    attr_accessor :name
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
 
-    # URL para envíar notificaciones CoDi al punto de venta
-    attr_accessor :notifications_url
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'access_ip' => :'access_ip',
-        :'account' => :'account',
-        :'name' => :'name',
-        :'notifications_url' => :'notifications_url'
+        :'status' => :'status'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'access_ip' => :'String',
-        :'account' => :'String',
-        :'name' => :'String',
-        :'notifications_url' => :'String'
+        :'status' => :'String'
       }
     end
 
@@ -55,20 +60,8 @@ module Wire4Client
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'access_ip')
-        self.access_ip = attributes[:'access_ip']
-      end
-
-      if attributes.has_key?(:'account')
-        self.account = attributes[:'account']
-      end
-
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.has_key?(:'notifications_url')
-        self.notifications_url = attributes[:'notifications_url']
+      if attributes.has_key?(:'status')
+        self.status = attributes[:'status']
       end
     end
 
@@ -76,24 +69,8 @@ module Wire4Client
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @access_ip.nil?
-        invalid_properties.push('invalid value for "access_ip", access_ip cannot be nil.')
-      end
-
-      if @access_ip !~ Regexp.new(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/)
-        invalid_properties.push('invalid value for "access_ip", must conform to the pattern /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/.')
-      end
-
-      if @account.nil?
-        invalid_properties.push('invalid value for "account", account cannot be nil.')
-      end
-
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @notifications_url.nil?
-        invalid_properties.push('invalid value for "notifications_url", notifications_url cannot be nil.')
+      if @status.nil?
+        invalid_properties.push('invalid value for "status", status cannot be nil.')
       end
 
       invalid_properties
@@ -102,26 +79,20 @@ module Wire4Client
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @access_ip.nil?
-      return false if @access_ip !~ Regexp.new(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/)
-      return false if @account.nil?
-      return false if @name.nil?
-      return false if @notifications_url.nil?
+      return false if @status.nil?
+      status_validator = EnumAttributeValidator.new('String', ['ACTIVE', 'INACTIVE'])
+      return false unless status_validator.valid?(@status)
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] access_ip Value to be assigned
-    def access_ip=(access_ip)
-      if access_ip.nil?
-        fail ArgumentError, 'access_ip cannot be nil'
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ['ACTIVE', 'INACTIVE'])
+      unless validator.valid?(status)
+        fail ArgumentError, 'invalid value for "status", must be one of #{validator.allowable_values}.'
       end
-
-      if access_ip !~ Regexp.new(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/)
-        fail ArgumentError, 'invalid value for "access_ip", must conform to the pattern /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/.'
-      end
-
-      @access_ip = access_ip
+      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -129,10 +100,7 @@ module Wire4Client
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          access_ip == o.access_ip &&
-          account == o.account &&
-          name == o.name &&
-          notifications_url == o.notifications_url
+          status == o.status
     end
 
     # @see the `==` method
@@ -144,7 +112,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [access_ip, account, name, notifications_url].hash
+      [status].hash
     end
 
     # Builds the object from hash

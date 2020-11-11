@@ -110,6 +110,7 @@ Class | Method | HTTP request | Description
 *Wire4Client::PuntosDeVentaCoDiApi* | [**create_sales_point**](docs/PuntosDeVentaCoDiApi.md#create_sales_point) | **POST** /codi/companies/salespoint | Registra un punto de venta asociado a una empresa
 *Wire4Client::PuntosDeVentaCoDiApi* | [**obtain_sale_points**](docs/PuntosDeVentaCoDiApi.md#obtain_sale_points) | **GET** /codi/companies/salespoint | Obtiene los puntos de venta asociados a una empresa
 *Wire4Client::SaldoApi* | [**get_balance_using_get**](docs/SaldoApi.md#get_balance_using_get) | **GET** /subscriptions/{subscription}/balance | Consulta los saldo de una cuenta
+*Wire4Client::SuscripcionesApi* | [**change_subscription_status_using_put**](docs/SuscripcionesApi.md#change_subscription_status_using_put) | **PUT** /subscriptions/{subscription}/status | Cambia el estatus de la suscripción
 *Wire4Client::SuscripcionesApi* | [**pre_enrollment_monex_user_using_post**](docs/SuscripcionesApi.md#pre_enrollment_monex_user_using_post) | **POST** /subscriptions/pre-subscription | Registra una pre-suscripción
 *Wire4Client::SuscripcionesApi* | [**remove_enrollment_user_using_delete**](docs/SuscripcionesApi.md#remove_enrollment_user_using_delete) | **DELETE** /subscriptions/{subscription} | Elimina una suscripción por el identificador de la suscripción
 *Wire4Client::SuscripcionesApi* | [**remove_subscription_pending_status_using_delete**](docs/SuscripcionesApi.md#remove_subscription_pending_status_using_delete) | **DELETE** /subscriptions/pre-subscription/{subscription} | Elimina una pre-suscripción
@@ -206,6 +207,7 @@ Class | Method | HTTP request | Description
  - [Wire4Client::SpidBeneficiaryResponse](docs/SpidBeneficiaryResponse.md)
  - [Wire4Client::SpidClassificationDTO](docs/SpidClassificationDTO.md)
  - [Wire4Client::SpidClassificationsResponseDTO](docs/SpidClassificationsResponseDTO.md)
+ - [Wire4Client::SubscriptionChangeStatusRequest](docs/SubscriptionChangeStatusRequest.md)
  - [Wire4Client::TokenRequiredResponse](docs/TokenRequiredResponse.md)
  - [Wire4Client::TransactionErrorCode](docs/TransactionErrorCode.md)
  - [Wire4Client::TransactionOutgoing](docs/TransactionOutgoing.md)

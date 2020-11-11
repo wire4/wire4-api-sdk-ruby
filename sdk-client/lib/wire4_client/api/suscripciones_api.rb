@@ -19,6 +19,72 @@ module Wire4Client
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Cambia el estatus de la suscripción
+    # Se cambia el estatus de la suscripción, los posibles valores son ACTIVE ó INACTIVE
+    # @param authorization Header para token
+    # @param request request
+    # @param subscription subscription
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def change_subscription_status_using_put(authorization, request, subscription, opts = {})
+      change_subscription_status_using_put_with_http_info(authorization, request, subscription, opts)
+      nil
+    end
+
+    # Cambia el estatus de la suscripción
+    # Se cambia el estatus de la suscripción, los posibles valores son ACTIVE ó INACTIVE
+    # @param authorization Header para token
+    # @param request request
+    # @param subscription subscription
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def change_subscription_status_using_put_with_http_info(authorization, request, subscription, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: SuscripcionesApi.change_subscription_status_using_put ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling SuscripcionesApi.change_subscription_status_using_put"
+      end
+      # verify the required parameter 'request' is set
+      if @api_client.config.client_side_validation && request.nil?
+        fail ArgumentError, "Missing the required parameter 'request' when calling SuscripcionesApi.change_subscription_status_using_put"
+      end
+      # verify the required parameter 'subscription' is set
+      if @api_client.config.client_side_validation && subscription.nil?
+        fail ArgumentError, "Missing the required parameter 'subscription' when calling SuscripcionesApi.change_subscription_status_using_put"
+      end
+      # resource path
+      local_var_path = '/subscriptions/{subscription}/status'.sub('{' + 'subscription' + '}', subscription.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+      header_params[:'Authorization'] = authorization
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(request)
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SuscripcionesApi#change_subscription_status_using_put\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
     # Registra una pre-suscripción
     # Registra una pre-suscripción para operar un contrato a través de un aplicación socio de la plataforma, proporcionando una URL donde el cliente Monex debe autorizar el acceso a los datos de su cuenta a el socio.<br/>Una vez que el cuentahabiente autorice el acceso, se envía un mensaje webhook con el evento 'ENROLLMENT.CREATED', el cuál contiene los datos de acceso a esta API.
     # @param authorization Header para token

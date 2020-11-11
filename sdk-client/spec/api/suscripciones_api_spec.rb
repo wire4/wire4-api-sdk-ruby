@@ -32,6 +32,20 @@ describe 'SuscripcionesApi' do
     end
   end
 
+  # unit tests for change_subscription_status_using_put
+  # Cambia el estatus de la suscripción
+  # Se cambia el estatus de la suscripción, los posibles valores son ACTIVE ó INACTIVE
+  # @param authorization Header para token
+  # @param request request
+  # @param subscription subscription
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'change_subscription_status_using_put test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for pre_enrollment_monex_user_using_post
   # Registra una pre-suscripción
   # Registra una pre-suscripción para operar un contrato a través de un aplicación socio de la plataforma, proporcionando una URL donde el cliente Monex debe autorizar el acceso a los datos de su cuenta a el socio.&lt;br/&gt;Una vez que el cuentahabiente autorice el acceso, se envía un mensaje webhook con el evento &#39;ENROLLMENT.CREATED&#39;, el cuál contiene los datos de acceso a esta API.
