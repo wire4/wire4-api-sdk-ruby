@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**accounts** | [**Array&lt;AccountReassigned&gt;**](AccountReassigned.md) | Lista de cuentas obtenidas | [optional] 
-**request_id** | **String** | Identificador público generado para la petición | [optional] 
-**url** | **String** | La url generada para confirmación de la operación | [optional] 
+**accounts** | [**Array&lt;AccountReassigned&gt;**](AccountReassigned.md) | Lista de cuentas obtenidas en estado pendiente de ser autorizadas. | [optional] 
+**request_id** | **String** | Es el identificador público generado para la petición (solicitud). | [optional] 
+**url** | **String** | Es la dirección URL generada para confirmación de la operación. Es para ingresar al centro de autorización. | [optional] 
 
 

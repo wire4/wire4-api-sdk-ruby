@@ -5,12 +5,12 @@ All URIs are relative to *https://sandbox-api.wire4.mx/wire4/1.0.0*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_webhook**](WebhooksApi.md#get_webhook) | **GET** /webhooks/{id} | Consulta de Webhook
-[**get_webhooks**](WebhooksApi.md#get_webhooks) | **GET** /webhooks | Consulta de Webhooks
+[**get_webhooks**](WebhooksApi.md#get_webhooks) | **GET** /webhooks | Consulta la lista de Webhooks
 [**register_webhook**](WebhooksApi.md#register_webhook) | **POST** /webhooks | Alta de Webhook
 
 
 # **get_webhook**
-> WebhookResponse get_webhook(authorization, id)
+> WebhookResponse get_webhook(authorization, webhook_id)
 
 Consulta de Webhook
 
@@ -25,12 +25,12 @@ api_instance = Wire4Client::WebhooksApi.new
 
 authorization = 'authorization_example' # String | Header para token
 
-id = 'id_example' # String | Identificador del webhook
+webhook_id = 'webhook_id_example' # String | Es el identificador del webhook. Ejemplo: wh_54a932866f784b439bc625c0f4e04e12
 
 
 begin
   #Consulta de Webhook
-  result = api_instance.get_webhook(authorization, id)
+  result = api_instance.get_webhook(authorization, webhook_id)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling WebhooksApi->get_webhook: #{e}"
@@ -42,7 +42,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| Header para token | 
- **id** | **String**| Identificador del webhook | 
+ **webhook_id** | **String**| Es el identificador del webhook. Ejemplo: wh_54a932866f784b439bc625c0f4e04e12 | 
 
 ### Return type
 
@@ -62,9 +62,9 @@ No authorization required
 # **get_webhooks**
 > WebhooksList get_webhooks(authorization)
 
-Consulta de Webhooks
+Consulta la lista de Webhooks
 
-Obtiene los webhooks registrados en la plataforma que tengan estatus 'ACTIVE' e 'INACTIVE'.
+Obtiene una lista de los webhooks registrados en la plataforma que tengan el estado (estatus)  Activo (ACTIVE) e Inactivo (INACTIVE).
 
 ### Example
 ```ruby
@@ -77,7 +77,7 @@ authorization = 'authorization_example' # String | Header para token
 
 
 begin
-  #Consulta de Webhooks
+  #Consulta la lista de Webhooks
   result = api_instance.get_webhooks(authorization)
   p result
 rescue Wire4Client::ApiError => e
@@ -111,7 +111,7 @@ No authorization required
 
 Alta de Webhook
 
-Registra un webhook en la plataforma para su uso como notificador de eventos cuando estos ocurran.
+Registra un webhook en la plataforma para su uso como notificador de eventos, cuándo estos ocurran.
 
 ### Example
 ```ruby

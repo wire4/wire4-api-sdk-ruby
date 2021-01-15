@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_authorization**](ContractsDetailsApi.md#create_authorization) | **POST** /onboarding/accounts/authorize | Devuelve la URL para autorización del usuario Monex
 [**obtain_authorized_users**](ContractsDetailsApi.md#obtain_authorized_users) | **GET** /onboarding/accounts/{requestId}/authorized-users | Obtiene los usuarios autorizados
+[**obtain_authorized_users_by_contract**](ContractsDetailsApi.md#obtain_authorized_users_by_contract) | **GET** /onboarding/accounts/authorized-users | Obtiene los usuarios autorizados por contrato
 [**obtain_contract_details**](ContractsDetailsApi.md#obtain_contract_details) | **POST** /onboarding/accounts/details | Obtiene los detalles de la empresa del contrato
 
 
@@ -96,6 +97,60 @@ Name | Type | Description  | Notes
  **authorization** | **String**| Header para token | 
  **x_access_key** | **String**| La llave de acceso de la aplicación | 
  **request_id** | **String**| El identificador de la petición a esta API | 
+
+### Return type
+
+[**Array&lt;AuthorizedUsers&gt;**](AuthorizedUsers.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+
+# **obtain_authorized_users_by_contract**
+> Array&lt;AuthorizedUsers&gt; obtain_authorized_users_by_contract(authorization, x_access_key, opts)
+
+Obtiene los usuarios autorizados por contrato
+
+Obtienen los detalles de los usuarios autorizados por contrato Monex.
+
+### Example
+```ruby
+# load the gem
+require 'wire4_client'
+
+api_instance = Wire4Client::ContractsDetailsApi.new
+
+authorization = 'authorization_example' # String | Header para token
+
+x_access_key = 'x_access_key_example' # String | La llave de acceso de la aplicación
+
+opts = { 
+  contract: 'contract_example' # String | El contrato Monex
+}
+
+begin
+  #Obtiene los usuarios autorizados por contrato
+  result = api_instance.obtain_authorized_users_by_contract(authorization, x_access_key, opts)
+  p result
+rescue Wire4Client::ApiError => e
+  puts "Exception when calling ContractsDetailsApi->obtain_authorized_users_by_contract: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| Header para token | 
+ **x_access_key** | **String**| La llave de acceso de la aplicación | 
+ **contract** | **String**| El contrato Monex | [optional] 
 
 ### Return type
 

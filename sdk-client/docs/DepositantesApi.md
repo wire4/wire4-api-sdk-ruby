@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 Consulta de cuentas de depositantes
 
-Obtiene una lista de depositantes asociados al contrato relacionado a la subscripción.
+Obtiene una lista de depositantes asociados al contrato relacionado a la suscripción.
 
 ### Example
 ```ruby
@@ -24,7 +24,7 @@ api_instance = Wire4Client::DepositantesApi.new
 
 authorization = 'authorization_example' # String | Header para token
 
-subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
+subscription = 'subscription_example' # String | Es el identificador de la suscripción a esta API.
 
 
 begin
@@ -41,7 +41,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| Header para token | 
- **subscription** | **String**| El identificador de la suscripción a esta API | 
+ **subscription** | **String**| Es el identificador de la suscripción a esta API. | 
 
 ### Return type
 
@@ -63,7 +63,7 @@ No authorization required
 
 Registra un nuevo depositante
 
-Registra un nuevo depositante en el contrato asociado a la subscripción.
+Registra un nuevo depositante en el contrato asociado a la suscripción.
 
 ### Example
 ```ruby
@@ -76,7 +76,7 @@ authorization = 'authorization_example' # String | Header para token
 
 register = Wire4Client::DepositantsRegister.new # DepositantsRegister | Depositant info
 
-subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
+subscription = 'subscription_example' # String | Es el identificador de la suscripción a esta API.
 
 
 begin
@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| Header para token | 
  **register** | [**DepositantsRegister**](DepositantsRegister.md)| Depositant info | 
- **subscription** | **String**| El identificador de la suscripción a esta API | 
+ **subscription** | **String**| Es el identificador de la suscripción a esta API. | 
 
 ### Return type
 
