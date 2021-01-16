@@ -3,13 +3,13 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **Float** | Monto de la transferencia | 
-**beneficiary_account** | **String** | Cuenta de beneficiario | 
-**beneficiary_bank_key** | **String** | Clave del banco beneficiario, se puede obtener este valor del listado de institucines &#39;/institutions&#39;. Si este valor no esta presente se obtiene de la cuenta del beneficiario, si la cuenta de beneficiario es un número celular este campo es requerido | [optional] 
-**clave_rastreo** | **String** | Clave de rastreo de la transferencia | 
-**operation_date** | **String** | Fecha de operación de la transferencia, formato: dd-MM-yyyy | 
-**reference** | **String** | Referencia numérica de la transferencia | [optional] 
-**sender_account** | **String** | Cuenta ordenante, es requerida cuando se no se envía la clave del banco ordenante  | [optional] 
-**sender_bank_key** | **String** | Clave del banco ordenante, se puede obtener este valor del listado de institucines &#39;/institutions&#39;. Es requerida cuando no se envía la cuenta ordenante | [optional] 
+**amount** | **Float** | Es el monto de la transferencia. Ejemplo 1000.00 | 
+**beneficiary_account** | **String** | Es la cuenta de beneficiario. | 
+**beneficiary_bank_key** | **String** | Clave del banco beneficiario. Éste valor no esta presente si obtiene de la cuenta del beneficiario, en caso de que sea un número celular éste campo es requerido. se puede obtener del recurso de las &lt;a href&#x3D;\&quot;#operation/getAllInstitutionsUsingGET\&quot;&gt;instituciones.&lt;/a&gt; | [optional] 
+**clave_rastreo** | **String** | Es la clave de rastreo de la transferencia. | 
+**operation_date** | **String** | Es la fecha de operación de la transferencia, formato: dd-MM-yyyy. | 
+**reference** | **String** | Es la referencia numérica de la transferencia. Se valida hasta 7 dígitos. | [optional] 
+**sender_account** | **String** | Es la cuenta ordenante, es requerida cuando se no se envía la clave del banco ordenante. | [optional] 
+**sender_bank_key** | **String** | Es la clave del banco ordenante, es requerida cuando no se envía la cuenta ordenante.  Se puede obtener del recurso de las &lt;a href&#x3D;\&quot;#operation/getAllInstitutionsUsingGET\&quot;&gt;instituciones.&lt;/a&gt; | [optional] 
 
 

@@ -4,16 +4,16 @@ All URIs are relative to *https://sandbox-api.wire4.mx/wire4/1.0.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**obtain_companies**](EmpresasCoDiApi.md#obtain_companies) | **GET** /codi/companies | Consulta de empresas CODI
-[**register_company_using_post**](EmpresasCoDiApi.md#register_company_using_post) | **POST** /codi/companies | Registro de empresas CODI
+[**obtain_companies**](EmpresasCoDiApi.md#obtain_companies) | **GET** /codi/companies | Consulta de empresas CODI®
+[**register_company_using_post**](EmpresasCoDiApi.md#register_company_using_post) | **POST** /codi/companies | Registro de empresas CODI®
 
 
 # **obtain_companies**
 > Array&lt;CompanyRegistered&gt; obtain_companies(authorization)
 
-Consulta de empresas CODI
+Consulta de empresas CODI®
 
-Consulta de empresas CODI registradas para la aplicación.
+Consulta de empresas CODI® registradas para la aplicación.
 
 ### Example
 ```ruby
@@ -26,7 +26,7 @@ authorization = 'authorization_example' # String | Header para token
 
 
 begin
-  #Consulta de empresas CODI
+  #Consulta de empresas CODI®
   result = api_instance.obtain_companies(authorization)
   p result
 rescue Wire4Client::ApiError => e
@@ -58,9 +58,9 @@ No authorization required
 # **register_company_using_post**
 > CompanyRegistered register_company_using_post(authorization, request_dto)
 
-Registro de empresas CODI
+Registro de empresas CODI®
 
-Registra una empresa para hacer uso de operaciones CODI. Es requerido tener el certificado emitido por BANXICO® asi como el Nombre de la empresa, Nombre comercial y RFC de la empresa.<br/>
+Registra una empresa para hacer uso de operaciones CODI®.<br><br> <b>Nota:<b> Es requerido tener el certificado emitido por BANXICO® asi como el Nombre de la empresa, Nombre comercial y el Registro Federal de Contribuyentes (RFC) de la empresa.<br/>
 
 ### Example
 ```ruby
@@ -75,7 +75,7 @@ request_dto = Wire4Client::CompanyRequested.new # CompanyRequested | Informació
 
 
 begin
-  #Registro de empresas CODI
+  #Registro de empresas CODI®
   result = api_instance.register_company_using_post(authorization, request_dto)
   p result
 rescue Wire4Client::ApiError => e

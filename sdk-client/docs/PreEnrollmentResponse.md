@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**subscription_id** | **String** | Identificador público generado | [optional] 
-**url** | **String** | Url para confirmación de enrolamiento | [optional] 
+**subscription_id** | **String** | Es el identificador público generado para la suscripción. | [optional] 
+**url** | **String** | Es la dirección URL del centro de autorizción para confirmación del alta de la suscripción. | [optional] 
 
 

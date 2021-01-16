@@ -4,22 +4,22 @@ All URIs are relative to *https://sandbox-api.wire4.mx/wire4/1.0.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**authorize_accounts_pending_put**](CuentasDeBeneficiariosSPEIApi.md#authorize_accounts_pending_put) | **PUT** /subscriptions/{subscription}/beneficiaries/pending | Recibe la solicitud para agrupar las cuentas SPEI/SPID de beneficiarios en estado pendiente que deben ser autorizadas
+[**authorize_accounts_pending_put**](CuentasDeBeneficiariosSPEIApi.md#authorize_accounts_pending_put) | **PUT** /subscriptions/{subscription}/beneficiaries/pending | Solicitud para agrupar cuentas de beneficiarios SPEI/SPID en estado pendiente.
 [**delete_account_using_delete**](CuentasDeBeneficiariosSPEIApi.md#delete_account_using_delete) | **DELETE** /subscriptions/{subscription}/beneficiaries/spei/{account} | Elimina la cuenta del beneficiario
 [**get_available_relationships_monex_using_get**](CuentasDeBeneficiariosSPEIApi.md#get_available_relationships_monex_using_get) | **GET** /subscriptions/{subscription}/beneficiaries/relationships | Consulta de relaciones
 [**get_beneficiaries_by_request_id**](CuentasDeBeneficiariosSPEIApi.md#get_beneficiaries_by_request_id) | **GET** /subscriptions/{subscription}/beneficiaries/spei/{requestId} | Consulta los beneficiarios por el identificador de la petición de registro
 [**get_beneficiaries_for_account_using_get**](CuentasDeBeneficiariosSPEIApi.md#get_beneficiaries_for_account_using_get) | **GET** /subscriptions/{subscription}/beneficiaries/spei | Consulta los beneficiarios registrados
-[**pre_register_accounts_using_post**](CuentasDeBeneficiariosSPEIApi.md#pre_register_accounts_using_post) | **POST** /subscriptions/{subscription}/beneficiaries/spei | Pre-registro de cuentas de beneficiarios.
+[**pre_register_accounts_using_post**](CuentasDeBeneficiariosSPEIApi.md#pre_register_accounts_using_post) | **POST** /subscriptions/{subscription}/beneficiaries/spei | Pre-registro de cuentas de beneficiarios SPEI®.
 [**remove_beneficiaries_pending_using_delete**](CuentasDeBeneficiariosSPEIApi.md#remove_beneficiaries_pending_using_delete) | **DELETE** /subscriptions/{subscription}/beneficiaries/spei/request/{requestId} | Eliminación de beneficiarios SPEI® sin confirmar
-[**update_amount_limit_account_using_put**](CuentasDeBeneficiariosSPEIApi.md#update_amount_limit_account_using_put) | **PUT** /subscriptions/{subscription}/beneficiaries/spei/{account} | Actualiza el monto límite
+[**update_amount_limit_account_using_put**](CuentasDeBeneficiariosSPEIApi.md#update_amount_limit_account_using_put) | **PUT** /subscriptions/{subscription}/beneficiaries/spei/{account} | Solicitud para actualizar el monto límite de una cuenta
 
 
 # **authorize_accounts_pending_put**
 > AuthorizedBeneficiariesResponse authorize_accounts_pending_put(authorization, subscription, urls_redirect_dto)
 
-Recibe la solicitud para agrupar las cuentas SPEI/SPID de beneficiarios en estado pendiente que deben ser autorizadas
+Solicitud para agrupar cuentas de beneficiarios SPEI/SPID en estado pendiente.
 
-Solicta autorizar las cuentas de beneficiarios en estado pendiente agrupandolas en un set de cuentas que pueden incluir tanto cuentas de SPI como de SPID, debe indicar las urls de redireccion en caso de error y en caso de exito<br/>
+Solicta la agrupación de las cuentas de beneficiarios en estado pendiente para que sean autorizadas,  para ello se crea un conjunto de éstas que puede incluir tanto de SPEI como de SPID. Además se debe indicar las urls de redirección en caso de error y éxito
 
 ### Example
 ```ruby
@@ -30,13 +30,13 @@ api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
 
 authorization = 'authorization_example' # String | Header para token
 
-subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
+subscription = 'subscription_example' # String | Es el identificador de la suscripción a esta API.
 
 urls_redirect_dto = Wire4Client::UrlsRedirect.new # UrlsRedirect | Información de la cuenta del beneficiario
 
 
 begin
-  #Recibe la solicitud para agrupar las cuentas SPEI/SPID de beneficiarios en estado pendiente que deben ser autorizadas
+  #Solicitud para agrupar cuentas de beneficiarios SPEI/SPID en estado pendiente.
   result = api_instance.authorize_accounts_pending_put(authorization, subscription, urls_redirect_dto)
   p result
 rescue Wire4Client::ApiError => e
@@ -49,7 +49,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| Header para token | 
- **subscription** | **String**| El identificador de la suscripción a esta API | 
+ **subscription** | **String**| Es el identificador de la suscripción a esta API. | 
  **urls_redirect_dto** | [**UrlsRedirect**](UrlsRedirect.md)| Información de la cuenta del beneficiario | 
 
 ### Return type
@@ -72,7 +72,7 @@ No authorization required
 
 Elimina la cuenta del beneficiario
 
-Borra la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción. La cuenta a borrar debe ser una cuenta que opere con SPEI.
+Elimina la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la suscripción. La cuenta a borrar debe ser una que opere con SPEI.
 
 ### Example
 ```ruby
@@ -83,9 +83,9 @@ api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
 
 authorization = 'authorization_example' # String | Header para token
 
-account = 'account_example' # String | La cuenta del beneciario que será eliminada
+account = 'account_example' # String | Es la cuenta del beneficiario que será eliminada.
 
-subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
+subscription = 'subscription_example' # String | Es el identificador de la suscripción a esta API.
 
 
 begin
@@ -101,8 +101,8 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| Header para token | 
- **account** | **String**| La cuenta del beneciario que será eliminada | 
- **subscription** | **String**| El identificador de la suscripción a esta API | 
+ **account** | **String**| Es la cuenta del beneficiario que será eliminada. | 
+ **subscription** | **String**| Es el identificador de la suscripción a esta API. | 
 
 ### Return type
 
@@ -135,7 +135,7 @@ api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
 
 authorization = 'authorization_example' # String | Header para token
 
-subscription = 'subscription_example' # String | Identificador de la suscripción a esta API
+subscription = 'subscription_example' # String | Es el identificador de la suscripción a esta API.
 
 
 begin
@@ -152,7 +152,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| Header para token | 
- **subscription** | **String**| Identificador de la suscripción a esta API | 
+ **subscription** | **String**| Es el identificador de la suscripción a esta API. | 
 
 ### Return type
 
@@ -185,9 +185,9 @@ api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
 
 authorization = 'authorization_example' # String | Header para token
 
-request_id = 'request_id_example' # String | El identificador de la petición del registro de beneficiarios a esta API
+request_id = 'request_id_example' # String | El identificador de la petición del registro de beneficiarios a esta API.
 
-subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
+subscription = 'subscription_example' # String | Es el identificador de la suscripción a esta API.
 
 
 begin
@@ -204,8 +204,8 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| Header para token | 
- **request_id** | **String**| El identificador de la petición del registro de beneficiarios a esta API | 
- **subscription** | **String**| El identificador de la suscripción a esta API | 
+ **request_id** | **String**| El identificador de la petición del registro de beneficiarios a esta API. | 
+ **subscription** | **String**| Es el identificador de la suscripción a esta API. | 
 
 ### Return type
 
@@ -238,16 +238,16 @@ api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
 
 authorization = 'authorization_example' # String | Header para token
 
-subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
+subscription = 'subscription_example' # String | Es el identificador de la suscripción a esta API.
 
 opts = { 
-  account: 'account_example', # String | Cuenta del beneficiario, puede ser Clabe, TDD o Celular
-  beneficiary_bank: 'beneficiary_bank_example', # String | Clave del banco beneficiario
-  beneficiary_name: 'beneficiary_name_example', # String | Nombre del beneficiario
-  end_date: 'end_date_example', # String | Fecha de inicio del perido a filtrar en formato dd-mm-yyyy
-  init_date: 'init_date_example', # String | Fecha de inicio del perido a filtrar en formato dd-mm-yyyy
-  rfc: 'rfc_example', # String | RFC del beneficiario
-  status: 'status_example' # String | Estatus de la cuenta
+  account: 'account_example', # String | Es la cuenta del beneficiario, podría ser teléfono celular (es de 10 dígitos), Tarjeta de débito (TDD, es de 16 dígitos) o cuenta CLABE (es de 18 dígitos). <br/><br/>Por ejemplo Teléfono celular: 5525072600, TDD: 4323 1234 5678 9123, CLABE: 032180000118359719.
+  beneficiary_bank: 'beneficiary_bank_example', # String | Es la clave del banco beneficiario. Se puede obtener del recurso de las <a href=\"#operation/getAllInstitutionsUsingGET\">instituciones.</a>
+  beneficiary_name: 'beneficiary_name_example', # String | Es el nombre del beneficiario.
+  end_date: 'end_date_example', # String | Es la fecha de inicio del perido a filtrar en formato dd-mm-yyyy.
+  init_date: 'init_date_example', # String | Es la fºecha de inicio del perido a filtrar en formato dd-mm-yyyy.
+  rfc: 'rfc_example', # String | Es el Registro Federal de Controbuyentes (RFC) del beneficiario.
+  status: 'status_example' # String | Es el estado (estatus) de la cuenta. Los valores pueden ser <b>PENDING</b> y <b>REGISTERED</b>.
 }
 
 begin
@@ -264,14 +264,14 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| Header para token | 
- **subscription** | **String**| El identificador de la suscripción a esta API | 
- **account** | **String**| Cuenta del beneficiario, puede ser Clabe, TDD o Celular | [optional] 
- **beneficiary_bank** | **String**| Clave del banco beneficiario | [optional] 
- **beneficiary_name** | **String**| Nombre del beneficiario | [optional] 
- **end_date** | **String**| Fecha de inicio del perido a filtrar en formato dd-mm-yyyy | [optional] 
- **init_date** | **String**| Fecha de inicio del perido a filtrar en formato dd-mm-yyyy | [optional] 
- **rfc** | **String**| RFC del beneficiario | [optional] 
- **status** | **String**| Estatus de la cuenta | [optional] 
+ **subscription** | **String**| Es el identificador de la suscripción a esta API. | 
+ **account** | **String**| Es la cuenta del beneficiario, podría ser teléfono celular (es de 10 dígitos), Tarjeta de débito (TDD, es de 16 dígitos) o cuenta CLABE (es de 18 dígitos). &lt;br/&gt;&lt;br/&gt;Por ejemplo Teléfono celular: 5525072600, TDD: 4323 1234 5678 9123, CLABE: 032180000118359719. | [optional] 
+ **beneficiary_bank** | **String**| Es la clave del banco beneficiario. Se puede obtener del recurso de las &lt;a href&#x3D;\&quot;#operation/getAllInstitutionsUsingGET\&quot;&gt;instituciones.&lt;/a&gt; | [optional] 
+ **beneficiary_name** | **String**| Es el nombre del beneficiario. | [optional] 
+ **end_date** | **String**| Es la fecha de inicio del perido a filtrar en formato dd-mm-yyyy. | [optional] 
+ **init_date** | **String**| Es la fºecha de inicio del perido a filtrar en formato dd-mm-yyyy. | [optional] 
+ **rfc** | **String**| Es el Registro Federal de Controbuyentes (RFC) del beneficiario. | [optional] 
+ **status** | **String**| Es el estado (estatus) de la cuenta. Los valores pueden ser &lt;b&gt;PENDING&lt;/b&gt; y &lt;b&gt;REGISTERED&lt;/b&gt;. | [optional] 
 
 ### Return type
 
@@ -291,9 +291,9 @@ No authorization required
 # **pre_register_accounts_using_post**
 > TokenRequiredResponse pre_register_accounts_using_post(authorization, request_dto, subscription)
 
-Pre-registro de cuentas de beneficiarios.
+Pre-registro de cuentas de beneficiarios SPEI®.
 
-Pre-registra una o más cuentas de beneficiario en la plataforma, proporcionando una URL donde el cuentahabiente Monex debe ingresar un valor de su llave digital para confirmar el alta de las cuentas de beneficiarios.<br/>Los posibles valores de <i>relationship</i> y <i>kind_of_relationship</i> se deben  obtener de /subscriptions/{subscription}/beneficiaries/relationships.<br/><br/>La confirmación de registro en Monex se realiza a través de una llamada a los webhooks registrados con el evento ACCOUNT.CREATED.
+Pre-registra una o más cuentas de beneficiario en la plataforma de Wire4, ésta le proporcionará una URL donde lo llevará al centro de autorización para que el cuentahabiente Monex ingrese su llave digital para confirmar el alta de las cuentas de beneficiarios.<br/> Los posibles valores de <em>relationship</em> y <em>kind_of_relationship</em> se deben  obtener de <a href=\"#operation/getAvailableRelationshipsMonexUsingGET\">/subscriptions/{subscription}/beneficiaries/relationships.</a><br/><br/>La confirmación de registro en Monex se realizará a través de una notificación a los webhooks registrados con el evento de tipo <a href=\"#section/Eventos/Tipos-de-Eventos\">ACCOUNT.CREATED.</a>
 
 ### Example
 ```ruby
@@ -306,11 +306,11 @@ authorization = 'authorization_example' # String | Header para token
 
 request_dto = Wire4Client::AccountRequest.new # AccountRequest | Información de la cuenta del beneficiario
 
-subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
+subscription = 'subscription_example' # String | Es el identificador de la suscripción a esta API.
 
 
 begin
-  #Pre-registro de cuentas de beneficiarios.
+  #Pre-registro de cuentas de beneficiarios SPEI®.
   result = api_instance.pre_register_accounts_using_post(authorization, request_dto, subscription)
   p result
 rescue Wire4Client::ApiError => e
@@ -324,7 +324,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| Header para token | 
  **request_dto** | [**AccountRequest**](AccountRequest.md)| Información de la cuenta del beneficiario | 
- **subscription** | **String**| El identificador de la suscripción a esta API | 
+ **subscription** | **String**| Es el identificador de la suscripción a esta API. | 
 
 ### Return type
 
@@ -346,7 +346,7 @@ No authorization required
 
 Eliminación de beneficiarios SPEI® sin confirmar
 
-Elimina un conjunto de beneficiarios a registrar en la cuenta del cliente Monex relacionada a la suscripción, los beneficiarios no deben haber sido confirmados por el cliente.
+Elimina uno o más beneficiarios que se encuentran en estado pendiente de confirmar (autorizar) de la cuenta del cliente Monex relacionada a la suscripción.
 
 ### Example
 ```ruby
@@ -357,9 +357,9 @@ api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
 
 authorization = 'authorization_example' # String | Header para token
 
-request_id = 'request_id_example' # String | Identificador de los beneficiarios a eliminar
+request_id = 'request_id_example' # String | Es el identificador con el que se dió de alta a los beneficiarios (viene en el cuerpo de la respuesta del <a href=\"#operation/getAvailableRelationshipsMonexUsingGET\">pre-registro de beneficiarios</a>), los registros bajo éste campo van a ser eliminados.
 
-subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
+subscription = 'subscription_example' # String | Es el identificador de la suscripción a esta API.
 
 
 begin
@@ -375,8 +375,8 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| Header para token | 
- **request_id** | **String**| Identificador de los beneficiarios a eliminar | 
- **subscription** | **String**| El identificador de la suscripción a esta API | 
+ **request_id** | **String**| Es el identificador con el que se dió de alta a los beneficiarios (viene en el cuerpo de la respuesta del &lt;a href&#x3D;\&quot;#operation/getAvailableRelationshipsMonexUsingGET\&quot;&gt;pre-registro de beneficiarios&lt;/a&gt;), los registros bajo éste campo van a ser eliminados. | 
+ **subscription** | **String**| Es el identificador de la suscripción a esta API. | 
 
 ### Return type
 
@@ -396,9 +396,9 @@ No authorization required
 # **update_amount_limit_account_using_put**
 > TokenRequiredResponse update_amount_limit_account_using_put(authorization, account, request_dto, subscription)
 
-Actualiza el monto límite
+Solicitud para actualizar el monto límite de una cuenta
 
-Actualiza el monto límite a la cuenta de beneficiario proporcionada relacionada al contrato perteneciente a la subscripción.
+Se crea una solicitud para actualizar el monto límite a la cuenta de beneficiario proporcionada y relacionada al contrato perteneciente a la subscripción. Una vez enviada la solicitud se retornará una URl que lo llevará al centro de autorización para que el cuentahabiente Monex ingrese su llave digital para confirmar la actualización del monto límite. 
 
 ### Example
 ```ruby
@@ -409,15 +409,15 @@ api_instance = Wire4Client::CuentasDeBeneficiariosSPEIApi.new
 
 authorization = 'authorization_example' # String | Header para token
 
-account = 'account_example' # String | Cuenta a actualizar
+account = 'account_example' # String | Es la cuenta que va a ser actualizada.
 
-request_dto = Wire4Client::AmountRequest.new # AmountRequest | Información de la cuenta y el monto límite a actualizar
+request_dto = Wire4Client::AmountRequest.new # AmountRequest | Información de la cuenta y el monto límite a actualizar.
 
-subscription = 'subscription_example' # String | El identificador de la suscripción a esta API
+subscription = 'subscription_example' # String | Es el identificador de la suscripción a esta API.
 
 
 begin
-  #Actualiza el monto límite
+  #Solicitud para actualizar el monto límite de una cuenta
   result = api_instance.update_amount_limit_account_using_put(authorization, account, request_dto, subscription)
   p result
 rescue Wire4Client::ApiError => e
@@ -430,9 +430,9 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| Header para token | 
- **account** | **String**| Cuenta a actualizar | 
- **request_dto** | [**AmountRequest**](AmountRequest.md)| Información de la cuenta y el monto límite a actualizar | 
- **subscription** | **String**| El identificador de la suscripción a esta API | 
+ **account** | **String**| Es la cuenta que va a ser actualizada. | 
+ **request_dto** | [**AmountRequest**](AmountRequest.md)| Información de la cuenta y el monto límite a actualizar. | 
+ **subscription** | **String**| Es el identificador de la suscripción a esta API. | 
 
 ### Return type
 

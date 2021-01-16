@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**_alias** | **String** | Alias del certificado | [optional] 
-**certificate_number** | **String** | Numero de certificado | [optional] 
-**check_digit** | **String** | Dígito verificador | [optional] 
-**cipher_data** | **String** | Información de cifrado | [optional] 
+**_alias** | **String** | Es el alias del certificado. | [optional] 
+**certificate_number** | **String** | Es el número de certificado. | [optional] 
+**check_digit** | **String** | Es el dígito verificador. Es un sólo dígito. | [optional] 
+**cipher_data** | **String** | Es la información de cifrado. | [optional] 
 
 

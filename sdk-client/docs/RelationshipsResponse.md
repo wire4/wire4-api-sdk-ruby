@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**relationships** | [**Array&lt;Relationship&gt;**](Relationship.md) | Lista de relaciones del beneficiario | [optional] 
+**relationships** | [**Array&lt;Relationship&gt;**](Relationship.md) | Es una lista de relaciones del beneficiario. | [optional] 
 
 

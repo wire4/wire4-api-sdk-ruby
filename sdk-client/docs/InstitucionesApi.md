@@ -4,13 +4,15 @@ All URIs are relative to *https://sandbox-api.wire4.mx/wire4/1.0.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_all_institutions_using_get**](InstitucionesApi.md#get_all_institutions_using_get) | **GET** /institutions | Información de instituciones bancarias.
+[**get_all_institutions_using_get**](InstitucionesApi.md#get_all_institutions_using_get) | **GET** /institutions | Consulta de instituciones bancarias
 
 
 # **get_all_institutions_using_get**
 > InstitutionsList get_all_institutions_using_get(authorization)
 
-Información de instituciones bancarias.
+Consulta de instituciones bancarias
+
+Se obtiene un listado de las instituciones bancarias y la información de cada una de estas.
 
 ### Example
 ```ruby
@@ -23,7 +25,7 @@ authorization = 'authorization_example' # String | Header para token
 
 
 begin
-  #Información de instituciones bancarias.
+  #Consulta de instituciones bancarias
   result = api_instance.get_all_institutions_using_get(authorization)
   p result
 rescue Wire4Client::ApiError => e

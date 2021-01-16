@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**kind_of_relationship** | **String** | Tipo de relación | [optional] 
-**relationship** | **String** | Nombre de la  relación | [optional] 
+**kind_of_relationship** | **String** | Es el tipo de relación. | [optional] 
+**relationship** | **String** | Es el mombre de la relación. | [optional] 
 
 

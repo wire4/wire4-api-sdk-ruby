@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**depositants** | [**Array&lt;Depositant&gt;**](Depositant.md) | Lista de depositantes que contiene cada depositante encontrado | 
+**depositants** | [**Array&lt;Depositant&gt;**](Depositant.md) | Es la lista que contiene cada depositante encontrad.o | 
 
 
