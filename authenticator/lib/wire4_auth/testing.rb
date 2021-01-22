@@ -225,6 +225,43 @@ class Wire4ExamplesTest < Test::Unit::TestCase
     end
   end
 
+  def test_change_subscription_usage
+    omit("Reason")
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
+
+    begin
+      # Obtain an access token use application flow and scope "spei_admin" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'general')
+
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e.response_body}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::SuscripcionesApi.new
+
+    subscription_id = "5873240b-cf69-456a-ab5a-88f5e79ab4b8"
+    request = Wire4Client::ServiceBanking.new
+    request.spei=Wire4Client::UseServiceBanking.new(status:'ACTIVE', use:'WITHDRAWAL')
+    request.spid=Wire4Client::UseServiceBanking.new(status:'INACTIVE', use:'WITHDRAWAL_DEPOSIT')
+    begin
+      # Call the API
+      response = api_instance.change_subscription_use_using_patch(authorization, request ,subscription_id)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e.response_body}"
+      # Optional manage exception in call API
+      return
+    end
+
+  end
+
   def test_obtain_relationships
     omit('Reason')
     # Create the authenticator to obtain access token
