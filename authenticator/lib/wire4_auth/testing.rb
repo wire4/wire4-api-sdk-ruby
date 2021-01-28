@@ -235,7 +235,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
     begin
       # Obtain an access token use application flow and scope "spei_admin" and add to request
       oauth_wire4.config_default_api_client
-      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'general')
+      authorization = oauth_wire4.obtain_access_token_app('general')
 
     rescue Wire4Client::ApiError => e
       puts "Exception to obtain access token #{e.response_body}"
