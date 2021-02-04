@@ -233,7 +233,7 @@ class Wire4ExamplesTest < Test::Unit::TestCase
     oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, Wire4Auth::EnvironmentEnum::SANDBOX)
 
     begin
-      # Obtain an access token use application flow and scope "spei_admin" and add to request
+      # Obtain an access token use application flow and scope "general" and add to request
       oauth_wire4.config_default_api_client
       authorization = oauth_wire4.obtain_access_token_app('general')
 
