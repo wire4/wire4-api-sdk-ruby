@@ -4,7 +4,7 @@ All URIs are relative to *https://sandbox-api.wire4.mx/wire4/1.0.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_webhook**](WebhooksApi.md#get_webhook) | **GET** /webhooks/{id} | Consulta de Webhook
+[**get_webhook**](WebhooksApi.md#get_webhook) | **GET** /webhooks/{webhook_id} | Consulta de Webhook
 [**get_webhooks**](WebhooksApi.md#get_webhooks) | **GET** /webhooks | Consulta la lista de Webhooks
 [**register_webhook**](WebhooksApi.md#register_webhook) | **POST** /webhooks | Alta de Webhook
 
