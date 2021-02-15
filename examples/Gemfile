@@ -7,6 +7,6 @@ gem "rake", "~> 12.0"
 gem "rspec", "~> 3.0"
 group :development, :test do
   gem 'oauth2', '~> 1.4.3'
-  gem 'wire4_auth', '~> 1.0.5'
-  gem 'wire4_client', '~> 1.0.11'
+  gem 'wire4_auth', '~> 1.1.0'
+  gem 'wire4_client', '~> 1.1.0'
 end
