@@ -3,7 +3,7 @@
 =begin
 #Wire4RestAPI
 
-#Referencia de API. La API de Wire4 está organizada en torno a REST
+#Referencia de la API de Wire4
 
 OpenAPI spec version: 1.0.0
 
@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.email       = [""]
   s.homepage    = "https://github.com/swagger-api/swagger-codegen"
   s.summary     = "Wire4RestAPI Ruby Gem"
-  s.description = "Referencia de API. La API de Wire4 está organizada en torno a REST"
+  s.description = "Referencia de la API de Wire4"
   s.license     = "Unlicense"
   s.required_ruby_version = ">= 1.9"
 

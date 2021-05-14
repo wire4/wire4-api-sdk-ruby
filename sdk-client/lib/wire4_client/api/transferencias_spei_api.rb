@@ -1,7 +1,7 @@
 =begin
 #Wire4RestAPI
 
-#Referencia de API. La API de Wire4 está organizada en torno a REST
+#Referencia de la API de Wire4
 
 OpenAPI spec version: 1.0.0
 
@@ -194,6 +194,8 @@ module Wire4Client
     # @param authorization Header para token
     # @param subscription Es el identificador de la suscripción a esta API.
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :begin_date Fecha inicial para filtrar los depósitos, se espera en formato &#39;yyyy-MM-dd&#39;
+    # @option opts [String] :end_date Fecha final para filtrar los depósitos, se espera en formato &#39;yyyy-MM-dd&#39;
     # @return [Array<Deposit>]
     def incoming_spei_transactions_report_using_get(authorization, subscription, opts = {})
       data, _status_code, _headers = incoming_spei_transactions_report_using_get_with_http_info(authorization, subscription, opts)
@@ -205,6 +207,8 @@ module Wire4Client
     # @param authorization Header para token
     # @param subscription Es el identificador de la suscripción a esta API.
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :begin_date Fecha inicial para filtrar los depósitos, se espera en formato &#39;yyyy-MM-dd&#39;
+    # @option opts [String] :end_date Fecha final para filtrar los depósitos, se espera en formato &#39;yyyy-MM-dd&#39;
     # @return [Array<(Array<Deposit>, Fixnum, Hash)>] Array<Deposit> data, response status code and response headers
     def incoming_spei_transactions_report_using_get_with_http_info(authorization, subscription, opts = {})
       if @api_client.config.debugging
@@ -230,11 +234,37 @@ module Wire4Client
         fail ArgumentError, "invalid value for 'subscription' when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, must conform to the pattern /[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[34][A-Fa-f0-9]{3}-[89ab][A-Fa-f0-9]{3}-[A-Fa-f0-9]{12}$/."
       end
 
+      if @api_client.config.client_side_validation && !opts[:'begin_date'].nil? && opts[:'begin_date'].to_s.length > 10
+        fail ArgumentError, 'invalid value for "opts[:"begin_date"]" when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, the character length must be smaller than or equal to 10.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'begin_date'].nil? && opts[:'begin_date'].to_s.length < 10
+        fail ArgumentError, 'invalid value for "opts[:"begin_date"]" when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, the character length must be great than or equal to 10.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'begin_date'].nil? && opts[:'begin_date'] !~ Regexp.new(/([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))/)
+        fail ArgumentError, "invalid value for 'opts[:\"begin_date\"]' when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, must conform to the pattern /([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))/."
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'end_date'].nil? && opts[:'end_date'].to_s.length > 10
+        fail ArgumentError, 'invalid value for "opts[:"end_date"]" when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, the character length must be smaller than or equal to 10.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'end_date'].nil? && opts[:'end_date'].to_s.length < 10
+        fail ArgumentError, 'invalid value for "opts[:"end_date"]" when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, the character length must be great than or equal to 10.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'end_date'].nil? && opts[:'end_date'] !~ Regexp.new(/([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))/)
+        fail ArgumentError, "invalid value for 'opts[:\"end_date\"]' when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, must conform to the pattern /([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))/."
+      end
+
       # resource path
       local_var_path = '/subscriptions/{subscription}/transactions/incoming/spei'.sub('{' + 'subscription' + '}', subscription.to_s)
 
       # query parameters
       query_params = {}
+      query_params[:'beginDate'] = opts[:'begin_date'] if !opts[:'begin_date'].nil?
+      query_params[:'endDate'] = opts[:'end_date'] if !opts[:'end_date'].nil?
 
       # header parameters
       header_params = {}

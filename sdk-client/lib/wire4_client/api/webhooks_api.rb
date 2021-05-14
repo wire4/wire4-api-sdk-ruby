@@ -1,7 +1,7 @@
 =begin
 #Wire4RestAPI
 
-#Referencia de API. La API de Wire4 está organizada en torno a REST
+#Referencia de la API de Wire4
 
 OpenAPI spec version: 1.0.0
 
@@ -49,7 +49,7 @@ module Wire4Client
         fail ArgumentError, "Missing the required parameter 'webhook_id' when calling WebhooksApi.get_webhook"
       end
       # resource path
-      local_var_path = '/webhooks/{webhook_id}'.sub('{' + 'webhook_id' + '}', webhook_id.to_s)
+      local_var_path = '/webhooks/{id}'.sub('{' + 'webhook_id' + '}', webhook_id.to_s)
 
       # query parameters
       query_params = {}

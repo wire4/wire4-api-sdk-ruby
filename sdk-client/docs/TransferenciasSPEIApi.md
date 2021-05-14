@@ -122,7 +122,7 @@ No authorization required
 
 
 # **incoming_spei_transactions_report_using_get**
-> Array&lt;Deposit&gt; incoming_spei_transactions_report_using_get(authorization, subscription)
+> Array&lt;Deposit&gt; incoming_spei_transactions_report_using_get(authorization, subscription, opts)
 
 Consulta de transferencias recibidas
 
@@ -139,10 +139,14 @@ authorization = 'authorization_example' # String | Header para token
 
 subscription = 'subscription_example' # String | Es el identificador de la suscripción a esta API.
 
+opts = { 
+  begin_date: 'begin_date_example', # String | Fecha inicial para filtrar los depósitos, se espera en formato 'yyyy-MM-dd'
+  end_date: 'end_date_example' # String | Fecha final para filtrar los depósitos, se espera en formato 'yyyy-MM-dd'
+}
 
 begin
   #Consulta de transferencias recibidas
-  result = api_instance.incoming_spei_transactions_report_using_get(authorization, subscription)
+  result = api_instance.incoming_spei_transactions_report_using_get(authorization, subscription, opts)
   p result
 rescue Wire4Client::ApiError => e
   puts "Exception when calling TransferenciasSPEIApi->incoming_spei_transactions_report_using_get: #{e}"
@@ -155,6 +159,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| Header para token | 
  **subscription** | **String**| Es el identificador de la suscripción a esta API. | 
+ **begin_date** | **String**| Fecha inicial para filtrar los depósitos, se espera en formato &#39;yyyy-MM-dd&#39; | [optional] 
+ **end_date** | **String**| Fecha final para filtrar los depósitos, se espera en formato &#39;yyyy-MM-dd&#39; | [optional] 
 
 ### Return type
 

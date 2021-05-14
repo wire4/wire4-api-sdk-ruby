@@ -1,7 +1,7 @@
 =begin
 #Wire4RestAPI
 
-#Referencia de API. La API de Wire4 está organizada en torno a REST
+#Referencia de la API de Wire4
 
 OpenAPI spec version: 1.0.0
 
@@ -67,6 +67,8 @@ describe 'TransferenciasSPEIApi' do
   # @param authorization Header para token
   # @param subscription Es el identificador de la suscripción a esta API.
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :begin_date Fecha inicial para filtrar los depósitos, se espera en formato &#39;yyyy-MM-dd&#39;
+  # @option opts [String] :end_date Fecha final para filtrar los depósitos, se espera en formato &#39;yyyy-MM-dd&#39;
   # @return [Array<Deposit>]
   describe 'incoming_spei_transactions_report_using_get test' do
     it 'should work' do
