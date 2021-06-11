@@ -1,7 +1,7 @@
 =begin
 #Wire4RestAPI
 
-#Referencia de API. La API de Wire4 está organizada en torno a REST
+#Referencia de la API de Wire4
 
 OpenAPI spec version: 1.0.0
 
@@ -41,6 +41,9 @@ module Wire4Client
 
     # Es el nombre del depositante en caso de que la transferencia se reciba en una cuenta de depositante.
     attr_accessor :depositant
+
+    # Es el alias de la cuenta CLABE del depositante en caso que la transferencia se reciba de una cuenta de depositante
+    attr_accessor :depositant_alias
 
     # Es la cuenta CLABE del depositante en caso que la transferencia se reciba en una cuenta de depositante
     attr_accessor :depositant_clabe
@@ -87,6 +90,7 @@ module Wire4Client
         :'currency_code' => :'currency_code',
         :'deposit_date' => :'deposit_date',
         :'depositant' => :'depositant',
+        :'depositant_alias' => :'depositant_alias',
         :'depositant_clabe' => :'depositant_clabe',
         :'depositant_email' => :'depositant_email',
         :'depositant_rfc' => :'depositant_rfc',
@@ -113,6 +117,7 @@ module Wire4Client
         :'currency_code' => :'String',
         :'deposit_date' => :'DateTime',
         :'depositant' => :'String',
+        :'depositant_alias' => :'String',
         :'depositant_clabe' => :'String',
         :'depositant_email' => :'String',
         :'depositant_rfc' => :'String',
@@ -169,6 +174,10 @@ module Wire4Client
 
       if attributes.has_key?(:'depositant')
         self.depositant = attributes[:'depositant']
+      end
+
+      if attributes.has_key?(:'depositant_alias')
+        self.depositant_alias = attributes[:'depositant_alias']
       end
 
       if attributes.has_key?(:'depositant_clabe')
@@ -243,6 +252,7 @@ module Wire4Client
           currency_code == o.currency_code &&
           deposit_date == o.deposit_date &&
           depositant == o.depositant &&
+          depositant_alias == o.depositant_alias &&
           depositant_clabe == o.depositant_clabe &&
           depositant_email == o.depositant_email &&
           depositant_rfc == o.depositant_rfc &&
@@ -265,7 +275,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount, beneficiary_account, beneficiary_name, beneficiary_rfc, clave_rastreo, confirm_date, currency_code, deposit_date, depositant, depositant_clabe, depositant_email, depositant_rfc, description, monex_description, monex_transaction_id, reference, sender_account, sender_bank, sender_name, sender_rfc].hash
+      [amount, beneficiary_account, beneficiary_name, beneficiary_rfc, clave_rastreo, confirm_date, currency_code, deposit_date, depositant, depositant_alias, depositant_clabe, depositant_email, depositant_rfc, description, monex_description, monex_transaction_id, reference, sender_account, sender_bank, sender_name, sender_rfc].hash
     end
 
     # Builds the object from hash

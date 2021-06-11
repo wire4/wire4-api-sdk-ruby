@@ -1,7 +1,7 @@
 =begin
 #Wire4RestAPI
 
-#Referencia de API. La API de Wire4 está organizada en torno a REST
+#Referencia de la API de Wire4
 
 OpenAPI spec version: 1.0.0
 
@@ -14,7 +14,7 @@ require 'date'
 
 module Wire4Client
   class Payment
-    # Es la uenta emisora.
+    # Es la cuenta emisora.
     attr_accessor :account
 
     # Es el monto de la transferencia.

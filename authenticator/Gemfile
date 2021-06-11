@@ -4,5 +4,5 @@ gemspec
 
 group :development, :test do
   gem 'oauth2', '~> 1.4.3'
-  gem 'wire4_client', '~> 1.1.0'
+  gem 'wire4_client', '~> 1.1.1'
 end
