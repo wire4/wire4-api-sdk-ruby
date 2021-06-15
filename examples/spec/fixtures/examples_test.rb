@@ -885,8 +885,8 @@ class Wire4ExamplesTest < Test::Unit::TestCase
       # Filtering by date is optional, but both parameters must be present when use filter by date:
       # begin date, end date,
       # Format: 'yyyy-MM-dd'
-      response = api_instance.incoming_spei_transactions_report_using_get(authorization, subscription, begin_date:nil,
-                                                                          end_date:nil)
+      response = api_instance.incoming_spei_transactions_report_using_get(authorization, subscription, {:beginDate => nil, :endDate => nil})
+
       p response
     rescue Wire4Client::ApiError => e
       puts "Exception when calling the API: #{e.response_body}"
