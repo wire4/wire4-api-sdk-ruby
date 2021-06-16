@@ -242,8 +242,8 @@ module Wire4Client
         fail ArgumentError, 'invalid value for "opts[:"begin_date"]" when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, the character length must be great than or equal to 10.'
       end
 
-      if @api_client.config.client_side_validation && !opts[:'begin_date'].nil? && opts[:'begin_date'] !~ Regexp.new(/([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))/)
-        fail ArgumentError, "invalid value for 'opts[:\"begin_date\"]' when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, must conform to the pattern /([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))/."
+      if @api_client.config.client_side_validation && !opts[:'begin_date'].nil? && opts[:'begin_date'] !~ Regexp.new(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)
+        fail ArgumentError, "invalid value for 'opts[:\"begin_date\"]' when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, must conform to the pattern /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/."
       end
 
       if @api_client.config.client_side_validation && !opts[:'end_date'].nil? && opts[:'end_date'].to_s.length > 10
@@ -254,8 +254,8 @@ module Wire4Client
         fail ArgumentError, 'invalid value for "opts[:"end_date"]" when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, the character length must be great than or equal to 10.'
       end
 
-      if @api_client.config.client_side_validation && !opts[:'end_date'].nil? && opts[:'end_date'] !~ Regexp.new(/([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))/)
-        fail ArgumentError, "invalid value for 'opts[:\"end_date\"]' when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, must conform to the pattern /([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))/."
+      if @api_client.config.client_side_validation && !opts[:'end_date'].nil? && opts[:'end_date'] !~ Regexp.new(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)
+        fail ArgumentError, "invalid value for 'opts[:\"end_date\"]' when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, must conform to the pattern /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/."
       end
 
       # resource path
