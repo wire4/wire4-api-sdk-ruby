@@ -49,7 +49,7 @@ module Wire4Client
         fail ArgumentError, "Missing the required parameter 'webhook_id' when calling WebhooksApi.get_webhook"
       end
       # resource path
-      local_var_path = '/webhooks/{webhook_id}'.sub('{' + 'webhook_id' + '}', webhook_id.to_s)
+      local_var_path = '/webhooks/{id}'.sub('{' + 'webhook_id' + '}', webhook_id.to_s)
 
       # query parameters
       query_params = {}

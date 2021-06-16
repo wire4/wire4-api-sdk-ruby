@@ -190,7 +190,7 @@ module Wire4Client
       return data, status_code, headers
     end
     # Consulta de transferencias recibidas
-    # Realiza una consulta de las transferencias recibidas (depósitos) en la cuenta del cliente Monex relacionada a la suscripción, las transferencias que regresa este recuso son únicamente las transferencias  recibidas durante el día en el que se realiza la consulta. Para consultar transacciones que se encuentran en otras fechas se debe utilizar los parámetros de fecha inicial (beginDate) y fecha final (endDate), siempre deben de ir las dos ya que en caso de que falte una marcará error la consulta, si faltan las dos la consulta lanzará solo las del día, como se describe al inicio. El formato para las fechas es \"yyyy-MM-dd\"
+    # Realiza una consulta de las transferencias recibidas (depósitos) en la cuenta del cliente Monex relacionada a la suscripción, las transferencias que regresa este recuso son únicamente las transferencias  recibidas durante el día en el que se realiza la consulta.
     # @param authorization Header para token
     # @param subscription Es el identificador de la suscripción a esta API.
     # @param [Hash] opts the optional parameters
@@ -203,7 +203,7 @@ module Wire4Client
     end
 
     # Consulta de transferencias recibidas
-    # Realiza una consulta de las transferencias recibidas (depósitos) en la cuenta del cliente Monex relacionada a la suscripción, las transferencias que regresa este recuso son únicamente las transferencias  recibidas durante el día en el que se realiza la consulta. Para consultar transacciones que se encuentran en otras fechas se debe utilizar los parámetros de fecha inicial (beginDate) y fecha final (endDate), siempre deben de ir las dos ya que en caso de que falte una marcará error la consulta, si faltan las dos la consulta lanzará solo las del día, como se describe al inicio. El formato para las fechas es \&quot;yyyy-MM-dd\&quot;
+    # Realiza una consulta de las transferencias recibidas (depósitos) en la cuenta del cliente Monex relacionada a la suscripción, las transferencias que regresa este recuso son únicamente las transferencias  recibidas durante el día en el que se realiza la consulta.
     # @param authorization Header para token
     # @param subscription Es el identificador de la suscripción a esta API.
     # @param [Hash] opts the optional parameters
@@ -242,8 +242,8 @@ module Wire4Client
         fail ArgumentError, 'invalid value for "opts[:"begin_date"]" when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, the character length must be great than or equal to 10.'
       end
 
-      if @api_client.config.client_side_validation && !opts[:'begin_date'].nil? && opts[:'begin_date'] !~ Regexp.new(/([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))/)
-        fail ArgumentError, "invalid value for 'opts[:\"begin_date\"]' when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, must conform to the pattern /([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))/."
+      if @api_client.config.client_side_validation && !opts[:'begin_date'].nil? && opts[:'begin_date'] !~ Regexp.new(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)
+        fail ArgumentError, "invalid value for 'opts[:\"begin_date\"]' when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, must conform to the pattern /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/."
       end
 
       if @api_client.config.client_side_validation && !opts[:'end_date'].nil? && opts[:'end_date'].to_s.length > 10
@@ -254,8 +254,8 @@ module Wire4Client
         fail ArgumentError, 'invalid value for "opts[:"end_date"]" when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, the character length must be great than or equal to 10.'
       end
 
-      if @api_client.config.client_side_validation && !opts[:'end_date'].nil? && opts[:'end_date'] !~ Regexp.new(/([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))/)
-        fail ArgumentError, "invalid value for 'opts[:\"end_date\"]' when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, must conform to the pattern /([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))/."
+      if @api_client.config.client_side_validation && !opts[:'end_date'].nil? && opts[:'end_date'] !~ Regexp.new(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)
+        fail ArgumentError, "invalid value for 'opts[:\"end_date\"]' when calling TransferenciasSPEIApi.incoming_spei_transactions_report_using_get, must conform to the pattern /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/."
       end
 
       # resource path
