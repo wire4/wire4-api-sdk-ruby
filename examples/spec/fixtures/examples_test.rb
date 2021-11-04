@@ -786,6 +786,39 @@ class Wire4ExamplesTest < Test::Unit::TestCase
     end
   end
 
+  def test_get_depositants_totals
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, ENVIRONMENT)
+
+    begin
+      # Obtain an access token use application flow and scope "spei_admin" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app_user(USER_KEY, SECRET_KEY, 'spei_admin')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e.response_body}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::DepositantesApi.new
+
+    # build body with info (check references for more info: types, required fields, etc.)
+    subscription = SUBSCRIPTION
+
+    begin
+      # Call the API
+      response = api_instance.get_depositants_totals_using_get(authorization, subscription)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e.response_body}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
   def test_get_depositants
     # Create the authenticator to obtain access token
     # The token URL and Service URL are defined for this environment enum value.
