@@ -89,8 +89,8 @@ module Wire4Client
         invalid_properties.push('invalid value for "amount_limit", amount_limit cannot be nil.')
       end
 
-      if @amount_limit < 0.0
-        invalid_properties.push('invalid value for "amount_limit", must be greater than or equal to 0.0.')
+      if @amount_limit < 0
+        invalid_properties.push('invalid value for "amount_limit", must be greater than or equal to 0.')
       end
 
       if @cancel_return_url.nil?
@@ -113,8 +113,8 @@ module Wire4Client
         invalid_properties.push('invalid value for "previous_amount_limit", previous_amount_limit cannot be nil.')
       end
 
-      if @previous_amount_limit < 0.0
-        invalid_properties.push('invalid value for "previous_amount_limit", must be greater than or equal to 0.0.')
+      if @previous_amount_limit < 0
+        invalid_properties.push('invalid value for "previous_amount_limit", must be greater than or equal to 0.')
       end
 
       if @return_url.nil?
@@ -136,13 +136,13 @@ module Wire4Client
     # @return true if the model is valid
     def valid?
       return false if @amount_limit.nil?
-      return false if @amount_limit < 0.0
+      return false if @amount_limit < 0
       return false if @cancel_return_url.nil?
       return false if @cancel_return_url.to_s.length > 512
       return false if @cancel_return_url.to_s.length < 10
       return false if @currency_code.nil?
       return false if @previous_amount_limit.nil?
-      return false if @previous_amount_limit < 0.0
+      return false if @previous_amount_limit < 0
       return false if @return_url.nil?
       return false if @return_url.to_s.length > 512
       return false if @return_url.to_s.length < 10
@@ -156,8 +156,8 @@ module Wire4Client
         fail ArgumentError, 'amount_limit cannot be nil'
       end
 
-      if amount_limit < 0.0
-        fail ArgumentError, 'invalid value for "amount_limit", must be greater than or equal to 0.0.'
+      if amount_limit < 0
+        fail ArgumentError, 'invalid value for "amount_limit", must be greater than or equal to 0.'
       end
 
       @amount_limit = amount_limit
@@ -188,8 +188,8 @@ module Wire4Client
         fail ArgumentError, 'previous_amount_limit cannot be nil'
       end
 
-      if previous_amount_limit < 0.0
-        fail ArgumentError, 'invalid value for "previous_amount_limit", must be greater than or equal to 0.0.'
+      if previous_amount_limit < 0
+        fail ArgumentError, 'invalid value for "previous_amount_limit", must be greater than or equal to 0.'
       end
 
       @previous_amount_limit = previous_amount_limit

@@ -98,7 +98,9 @@ describe 'CuentasDeBeneficiariosSPEIApi' do
   # @option opts [String] :beneficiary_name Es el nombre del beneficiario.
   # @option opts [String] :end_date Es la fecha de inicio del perido a filtrar en formato dd-mm-yyyy.
   # @option opts [String] :init_date Es la fºecha de inicio del perido a filtrar en formato dd-mm-yyyy.
+  # @option opts [String] :page Es el número de página.
   # @option opts [String] :rfc Es el Registro Federal de Controbuyentes (RFC) del beneficiario.
+  # @option opts [String] :size Es el tamaño de página.
   # @option opts [String] :status Es el estado (estatus) de la cuenta. Los valores pueden ser &lt;b&gt;PENDING&lt;/b&gt; y &lt;b&gt;REGISTERED&lt;/b&gt;.
   # @return [BeneficiariesResponse]
   describe 'get_beneficiaries_for_account_using_get test' do

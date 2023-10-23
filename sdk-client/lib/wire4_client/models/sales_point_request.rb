@@ -80,8 +80,8 @@ module Wire4Client
         invalid_properties.push('invalid value for "access_ip", access_ip cannot be nil.')
       end
 
-      if @access_ip !~ Regexp.new(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/)
-        invalid_properties.push('invalid value for "access_ip", must conform to the pattern /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/.')
+      if @access_ip !~ Regexp.new(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/)
+        invalid_properties.push('invalid value for "access_ip", must conform to the pattern /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/.')
       end
 
       if @account.nil?
@@ -103,7 +103,7 @@ module Wire4Client
     # @return true if the model is valid
     def valid?
       return false if @access_ip.nil?
-      return false if @access_ip !~ Regexp.new(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/)
+      return false if @access_ip !~ Regexp.new(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/)
       return false if @account.nil?
       return false if @name.nil?
       return false if @notifications_url.nil?
@@ -117,8 +117,8 @@ module Wire4Client
         fail ArgumentError, 'access_ip cannot be nil'
       end
 
-      if access_ip !~ Regexp.new(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/)
-        fail ArgumentError, 'invalid value for "access_ip", must conform to the pattern /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/.'
+      if access_ip !~ Regexp.new(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/)
+        fail ArgumentError, 'invalid value for "access_ip", must conform to the pattern /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/.'
       end
 
       @access_ip = access_ip

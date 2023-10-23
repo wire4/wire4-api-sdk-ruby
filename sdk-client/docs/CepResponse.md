@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **sender_name** | **String** | Es el nombre del emisor. | [optional] 
 **sender_rfc** | **String** | Es el Registro Federal de Contribuyentes (RFC) del emisor. | [optional] 
 **signature** | **String** | Firma del CEP.. | [optional] 
+**type** | **String** | Es el tiop de CEP, puede ser: &lt;strong&gt;SPEI&lt;/strong&gt; o &lt;strong&gt;SPID&lt;/strong&gt;. | [optional] 
 **url_zip** | **String** | La url al archivo zip del CEP, el cual contiene el xml y pdf | [optional] 
 
 

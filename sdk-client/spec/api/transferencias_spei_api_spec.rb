@@ -90,6 +90,34 @@ describe 'TransferenciasSPEIApi' do
     end
   end
 
+  # unit tests for out_comming_spei_spid_order_id_transaction_report_using_get
+  # Consulta de transferencias realizadas por order_id
+  # Consulta las transferencias que regresa este recuso son únicamente las transferencias recibidas en el día en el que se realiza la consulta o las transferencias identificadas con el &lt;strong&gt;order_id&lt;/strong&gt; proporcionado, para este tipo de consultas no importa el día en el que se realizó la transferencia. &lt;br&gt; Es importante que conozca que la respuesta puede dar como resultado un objeto con una lista spei o una lista spid con el/los elementos ya que un identificador order_id solo puede pertenecer a una transacción sea spei o spid.
+  # @param authorization Header para token
+  # @param subscription Es el identificador de la suscripción a esta API.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :order_id Es el identificador de la orden a buscar.
+  # @return [PaymentsSpeiAndSpidOrderId]
+  describe 'out_comming_spei_spid_order_id_transaction_report_using_get test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for out_comming_spei_spid_request_id_transactions_report_using_get
+  # Consulta de transferencias de salida por identificador de petición
+  # Consulta las transferencias de salida registradas en una petición, las transferencias que regresa este recuso son únicamente las transferencias de salida agrupadas al identificador de la petición que se generó al hacer el registro de las transacciones el cuál se debe especificar como parte del path de este endpoint.
+  # @param authorization Header para token
+  # @param request_id Identificador de la petición a buscar.
+  # @param subscription Es el identificador de la suscripción a esta API.
+  # @param [Hash] opts the optional parameters
+  # @return [PaymentsSpeiAndSpidRequestId]
+  describe 'out_comming_spei_spid_request_id_transactions_report_using_get test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for outgoing_spei_transactions_report_using_get
   # Consulta de transferencias realizadas
   # Consulta las transferencias realizadas en la cuenta del cliente Monex relacionada a la suscripción, las transferencias que regresa este recuso son únicamente las transferencias recibidas en el día en el que se realiza la consulta.&lt;br&gt;Se pueden realizar consultas por &lt;strong&gt;order_id&lt;/strong&gt; al realizar este tipo de consultas no importa el día en el que se realizó la transferencia
@@ -113,6 +141,20 @@ describe 'TransferenciasSPEIApi' do
   # @param [Hash] opts the optional parameters
   # @return [TokenRequiredResponse]
   describe 'register_outgoing_spei_transaction_using_post test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for register_spei_spid_outgoing_transactions_using_post
+  # Registro de transferencias SPEI y SPID
+  # Se registra un conjunto de transferencias (una o más) tanto SPEI como SPID en una sola petición en la cuenta del cliente Monex relacionada a la suscripción. En la respuesta se proporcionará una dirección URL que lo llevará al centro de autorización para que las transferencias sean confirmadas (autorizadas) por el cliente para que se efectúen, para ello debe ingresar la llave electrónica (Token).&lt;br&gt;  Nota: Debe considerar que el concepto de cada una de las transacciones solo debe contener caracteres alfanuméricos por lo que en caso de que se reciban caracteres como ñ o acentos serán sustituidos por n o en su caso por la letra sin acento. Los caracteres no alfanuméricos como pueden ser caracteres especiales serán eliminados.
+  # @param authorization Header para token
+  # @param subscription Es el identificador de la suscripción a esta API.
+  # @param transactions Información de las transferencias SPEI y SPID de salida
+  # @param [Hash] opts the optional parameters
+  # @return [TokenRequiredResponse]
+  describe 'register_spei_spid_outgoing_transactions_using_post test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

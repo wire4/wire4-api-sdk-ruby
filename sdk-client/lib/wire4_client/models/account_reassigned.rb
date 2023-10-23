@@ -18,14 +18,14 @@ module Wire4Client
     # Es el monto límite permitido que se registra para la cuenta. Por ejemplo 1000.00.
     attr_accessor :amount_limit
 
+    # Es la fecha en la que se autorizó el registro del beneficiario. Ésta fecha viene en formato ISO 8601 con zona horaria, ejemplo: <strong>2020-10-27T11:03:15.000-06:00</strong>.
+    attr_accessor :authorization_date
+
     # Es el banco al cuál pertenece la cuenta.
     attr_accessor :bank
 
     # Es la cuenta del beneficiario, podría ser teléfono celular (se valida que sea de 10 dígitos), Tarjeta de débito (TDD, se valida que sea de 16 dígitos) o cuenta CLABE (se valida que sea de 18 dígitos). <br/><br/>Por ejemplo Teléfono celular: 5525072600, TDD: 4323 1234 5678 9123, CLABE: 032180000118359719.
     attr_accessor :beneficiary_account
-
-    # Es el código de divisa. Es en el formato estándar de 3 dígitos, por ejemplo para el peso mexicano: <b>MXP</b>, para el dólar estadounidense: <b>USD</b>.<br/><br/>Este dato es opcional, al registrar una cuenta si no se cuenta con este valor se asignará <b>MXP</b>
-    attr_accessor :currency_code
 
     # Es una lista de correos electrónicos (emails). Se valida el formato de email. Este campo es opcional.
     attr_accessor :email
@@ -61,9 +61,9 @@ module Wire4Client
     def self.attribute_map
       {
         :'amount_limit' => :'amount_limit',
+        :'authorization_date' => :'authorization_date',
         :'bank' => :'bank',
         :'beneficiary_account' => :'beneficiary_account',
-        :'currency_code' => :'currency_code',
         :'email' => :'email',
         :'institution' => :'institution',
         :'kind_of_relationship' => :'kind_of_relationship',
@@ -81,9 +81,9 @@ module Wire4Client
     def self.swagger_types
       {
         :'amount_limit' => :'Float',
+        :'authorization_date' => :'DateTime',
         :'bank' => :'Institution',
         :'beneficiary_account' => :'String',
-        :'currency_code' => :'String',
         :'email' => :'Array<String>',
         :'institution' => :'BeneficiaryInstitution',
         :'kind_of_relationship' => :'String',
@@ -109,16 +109,16 @@ module Wire4Client
         self.amount_limit = attributes[:'amount_limit']
       end
 
+      if attributes.has_key?(:'authorization_date')
+        self.authorization_date = attributes[:'authorization_date']
+      end
+
       if attributes.has_key?(:'bank')
         self.bank = attributes[:'bank']
       end
 
       if attributes.has_key?(:'beneficiary_account')
         self.beneficiary_account = attributes[:'beneficiary_account']
-      end
-
-      if attributes.has_key?(:'currency_code')
-        self.currency_code = attributes[:'currency_code']
       end
 
       if attributes.has_key?(:'email')
@@ -241,9 +241,9 @@ module Wire4Client
       return true if self.equal?(o)
       self.class == o.class &&
           amount_limit == o.amount_limit &&
+          authorization_date == o.authorization_date &&
           bank == o.bank &&
           beneficiary_account == o.beneficiary_account &&
-          currency_code == o.currency_code &&
           email == o.email &&
           institution == o.institution &&
           kind_of_relationship == o.kind_of_relationship &&
@@ -265,7 +265,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount_limit, bank, beneficiary_account, currency_code, email, institution, kind_of_relationship, numeric_reference_spei, payment_concept_spei, person, register_date, relationship, rfc, status].hash
+      [amount_limit, authorization_date, bank, beneficiary_account, email, institution, kind_of_relationship, numeric_reference_spei, payment_concept_spei, person, register_date, relationship, rfc, status].hash
     end
 
     # Builds the object from hash

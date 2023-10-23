@@ -83,7 +83,7 @@ describe 'Operations' do
   describe 'test attribute "status"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["RECEIVED", "COMPLETED", "CANCELLED"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["ACCEPTED", "RECEIVED", "COMPLETED", "CANCELLED", "POSTPONED", "REJECTED", "REVERSED", "PENDING"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.status = value }.not_to raise_error
       # end
@@ -93,7 +93,7 @@ describe 'Operations' do
   describe 'test attribute "type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["PUSH_NOTIFICATION", "QR_CODE"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["PUSH_NOTIFICATION", "QR_CODE", "UNKNOWN"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.type = value }.not_to raise_error
       # end

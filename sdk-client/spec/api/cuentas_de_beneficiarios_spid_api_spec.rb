@@ -43,7 +43,9 @@ describe 'CuentasDeBeneficiariosSPIDApi' do
   # @option opts [String] :beneficiary_name Es el nombre del beneficiario.
   # @option opts [String] :end_date Es la fecha de inicio del periodo a filtrar en formato dd-mm-yyyy.
   # @option opts [String] :init_date Es la fecha de inicio del periodo a filtrar en formato dd-mm-yyyy.
+  # @option opts [String] :page Es el número de página.
   # @option opts [String] :rfc Es el Registro Federal de Contribuyentes (RFC) del beneficiario.
+  # @option opts [String] :size Es el tamaño de página.
   # @option opts [String] :status Es el estado (estatus) de la cuenta, Los valores pueden ser &lt;b&gt;PENDING&lt;/b&gt; y &lt;b&gt;REGISTERED&lt;/b&gt;.
   # @return [SpidBeneficiariesResponse]
   describe 'get_spid_beneficiaries_for_account test' do

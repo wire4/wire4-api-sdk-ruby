@@ -80,6 +80,31 @@ module Wire4Client
     # Es el Registro Federal de Contribuyentes (RFC) de la cuenta ordenante.
     attr_accessor :sender_rfc
 
+    # Es el estatus del depósito (COMPLETED/RETURNED).
+    attr_accessor :status
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -104,7 +129,8 @@ module Wire4Client
         :'sender_account' => :'sender_account',
         :'sender_bank' => :'sender_bank',
         :'sender_name' => :'sender_name',
-        :'sender_rfc' => :'sender_rfc'
+        :'sender_rfc' => :'sender_rfc',
+        :'status' => :'status'
       }
     end
 
@@ -132,7 +158,8 @@ module Wire4Client
         :'sender_account' => :'String',
         :'sender_bank' => :'MessageInstitution',
         :'sender_name' => :'String',
-        :'sender_rfc' => :'String'
+        :'sender_rfc' => :'String',
+        :'status' => :'String'
       }
     end
 
@@ -231,6 +258,10 @@ module Wire4Client
       if attributes.has_key?(:'sender_rfc')
         self.sender_rfc = attributes[:'sender_rfc']
       end
+
+      if attributes.has_key?(:'status')
+        self.status = attributes[:'status']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -243,7 +274,19 @@ module Wire4Client
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      status_validator = EnumAttributeValidator.new('String', ['PENDING', 'COMPLETED', 'FAILED', 'CANCELLED', 'AUTHORIZING', 'REJECTED'])
+      return false unless status_validator.valid?(@status)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ['PENDING', 'COMPLETED', 'FAILED', 'CANCELLED', 'AUTHORIZING', 'REJECTED'])
+      unless validator.valid?(status)
+        fail ArgumentError, 'invalid value for "status", must be one of #{validator.allowable_values}.'
+      end
+      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -272,7 +315,8 @@ module Wire4Client
           sender_account == o.sender_account &&
           sender_bank == o.sender_bank &&
           sender_name == o.sender_name &&
-          sender_rfc == o.sender_rfc
+          sender_rfc == o.sender_rfc &&
+          status == o.status
     end
 
     # @see the `==` method
@@ -284,7 +328,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount, beneficiary_account, beneficiary_name, beneficiary_rfc, cep, clave_rastreo, confirm_date, currency_code, deposit_date, depositant, depositant_alias, depositant_clabe, depositant_email, depositant_rfc, description, monex_description, monex_transaction_id, reference, sender_account, sender_bank, sender_name, sender_rfc].hash
+      [amount, beneficiary_account, beneficiary_name, beneficiary_rfc, cep, clave_rastreo, confirm_date, currency_code, deposit_date, depositant, depositant_alias, depositant_clabe, depositant_email, depositant_rfc, description, monex_description, monex_transaction_id, reference, sender_account, sender_bank, sender_name, sender_rfc, status].hash
     end
 
     # Builds the object from hash

@@ -32,6 +32,19 @@ describe 'DepositantesApi' do
     end
   end
 
+  # unit tests for get_depositants_totals_using_get
+  # Número de depositantes por suscripción
+  # Obtiene la cantidad el total de depositantes asociados al contrato relacionado a la suscripción.
+  # @param authorization Header para token
+  # @param subscription Es el identificador de la suscripción a esta API.
+  # @param [Hash] opts the optional parameters
+  # @return [DepositantCountResponse]
+  describe 'get_depositants_totals_using_get test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_depositants_using_get
   # Consulta de cuentas de depositantes
   # Obtiene una lista de depositantes asociados al contrato relacionado a la suscripción.
@@ -47,13 +60,41 @@ describe 'DepositantesApi' do
 
   # unit tests for register_depositants_using_post
   # Registra un nuevo depositante
-  # Registra un nuevo depositante en el contrato asociado a la suscripción.
+  # Registra un nuevo depositante en el contrato asociado a la suscripción. Si intenta registrar un depositante que previamente se había registrado, se devolverá la cuenta clabe asociada al Álias que está intentando registrar. Queda bajo responsabilidad del cliente verificar que los álias sean únicos en sus sistemas.
   # @param authorization Header para token
   # @param register Depositant info
   # @param subscription Es el identificador de la suscripción a esta API.
   # @param [Hash] opts the optional parameters
   # @return [DepositantsResponse]
   describe 'register_depositants_using_post test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for update_status_depositants_no_suscrption_using_patch
+  # Solicitud para actualizar el estado de un depositante sin utilizar la suscripción
+  # @param authorization Header para token
+  # @param account Es la cuenta que va a ser actualizada.
+  # @param action Es la cuenta que va a ser actualizada.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :empty_value Empty value
+  # @return [Depositant]
+  describe 'update_status_depositants_no_suscrption_using_patch test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for update_status_depositants_using_patch
+  # Solicitud para actualizar el estado de un depossitante
+  # @param authorization Header para token
+  # @param account Es la cuenta que va a ser actualizada.
+  # @param action Es la cuenta que va a ser actualizada.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :empty_value Empty value
+  # @return [Depositant]
+  describe 'update_status_depositants_using_patch test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

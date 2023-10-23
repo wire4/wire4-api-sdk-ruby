@@ -25,5 +25,6 @@ Name | Type | Description | Notes
 **sender_bank** | [**MessageInstitution**](MessageInstitution.md) | Es el banco del ordenante. | [optional] 
 **sender_name** | **String** | Es el nombre del ordenante. | [optional] 
 **sender_rfc** | **String** | Es el Registro Federal de Contribuyentes (RFC) de la cuenta ordenante. | [optional] 
+**status** | **String** | Es el estatus del depósito (COMPLETED/RETURNED). | [optional] 
 
 

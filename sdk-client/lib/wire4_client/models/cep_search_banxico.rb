@@ -38,6 +38,31 @@ module Wire4Client
     # Es la clave del banco ordenante, es requerida cuando no se envía la cuenta ordenante.  Se puede obtener del recurso de las <a href=\"#operation/getAllInstitutionsUsingGET\">instituciones.</a>
     attr_accessor :sender_bank_key
 
+    # Es el tipo de cep a consultar, puede ser SPEI o SPID.
+    attr_accessor :type
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -48,7 +73,8 @@ module Wire4Client
         :'operation_date' => :'operation_date',
         :'reference' => :'reference',
         :'sender_account' => :'sender_account',
-        :'sender_bank_key' => :'sender_bank_key'
+        :'sender_bank_key' => :'sender_bank_key',
+        :'type' => :'type'
       }
     end
 
@@ -62,7 +88,8 @@ module Wire4Client
         :'operation_date' => :'String',
         :'reference' => :'String',
         :'sender_account' => :'String',
-        :'sender_bank_key' => :'String'
+        :'sender_bank_key' => :'String',
+        :'type' => :'String'
       }
     end
 
@@ -104,6 +131,10 @@ module Wire4Client
 
       if attributes.has_key?(:'sender_bank_key')
         self.sender_bank_key = attributes[:'sender_bank_key']
+      end
+
+      if attributes.has_key?(:'type')
+        self.type = attributes[:'type']
       end
     end
 
@@ -182,6 +213,8 @@ module Wire4Client
       return false if !@sender_bank_key.nil? && @sender_bank_key.to_s.length > 5
       return false if !@sender_bank_key.nil? && @sender_bank_key.to_s.length < 1
       return false if !@sender_bank_key.nil? && @sender_bank_key !~ Regexp.new(/[0-9][0-9]*/)
+      type_validator = EnumAttributeValidator.new('String', ['SPEI', 'SPID'])
+      return false unless type_validator.valid?(@type)
       true
     end
 
@@ -239,6 +272,16 @@ module Wire4Client
       @sender_bank_key = sender_bank_key
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ['SPEI', 'SPID'])
+      unless validator.valid?(type)
+        fail ArgumentError, 'invalid value for "type", must be one of #{validator.allowable_values}.'
+      end
+      @type = type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -251,7 +294,8 @@ module Wire4Client
           operation_date == o.operation_date &&
           reference == o.reference &&
           sender_account == o.sender_account &&
-          sender_bank_key == o.sender_bank_key
+          sender_bank_key == o.sender_bank_key &&
+          type == o.type
     end
 
     # @see the `==` method
@@ -263,7 +307,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount, beneficiary_account, beneficiary_bank_key, clave_rastreo, operation_date, reference, sender_account, sender_bank_key].hash
+      [amount, beneficiary_account, beneficiary_bank_key, clave_rastreo, operation_date, reference, sender_account, sender_bank_key, type].hash
     end
 
     # Builds the object from hash

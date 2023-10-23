@@ -21,7 +21,7 @@ module Wire4Client
     # Es el número de certificado.
     attr_accessor :certificate_number
 
-    # Es el dígito verificador. Es un sólo dígito.
+    # Es el dígito verificador. Máximo 3 dígitos.
     attr_accessor :check_digit
 
     # Es la información de cifrado.
@@ -76,16 +76,12 @@ module Wire4Client
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@check_digit.nil? && @check_digit.to_s.length > 1
-        invalid_properties.push('invalid value for "check_digit", the character length must be smaller than or equal to 1.')
+      if !@check_digit.nil? && @check_digit.to_s.length > 3
+        invalid_properties.push('invalid value for "check_digit", the character length must be smaller than or equal to 3.')
       end
 
       if !@check_digit.nil? && @check_digit.to_s.length < 1
         invalid_properties.push('invalid value for "check_digit", the character length must be great than or equal to 1.')
-      end
-
-      if !@check_digit.nil? && @check_digit !~ Regexp.new(/\d/)
-        invalid_properties.push('invalid value for "check_digit", must conform to the pattern /\d/.')
       end
 
       invalid_properties
@@ -94,25 +90,20 @@ module Wire4Client
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@check_digit.nil? && @check_digit.to_s.length > 1
+      return false if !@check_digit.nil? && @check_digit.to_s.length > 3
       return false if !@check_digit.nil? && @check_digit.to_s.length < 1
-      return false if !@check_digit.nil? && @check_digit !~ Regexp.new(/\d/)
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] check_digit Value to be assigned
     def check_digit=(check_digit)
-      if !check_digit.nil? && check_digit.to_s.length > 1
-        fail ArgumentError, 'invalid value for "check_digit", the character length must be smaller than or equal to 1.'
+      if !check_digit.nil? && check_digit.to_s.length > 3
+        fail ArgumentError, 'invalid value for "check_digit", the character length must be smaller than or equal to 3.'
       end
 
       if !check_digit.nil? && check_digit.to_s.length < 1
         fail ArgumentError, 'invalid value for "check_digit", the character length must be great than or equal to 1.'
-      end
-
-      if !check_digit.nil? && check_digit !~ Regexp.new(/\d/)
-        fail ArgumentError, 'invalid value for "check_digit", must conform to the pattern /\d/.'
       end
 
       @check_digit = check_digit

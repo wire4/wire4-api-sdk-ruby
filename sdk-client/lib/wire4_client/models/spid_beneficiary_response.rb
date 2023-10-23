@@ -18,6 +18,9 @@ module Wire4Client
     # Monto límite permitido para la cuenta. Ejemplo: 1000.00
     attr_accessor :amount_limit
 
+    # La fecha en la que se registro el beneficiario.
+    attr_accessor :authorization_date
+
     # El banco al cual pertenece la cuenta.
     attr_accessor :bank
 
@@ -55,6 +58,7 @@ module Wire4Client
     def self.attribute_map
       {
         :'amount_limit' => :'amount_limit',
+        :'authorization_date' => :'authorization_date',
         :'bank' => :'bank',
         :'beneficiary_account' => :'beneficiary_account',
         :'email' => :'email',
@@ -73,6 +77,7 @@ module Wire4Client
     def self.swagger_types
       {
         :'amount_limit' => :'Float',
+        :'authorization_date' => :'DateTime',
         :'bank' => :'Institution',
         :'beneficiary_account' => :'String',
         :'email' => :'Array<String>',
@@ -97,6 +102,10 @@ module Wire4Client
 
       if attributes.has_key?(:'amount_limit')
         self.amount_limit = attributes[:'amount_limit']
+      end
+
+      if attributes.has_key?(:'authorization_date')
+        self.authorization_date = attributes[:'authorization_date']
       end
 
       if attributes.has_key?(:'bank')
@@ -223,6 +232,7 @@ module Wire4Client
       return true if self.equal?(o)
       self.class == o.class &&
           amount_limit == o.amount_limit &&
+          authorization_date == o.authorization_date &&
           bank == o.bank &&
           beneficiary_account == o.beneficiary_account &&
           email == o.email &&
@@ -245,7 +255,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount_limit, bank, beneficiary_account, email, institution, kind_of_relationship, numeric_reference_spid, payment_concept_spid, register_date, relationship, rfc, status].hash
+      [amount_limit, authorization_date, bank, beneficiary_account, email, institution, kind_of_relationship, numeric_reference_spid, payment_concept_spid, register_date, relationship, rfc, status].hash
     end
 
     # Builds the object from hash

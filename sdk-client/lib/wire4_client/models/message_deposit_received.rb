@@ -66,8 +66,17 @@ module Wire4Client
     # Es el identificador asignado por Monex a la transferencia.
     attr_accessor :monex_transaction_id
 
+    # Número de orden asignado por el cliente de Wire4
+    attr_accessor :order_id
+
     # Es la referecia de la transferencia.
     attr_accessor :reference
+
+    # Es el identificador de la solicitud de cobro establecido por la aplicación.
+    attr_accessor :request_id
+
+    # Es el id de devolucion de la transaccion.
+    attr_accessor :return_id_instruction
 
     # Es la cuenta del ordenante que podría ser un número celular (10 dígitos), una tarjeta de débito (TDD, de 16 dígitos) o Cuenta CLABE interbancaria (18 dígitos).
     attr_accessor :sender_account
@@ -101,7 +110,10 @@ module Wire4Client
         :'description' => :'description',
         :'monex_description' => :'monex_description',
         :'monex_transaction_id' => :'monex_transaction_id',
+        :'order_id' => :'order_id',
         :'reference' => :'reference',
+        :'request_id' => :'request_id',
+        :'return_id_instruction' => :'return_id_instruction',
         :'sender_account' => :'sender_account',
         :'sender_bank' => :'sender_bank',
         :'sender_name' => :'sender_name',
@@ -129,7 +141,10 @@ module Wire4Client
         :'description' => :'String',
         :'monex_description' => :'String',
         :'monex_transaction_id' => :'String',
+        :'order_id' => :'String',
         :'reference' => :'String',
+        :'request_id' => :'String',
+        :'return_id_instruction' => :'Integer',
         :'sender_account' => :'String',
         :'sender_bank' => :'MessageInstitution',
         :'sender_name' => :'String',
@@ -213,8 +228,20 @@ module Wire4Client
         self.monex_transaction_id = attributes[:'monex_transaction_id']
       end
 
+      if attributes.has_key?(:'order_id')
+        self.order_id = attributes[:'order_id']
+      end
+
       if attributes.has_key?(:'reference')
         self.reference = attributes[:'reference']
+      end
+
+      if attributes.has_key?(:'request_id')
+        self.request_id = attributes[:'request_id']
+      end
+
+      if attributes.has_key?(:'return_id_instruction')
+        self.return_id_instruction = attributes[:'return_id_instruction']
       end
 
       if attributes.has_key?(:'sender_account')
@@ -269,7 +296,10 @@ module Wire4Client
           description == o.description &&
           monex_description == o.monex_description &&
           monex_transaction_id == o.monex_transaction_id &&
+          order_id == o.order_id &&
           reference == o.reference &&
+          request_id == o.request_id &&
+          return_id_instruction == o.return_id_instruction &&
           sender_account == o.sender_account &&
           sender_bank == o.sender_bank &&
           sender_name == o.sender_name &&
@@ -285,7 +315,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount, beneficiary_account, beneficiary_name, beneficiary_rfc, cep, clave_rastreo, confirm_date, currency_code, deposit_date, depositant, depositant_alias, depositant_clabe, depositant_email, depositant_rfc, description, monex_description, monex_transaction_id, reference, sender_account, sender_bank, sender_name, sender_rfc].hash
+      [amount, beneficiary_account, beneficiary_name, beneficiary_rfc, cep, clave_rastreo, confirm_date, currency_code, deposit_date, depositant, depositant_alias, depositant_clabe, depositant_email, depositant_rfc, description, monex_description, monex_transaction_id, order_id, reference, request_id, return_id_instruction, sender_account, sender_bank, sender_name, sender_rfc].hash
     end
 
     # Builds the object from hash

@@ -146,8 +146,8 @@ module Wire4Client
         invalid_properties.push('invalid value for "order_id", order_id cannot be nil.')
       end
 
-      if @order_id.to_s.length > 36
-        invalid_properties.push('invalid value for "order_id", the character length must be smaller than or equal to 36.')
+      if @order_id.to_s.length > 256
+        invalid_properties.push('invalid value for "order_id", the character length must be smaller than or equal to 256.')
       end
 
       if @order_id.to_s.length < 1
@@ -180,7 +180,7 @@ module Wire4Client
       return false if @concept.to_s.length < 1
       return false if @currency_code.nil?
       return false if @order_id.nil?
-      return false if @order_id.to_s.length > 36
+      return false if @order_id.to_s.length > 256
       return false if @order_id.to_s.length < 1
       return false if @reference.nil?
       return false if @reference > 9999999
@@ -227,8 +227,8 @@ module Wire4Client
         fail ArgumentError, 'order_id cannot be nil'
       end
 
-      if order_id.to_s.length > 36
-        fail ArgumentError, 'invalid value for "order_id", the character length must be smaller than or equal to 36.'
+      if order_id.to_s.length > 256
+        fail ArgumentError, 'invalid value for "order_id", the character length must be smaller than or equal to 256.'
       end
 
       if order_id.to_s.length < 1
