@@ -38,6 +38,9 @@ module Wire4Client
     # Es el Número de teléfono móvil en caso de ser un pago CODI® usando \"PUSH_NOTIFICATION\".
     attr_accessor :phone_number
 
+    # Referencia numérica del pago CODI®.
+    attr_accessor :reference
+
     # El estado del código QR para pago CODI®.
     attr_accessor :status
 
@@ -77,6 +80,7 @@ module Wire4Client
         :'due_date' => :'due_date',
         :'order_id' => :'order_id',
         :'phone_number' => :'phone_number',
+        :'reference' => :'reference',
         :'status' => :'status',
         :'type' => :'type'
       }
@@ -93,6 +97,7 @@ module Wire4Client
         :'due_date' => :'DateTime',
         :'order_id' => :'String',
         :'phone_number' => :'String',
+        :'reference' => :'Integer',
         :'status' => :'String',
         :'type' => :'String'
       }
@@ -138,6 +143,10 @@ module Wire4Client
         self.phone_number = attributes[:'phone_number']
       end
 
+      if attributes.has_key?(:'reference')
+        self.reference = attributes[:'reference']
+      end
+
       if attributes.has_key?(:'status')
         self.status = attributes[:'status']
       end
@@ -157,9 +166,9 @@ module Wire4Client
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      status_validator = EnumAttributeValidator.new('String', ['RECEIVED', 'COMPLETED', 'CANCELLED'])
+      status_validator = EnumAttributeValidator.new('String', ['ACCEPTED', 'RECEIVED', 'COMPLETED', 'CANCELLED', 'POSTPONED', 'REJECTED', 'REVERSED', 'PENDING'])
       return false unless status_validator.valid?(@status)
-      type_validator = EnumAttributeValidator.new('String', ['PUSH_NOTIFICATION', 'QR_CODE'])
+      type_validator = EnumAttributeValidator.new('String', ['PUSH_NOTIFICATION', 'QR_CODE', 'UNKNOWN'])
       return false unless type_validator.valid?(@type)
       true
     end
@@ -167,7 +176,7 @@ module Wire4Client
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ['RECEIVED', 'COMPLETED', 'CANCELLED'])
+      validator = EnumAttributeValidator.new('String', ['ACCEPTED', 'RECEIVED', 'COMPLETED', 'CANCELLED', 'POSTPONED', 'REJECTED', 'REVERSED', 'PENDING'])
       unless validator.valid?(status)
         fail ArgumentError, 'invalid value for "status", must be one of #{validator.allowable_values}.'
       end
@@ -177,7 +186,7 @@ module Wire4Client
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ['PUSH_NOTIFICATION', 'QR_CODE'])
+      validator = EnumAttributeValidator.new('String', ['PUSH_NOTIFICATION', 'QR_CODE', 'UNKNOWN'])
       unless validator.valid?(type)
         fail ArgumentError, 'invalid value for "type", must be one of #{validator.allowable_values}.'
       end
@@ -197,6 +206,7 @@ module Wire4Client
           due_date == o.due_date &&
           order_id == o.order_id &&
           phone_number == o.phone_number &&
+          reference == o.reference &&
           status == o.status &&
           type == o.type
     end
@@ -210,7 +220,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount, barcode_base64, barcode_url, concept, creation_date, due_date, order_id, phone_number, status, type].hash
+      [amount, barcode_base64, barcode_url, concept, creation_date, due_date, order_id, phone_number, reference, status, type].hash
     end
 
     # Builds the object from hash

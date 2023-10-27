@@ -31,10 +31,10 @@ Gem::Specification.new do |s|
   s.license     = "Unlicense"
   s.required_ruby_version = ">= 1.9"
 
-  s.add_runtime_dependency 'oauth2', '~> 1.4', '>= 1.4.3'
-  s.add_runtime_dependency 'wire4_client', '~> 1.0', '>= 1.1.2'
+  s.add_runtime_dependency 'oauth2', '~> 2.0', '>= 2.0.9'
+  s.add_runtime_dependency 'wire4_client', '~> 1.0', '>= 1.1.4'
 
-  s.add_development_dependency 'test-unit', '~> 3.3', '>= 3.3.5'
+  s.add_development_dependency 'test-unit', '~> 3.6', '>= 3.6.1'
 
   s.files         = `find *`.split("\n").uniq.sort.select { |f| !f.empty? }
   s.executables   = []

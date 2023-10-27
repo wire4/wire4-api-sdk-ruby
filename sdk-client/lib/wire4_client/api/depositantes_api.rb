@@ -19,7 +19,7 @@ module Wire4Client
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Consulta cuantas cuentas de depositantes existen
+    # Número de depositantes por suscripción
     # Obtiene la cantidad el total de depositantes asociados al contrato relacionado a la suscripción.
     # @param authorization Header para token
     # @param subscription Es el identificador de la suscripción a esta API.
@@ -30,7 +30,7 @@ module Wire4Client
       data
     end
 
-    # Consulta cuantas cuentas de depositantes existen
+    # Número de depositantes por suscripción
     # Obtiene la cantidad el total de depositantes asociados al contrato relacionado a la suscripción.
     # @param authorization Header para token
     # @param subscription Es el identificador de la suscripción a esta API.
@@ -162,7 +162,7 @@ module Wire4Client
       return data, status_code, headers
     end
     # Registra un nuevo depositante
-    # Registra un nuevo depositante en el contrato asociado a la suscripción.
+    # Registra un nuevo depositante en el contrato asociado a la suscripción. Si intenta registrar un depositante que previamente se había registrado, se devolverá la cuenta clabe asociada al Álias que está intentando registrar. Queda bajo responsabilidad del cliente verificar que los álias sean únicos en sus sistemas.
     # @param authorization Header para token
     # @param register Depositant info
     # @param subscription Es el identificador de la suscripción a esta API.
@@ -174,7 +174,7 @@ module Wire4Client
     end
 
     # Registra un nuevo depositante
-    # Registra un nuevo depositante en el contrato asociado a la suscripción.
+    # Registra un nuevo depositante en el contrato asociado a la suscripción. Si intenta registrar un depositante que previamente se había registrado, se devolverá la cuenta clabe asociada al Álias que está intentando registrar. Queda bajo responsabilidad del cliente verificar que los álias sean únicos en sus sistemas.
     # @param authorization Header para token
     # @param register Depositant info
     # @param subscription Es el identificador de la suscripción a esta API.
@@ -237,6 +237,140 @@ module Wire4Client
         :return_type => 'DepositantsResponse')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: DepositantesApi#register_depositants_using_post\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+    # Solicitud para actualizar el estado de un depositante sin utilizar la suscripción
+    # @param authorization Header para token
+    # @param account Es la cuenta que va a ser actualizada.
+    # @param action Es la cuenta que va a ser actualizada.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :empty_value Empty value
+    # @return [Depositant]
+    def update_status_depositants_no_suscrption_using_patch(authorization, account, action, opts = {})
+      data, _status_code, _headers = update_status_depositants_no_suscrption_using_patch_with_http_info(authorization, account, action, opts)
+      data
+    end
+
+    # Solicitud para actualizar el estado de un depositante sin utilizar la suscripción
+    # @param authorization Header para token
+    # @param account Es la cuenta que va a ser actualizada.
+    # @param action Es la cuenta que va a ser actualizada.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :empty_value Empty value
+    # @return [Array<(Depositant, Fixnum, Hash)>] Depositant data, response status code and response headers
+    def update_status_depositants_no_suscrption_using_patch_with_http_info(authorization, account, action, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: DepositantesApi.update_status_depositants_no_suscrption_using_patch ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling DepositantesApi.update_status_depositants_no_suscrption_using_patch"
+      end
+      # verify the required parameter 'account' is set
+      if @api_client.config.client_side_validation && account.nil?
+        fail ArgumentError, "Missing the required parameter 'account' when calling DepositantesApi.update_status_depositants_no_suscrption_using_patch"
+      end
+      # verify the required parameter 'action' is set
+      if @api_client.config.client_side_validation && action.nil?
+        fail ArgumentError, "Missing the required parameter 'action' when calling DepositantesApi.update_status_depositants_no_suscrption_using_patch"
+      end
+      # resource path
+      local_var_path = '/depositants/{account}/{action}'.sub('{' + 'account' + '}', account.to_s).sub('{' + 'action' + '}', action.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+      header_params[:'Authorization'] = authorization
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(opts[:'empty_value'])
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Depositant')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: DepositantesApi#update_status_depositants_no_suscrption_using_patch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+    # Solicitud para actualizar el estado de un depossitante
+    # @param authorization Header para token
+    # @param account Es la cuenta que va a ser actualizada.
+    # @param action Es la cuenta que va a ser actualizada.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :empty_value Empty value
+    # @return [Depositant]
+    def update_status_depositants_using_patch(authorization, account, action, opts = {})
+      data, _status_code, _headers = update_status_depositants_using_patch_with_http_info(authorization, account, action, opts)
+      data
+    end
+
+    # Solicitud para actualizar el estado de un depossitante
+    # @param authorization Header para token
+    # @param account Es la cuenta que va a ser actualizada.
+    # @param action Es la cuenta que va a ser actualizada.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :empty_value Empty value
+    # @return [Array<(Depositant, Fixnum, Hash)>] Depositant data, response status code and response headers
+    def update_status_depositants_using_patch_with_http_info(authorization, account, action, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: DepositantesApi.update_status_depositants_using_patch ...'
+      end
+      # verify the required parameter 'authorization' is set
+      if @api_client.config.client_side_validation && authorization.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization' when calling DepositantesApi.update_status_depositants_using_patch"
+      end
+      # verify the required parameter 'account' is set
+      if @api_client.config.client_side_validation && account.nil?
+        fail ArgumentError, "Missing the required parameter 'account' when calling DepositantesApi.update_status_depositants_using_patch"
+      end
+      # verify the required parameter 'action' is set
+      if @api_client.config.client_side_validation && action.nil?
+        fail ArgumentError, "Missing the required parameter 'action' when calling DepositantesApi.update_status_depositants_using_patch"
+      end
+      # resource path
+      local_var_path = '/subscriptions/{subscription}/depositants/{account}/{action}'.sub('{' + 'account' + '}', account.to_s).sub('{' + 'action' + '}', action.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+      header_params[:'Authorization'] = authorization
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(opts[:'empty_value'])
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Depositant')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: DepositantesApi#update_status_depositants_using_patch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

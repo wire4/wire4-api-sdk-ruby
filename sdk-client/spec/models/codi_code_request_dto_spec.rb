@@ -38,6 +38,12 @@ describe 'CodiCodeRequestDTO' do
     end
   end
 
+  describe 'test attribute "beneficiary2"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "concept"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -62,7 +68,23 @@ describe 'CodiCodeRequestDTO' do
     end
   end
 
+  describe 'test attribute "payment_type"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["ONE_OCCASION", "RECURRENT", "RECURRENT_NO_RECURRENT", "UNKNOWN"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.payment_type = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "phone_number"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "reference"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -71,7 +93,7 @@ describe 'CodiCodeRequestDTO' do
   describe 'test attribute "type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["PUSH_NOTIFICATION", "QR_CODE"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["PUSH_NOTIFICATION", "QR_CODE", "UNKNOWN"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.type = value }.not_to raise_error
       # end

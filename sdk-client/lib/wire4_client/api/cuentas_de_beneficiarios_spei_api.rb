@@ -352,7 +352,9 @@ module Wire4Client
     # @option opts [String] :beneficiary_name Es el nombre del beneficiario.
     # @option opts [String] :end_date Es la fecha de inicio del perido a filtrar en formato dd-mm-yyyy.
     # @option opts [String] :init_date Es la fºecha de inicio del perido a filtrar en formato dd-mm-yyyy.
+    # @option opts [String] :page Es el número de página. (default to 0)
     # @option opts [String] :rfc Es el Registro Federal de Controbuyentes (RFC) del beneficiario.
+    # @option opts [String] :size Es el tamaño de página. (default to 20)
     # @option opts [String] :status Es el estado (estatus) de la cuenta. Los valores pueden ser &lt;b&gt;PENDING&lt;/b&gt; y &lt;b&gt;REGISTERED&lt;/b&gt;.
     # @return [BeneficiariesResponse]
     def get_beneficiaries_for_account_using_get(authorization, subscription, opts = {})
@@ -370,7 +372,9 @@ module Wire4Client
     # @option opts [String] :beneficiary_name Es el nombre del beneficiario.
     # @option opts [String] :end_date Es la fecha de inicio del perido a filtrar en formato dd-mm-yyyy.
     # @option opts [String] :init_date Es la fºecha de inicio del perido a filtrar en formato dd-mm-yyyy.
+    # @option opts [String] :page Es el número de página.
     # @option opts [String] :rfc Es el Registro Federal de Controbuyentes (RFC) del beneficiario.
+    # @option opts [String] :size Es el tamaño de página.
     # @option opts [String] :status Es el estado (estatus) de la cuenta. Los valores pueden ser &lt;b&gt;PENDING&lt;/b&gt; y &lt;b&gt;REGISTERED&lt;/b&gt;.
     # @return [Array<(BeneficiariesResponse, Fixnum, Hash)>] BeneficiariesResponse data, response status code and response headers
     def get_beneficiaries_for_account_using_get_with_http_info(authorization, subscription, opts = {})
@@ -407,7 +411,9 @@ module Wire4Client
       query_params[:'beneficiary_name'] = opts[:'beneficiary_name'] if !opts[:'beneficiary_name'].nil?
       query_params[:'end_date'] = opts[:'end_date'] if !opts[:'end_date'].nil?
       query_params[:'init_date'] = opts[:'init_date'] if !opts[:'init_date'].nil?
+      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
       query_params[:'rfc'] = opts[:'rfc'] if !opts[:'rfc'].nil?
+      query_params[:'size'] = opts[:'size'] if !opts[:'size'].nil?
       query_params[:'status'] = opts[:'status'] if !opts[:'status'].nil?
 
       # header parameters

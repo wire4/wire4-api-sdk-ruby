@@ -159,7 +159,7 @@ module Wire4Client
       return false if !@amount_from.nil? && @amount_from < 0.01
       return false if !@amount_to.nil? && @amount_to > 9999999.99
       return false if !@amount_to.nil? && @amount_to < 0.01
-      status_validator = EnumAttributeValidator.new('String', ['RECEIVED', 'COMPLETED', 'CANCELLED'])
+      status_validator = EnumAttributeValidator.new('String', ['ACCEPTED', 'RECEIVED', 'COMPLETED', 'CANCELLED', 'POSTPONED', 'REJECTED', 'REVERSED', 'PENDING'])
       return false unless status_validator.valid?(@status)
       true
     end
@@ -195,7 +195,7 @@ module Wire4Client
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ['RECEIVED', 'COMPLETED', 'CANCELLED'])
+      validator = EnumAttributeValidator.new('String', ['ACCEPTED', 'RECEIVED', 'COMPLETED', 'CANCELLED', 'POSTPONED', 'REJECTED', 'REVERSED', 'PENDING'])
       unless validator.valid?(status)
         fail ArgumentError, 'invalid value for "status", must be one of #{validator.allowable_values}.'
       end

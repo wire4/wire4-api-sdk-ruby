@@ -4,9 +4,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **amount_limit** | **Float** | Es el monto límite permitido que se registra para la cuenta. Por ejemplo 1000.00. | 
+**authorization_date** | **DateTime** | Es la fecha en la que se autorizó el registro del beneficiario. Ésta fecha viene en formato ISO 8601 con zona horaria, ejemplo: &lt;strong&gt;2020-10-27T11:03:15.000-06:00&lt;/strong&gt;. | [optional] 
 **bank** | [**Institution**](Institution.md) | Es el banco al cuál pertenece la cuenta. | [optional] 
 **beneficiary_account** | **String** | Es la cuenta del beneficiario, podría ser teléfono celular (se valida que sea de 10 dígitos), Tarjeta de débito (TDD, se valida que sea de 16 dígitos) o cuenta CLABE (se valida que sea de 18 dígitos). &lt;br/&gt;&lt;br/&gt;Por ejemplo Teléfono celular: 5525072600, TDD: 4323 1234 5678 9123, CLABE: 032180000118359719. | 
-**currency_code** | **String** | Es el código de divisa. Es en el formato estándar de 3 dígitos, por ejemplo para el peso mexicano: &lt;b&gt;MXP&lt;/b&gt;, para el dólar estadounidense: &lt;b&gt;USD&lt;/b&gt;.&lt;br/&gt;&lt;br/&gt;Este dato es opcional, al registrar una cuenta si no se cuenta con este valor se asignará &lt;b&gt;MXP&lt;/b&gt; | [optional] 
 **email** | **Array&lt;String&gt;** | Es una lista de correos electrónicos (emails). Se valida el formato de email. Este campo es opcional. | [optional] 
 **institution** | [**BeneficiaryInstitution**](BeneficiaryInstitution.md) | Es el objeto que contiene el nombre de la institución, es mutuamente exclusivo con el objeto Person. | [optional] 
 **kind_of_relationship** | **String** | Es el tipo de relación que se tiene con el propietario de la cuenta. Para registrar una cuenta, este valor se debe obtener del recurso &lt;a href&#x3D;\&quot;#operation/getAvailableRelationshipsMonexUsingGET\&quot;&gt;relationships.&lt;/a&gt; &lt;br /&gt;&lt;br /&gt;&lt;b&gt;Nota:&lt;/b&gt; &lt;em&gt;Si en la respuesta de Monex esta propiedad es nula, tampoco estará presente en esta respuesta.&lt;/em&gt; | 

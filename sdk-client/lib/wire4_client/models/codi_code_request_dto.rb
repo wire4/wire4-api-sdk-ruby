@@ -17,7 +17,9 @@ module Wire4Client
     # Monto del pago CODI®
     attr_accessor :amount
 
-    # Descripción del pago CODI®
+    attr_accessor :beneficiary2
+
+    # Descripción del pago CODI®, no debe contener letras con acentos ni caracteres especiales
     attr_accessor :concept
 
     # Fecha de operación pago CODI®, formato: yyyy-MM-dd'T'HH:mm:ss
@@ -29,10 +31,16 @@ module Wire4Client
     # Referencia de la transferencia asignada por el cliente
     attr_accessor :order_id
 
+    # El tipo de pago ya sea en una ocasión (ONE_OCCASION) o recurrente (RECURRENT)
+    attr_accessor :payment_type
+
     # Número de teléfono móvil en caso de ser un pago CODI® usando 'PUSH_NOTIFICATION' estecampo sería obligatorio
     attr_accessor :phone_number
 
-    # El tipo de código QR para pago con CODI®
+    # Referencia numérica del pago CODI®. Debe ser de 7 dígitos
+    attr_accessor :reference
+
+    # El tipo de solicitud QR o PUSH para pago con CODI®
     attr_accessor :type
 
     class EnumAttributeValidator
@@ -61,11 +69,14 @@ module Wire4Client
     def self.attribute_map
       {
         :'amount' => :'amount',
+        :'beneficiary2' => :'beneficiary2',
         :'concept' => :'concept',
         :'due_date' => :'due_date',
         :'metadata' => :'metadata',
         :'order_id' => :'order_id',
+        :'payment_type' => :'payment_type',
         :'phone_number' => :'phone_number',
+        :'reference' => :'reference',
         :'type' => :'type'
       }
     end
@@ -74,11 +85,14 @@ module Wire4Client
     def self.swagger_types
       {
         :'amount' => :'Float',
+        :'beneficiary2' => :'BeneficiaryDTO',
         :'concept' => :'String',
         :'due_date' => :'DateTime',
         :'metadata' => :'String',
         :'order_id' => :'String',
+        :'payment_type' => :'String',
         :'phone_number' => :'String',
+        :'reference' => :'Integer',
         :'type' => :'String'
       }
     end
@@ -93,6 +107,10 @@ module Wire4Client
 
       if attributes.has_key?(:'amount')
         self.amount = attributes[:'amount']
+      end
+
+      if attributes.has_key?(:'beneficiary2')
+        self.beneficiary2 = attributes[:'beneficiary2']
       end
 
       if attributes.has_key?(:'concept')
@@ -111,8 +129,16 @@ module Wire4Client
         self.order_id = attributes[:'order_id']
       end
 
+      if attributes.has_key?(:'payment_type')
+        self.payment_type = attributes[:'payment_type']
+      end
+
       if attributes.has_key?(:'phone_number')
         self.phone_number = attributes[:'phone_number']
+      end
+
+      if attributes.has_key?(:'reference')
+        self.reference = attributes[:'reference']
       end
 
       if attributes.has_key?(:'type')
@@ -124,8 +150,8 @@ module Wire4Client
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@amount.nil? && @amount > 8000.0
-        invalid_properties.push('invalid value for "amount", must be smaller than or equal to 8000.0.')
+      if !@amount.nil? && @amount > 8000
+        invalid_properties.push('invalid value for "amount", must be smaller than or equal to 8000.')
       end
 
       if !@amount.nil? && @amount < 0.01
@@ -136,16 +162,12 @@ module Wire4Client
         invalid_properties.push('invalid value for "concept", concept cannot be nil.')
       end
 
-      if @concept.to_s.length > 200
-        invalid_properties.push('invalid value for "concept", the character length must be smaller than or equal to 200.')
+      if @concept.to_s.length > 40
+        invalid_properties.push('invalid value for "concept", the character length must be smaller than or equal to 40.')
       end
 
       if @concept.to_s.length < 0
         invalid_properties.push('invalid value for "concept", the character length must be great than or equal to 0.')
-      end
-
-      if @due_date.nil?
-        invalid_properties.push('invalid value for "due_date", due_date cannot be nil.')
       end
 
       if @order_id.nil?
@@ -160,12 +182,28 @@ module Wire4Client
         invalid_properties.push('invalid value for "order_id", the character length must be great than or equal to 5.')
       end
 
+      if @payment_type.nil?
+        invalid_properties.push('invalid value for "payment_type", payment_type cannot be nil.')
+      end
+
       if !@phone_number.nil? && @phone_number.to_s.length > 10
         invalid_properties.push('invalid value for "phone_number", the character length must be smaller than or equal to 10.')
       end
 
       if !@phone_number.nil? && @phone_number.to_s.length < 10
         invalid_properties.push('invalid value for "phone_number", the character length must be great than or equal to 10.')
+      end
+
+      if @reference.nil?
+        invalid_properties.push('invalid value for "reference", reference cannot be nil.')
+      end
+
+      if @reference > 9999999
+        invalid_properties.push('invalid value for "reference", must be smaller than or equal to 9999999.')
+      end
+
+      if @reference < 0
+        invalid_properties.push('invalid value for "reference", must be greater than or equal to 0.')
       end
 
       if @type.nil?
@@ -178,19 +216,24 @@ module Wire4Client
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@amount.nil? && @amount > 8000.0
+      return false if !@amount.nil? && @amount > 8000
       return false if !@amount.nil? && @amount < 0.01
       return false if @concept.nil?
-      return false if @concept.to_s.length > 200
+      return false if @concept.to_s.length > 40
       return false if @concept.to_s.length < 0
-      return false if @due_date.nil?
       return false if @order_id.nil?
       return false if @order_id.to_s.length > 36
       return false if @order_id.to_s.length < 5
+      return false if @payment_type.nil?
+      payment_type_validator = EnumAttributeValidator.new('String', ['ONE_OCCASION', 'RECURRENT', 'RECURRENT_NO_RECURRENT', 'UNKNOWN'])
+      return false unless payment_type_validator.valid?(@payment_type)
       return false if !@phone_number.nil? && @phone_number.to_s.length > 10
       return false if !@phone_number.nil? && @phone_number.to_s.length < 10
+      return false if @reference.nil?
+      return false if @reference > 9999999
+      return false if @reference < 0
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ['PUSH_NOTIFICATION', 'QR_CODE'])
+      type_validator = EnumAttributeValidator.new('String', ['PUSH_NOTIFICATION', 'QR_CODE', 'UNKNOWN'])
       return false unless type_validator.valid?(@type)
       true
     end
@@ -198,8 +241,8 @@ module Wire4Client
     # Custom attribute writer method with validation
     # @param [Object] amount Value to be assigned
     def amount=(amount)
-      if !amount.nil? && amount > 8000.0
-        fail ArgumentError, 'invalid value for "amount", must be smaller than or equal to 8000.0.'
+      if !amount.nil? && amount > 8000
+        fail ArgumentError, 'invalid value for "amount", must be smaller than or equal to 8000.'
       end
 
       if !amount.nil? && amount < 0.01
@@ -216,8 +259,8 @@ module Wire4Client
         fail ArgumentError, 'concept cannot be nil'
       end
 
-      if concept.to_s.length > 200
-        fail ArgumentError, 'invalid value for "concept", the character length must be smaller than or equal to 200.'
+      if concept.to_s.length > 40
+        fail ArgumentError, 'invalid value for "concept", the character length must be smaller than or equal to 40.'
       end
 
       if concept.to_s.length < 0
@@ -245,6 +288,16 @@ module Wire4Client
       @order_id = order_id
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] payment_type Object to be assigned
+    def payment_type=(payment_type)
+      validator = EnumAttributeValidator.new('String', ['ONE_OCCASION', 'RECURRENT', 'RECURRENT_NO_RECURRENT', 'UNKNOWN'])
+      unless validator.valid?(payment_type)
+        fail ArgumentError, 'invalid value for "payment_type", must be one of #{validator.allowable_values}.'
+      end
+      @payment_type = payment_type
+    end
+
     # Custom attribute writer method with validation
     # @param [Object] phone_number Value to be assigned
     def phone_number=(phone_number)
@@ -259,10 +312,28 @@ module Wire4Client
       @phone_number = phone_number
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] reference Value to be assigned
+    def reference=(reference)
+      if reference.nil?
+        fail ArgumentError, 'reference cannot be nil'
+      end
+
+      if reference > 9999999
+        fail ArgumentError, 'invalid value for "reference", must be smaller than or equal to 9999999.'
+      end
+
+      if reference < 0
+        fail ArgumentError, 'invalid value for "reference", must be greater than or equal to 0.'
+      end
+
+      @reference = reference
+    end
+
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ['PUSH_NOTIFICATION', 'QR_CODE'])
+      validator = EnumAttributeValidator.new('String', ['PUSH_NOTIFICATION', 'QR_CODE', 'UNKNOWN'])
       unless validator.valid?(type)
         fail ArgumentError, 'invalid value for "type", must be one of #{validator.allowable_values}.'
       end
@@ -275,11 +346,14 @@ module Wire4Client
       return true if self.equal?(o)
       self.class == o.class &&
           amount == o.amount &&
+          beneficiary2 == o.beneficiary2 &&
           concept == o.concept &&
           due_date == o.due_date &&
           metadata == o.metadata &&
           order_id == o.order_id &&
+          payment_type == o.payment_type &&
           phone_number == o.phone_number &&
+          reference == o.reference &&
           type == o.type
     end
 
@@ -292,7 +366,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount, concept, due_date, metadata, order_id, phone_number, type].hash
+      [amount, beneficiary2, concept, due_date, metadata, order_id, payment_type, phone_number, reference, type].hash
     end
 
     # Builds the object from hash

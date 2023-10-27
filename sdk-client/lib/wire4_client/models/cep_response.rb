@@ -74,8 +74,33 @@ module Wire4Client
     # Firma del CEP..
     attr_accessor :signature
 
+    # Es el tiop de CEP, puede ser: <strong>SPEI</strong> o <strong>SPID</strong>.
+    attr_accessor :type
+
     # La url al archivo zip del CEP, el cual contiene el xml y pdf
     attr_accessor :url_zip
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -100,6 +125,7 @@ module Wire4Client
         :'sender_name' => :'sender_name',
         :'sender_rfc' => :'sender_rfc',
         :'signature' => :'signature',
+        :'type' => :'type',
         :'url_zip' => :'url_zip'
       }
     end
@@ -127,6 +153,7 @@ module Wire4Client
         :'sender_name' => :'String',
         :'sender_rfc' => :'String',
         :'signature' => :'String',
+        :'type' => :'String',
         :'url_zip' => :'String'
       }
     end
@@ -219,6 +246,10 @@ module Wire4Client
         self.signature = attributes[:'signature']
       end
 
+      if attributes.has_key?(:'type')
+        self.type = attributes[:'type']
+      end
+
       if attributes.has_key?(:'url_zip')
         self.url_zip = attributes[:'url_zip']
       end
@@ -234,7 +265,19 @@ module Wire4Client
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      type_validator = EnumAttributeValidator.new('String', ['SPEI', 'SPID'])
+      return false unless type_validator.valid?(@type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ['SPEI', 'SPID'])
+      unless validator.valid?(type)
+        fail ArgumentError, 'invalid value for "type", must be one of #{validator.allowable_values}.'
+      end
+      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -262,6 +305,7 @@ module Wire4Client
           sender_name == o.sender_name &&
           sender_rfc == o.sender_rfc &&
           signature == o.signature &&
+          type == o.type &&
           url_zip == o.url_zip
     end
 
@@ -274,7 +318,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [account_beneficiary, account_sender, amount, available, beneficiary_bank_key, beneficiary_name, beneficiary_rfc, cadena_original, capture_date, certificate_serial_number, clave_rastreo, description, iva, operation_date, operation_date_cep, reference, sender_bank_key, sender_name, sender_rfc, signature, url_zip].hash
+      [account_beneficiary, account_sender, amount, available, beneficiary_bank_key, beneficiary_name, beneficiary_rfc, cadena_original, capture_date, certificate_serial_number, clave_rastreo, description, iva, operation_date, operation_date_cep, reference, sender_bank_key, sender_name, sender_rfc, signature, type, url_zip].hash
     end
 
     # Builds the object from hash

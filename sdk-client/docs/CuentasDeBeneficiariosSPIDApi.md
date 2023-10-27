@@ -32,7 +32,9 @@ opts = {
   beneficiary_name: 'beneficiary_name_example', # String | Es el nombre del beneficiario.
   end_date: 'end_date_example', # String | Es la fecha de inicio del periodo a filtrar en formato dd-mm-yyyy.
   init_date: 'init_date_example', # String | Es la fecha de inicio del periodo a filtrar en formato dd-mm-yyyy.
+  page: '0', # String | Es el número de página.
   rfc: 'rfc_example', # String | Es el Registro Federal de Contribuyentes (RFC) del beneficiario.
+  size: '20', # String | Es el tamaño de página.
   status: 'status_example' # String | Es el estado (estatus) de la cuenta, Los valores pueden ser <b>PENDING</b> y <b>REGISTERED</b>.
 }
 
@@ -56,7 +58,9 @@ Name | Type | Description  | Notes
  **beneficiary_name** | **String**| Es el nombre del beneficiario. | [optional] 
  **end_date** | **String**| Es la fecha de inicio del periodo a filtrar en formato dd-mm-yyyy. | [optional] 
  **init_date** | **String**| Es la fecha de inicio del periodo a filtrar en formato dd-mm-yyyy. | [optional] 
+ **page** | **String**| Es el número de página. | [optional] [default to 0]
  **rfc** | **String**| Es el Registro Federal de Contribuyentes (RFC) del beneficiario. | [optional] 
+ **size** | **String**| Es el tamaño de página. | [optional] [default to 20]
  **status** | **String**| Es el estado (estatus) de la cuenta, Los valores pueden ser &lt;b&gt;PENDING&lt;/b&gt; y &lt;b&gt;REGISTERED&lt;/b&gt;. | [optional] 
 
 ### Return type

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **due_date** | **DateTime** | Es la fecha de operación del pago CODI®. Ésta fecha viene en formato ISO 8601 con zona horaria, ejemplo: &lt;strong&gt;2020-10-27T11:03:15.000-06:00&lt;/strong&gt;. | [optional] 
 **order_id** | **String** | Es la referencia de la transferencia asignada por el cliente. | [optional] 
 **phone_number** | **String** | Es el Número de teléfono móvil en caso de ser un pago CODI® usando \&quot;PUSH_NOTIFICATION\&quot;. | [optional] 
+**reference** | **Integer** | Referencia numérica del pago CODI®. | [optional] 
 **status** | **String** | El estado del código QR para pago CODI®. | [optional] 
 **type** | **String** | Es el tipo de código QR para pago con CODI®. | [optional] 
 

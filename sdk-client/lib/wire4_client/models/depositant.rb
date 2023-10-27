@@ -30,6 +30,9 @@ module Wire4Client
     # Es el nombre del depositante.
     attr_accessor :name
 
+    # Es el estatus del depositante.
+    attr_accessor :status
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -37,7 +40,8 @@ module Wire4Client
         :'currency_code' => :'currency_code',
         :'depositant_clabe' => :'depositant_clabe',
         :'email' => :'email',
-        :'name' => :'name'
+        :'name' => :'name',
+        :'status' => :'status'
       }
     end
 
@@ -48,7 +52,8 @@ module Wire4Client
         :'currency_code' => :'String',
         :'depositant_clabe' => :'String',
         :'email' => :'Array<String>',
-        :'name' => :'String'
+        :'name' => :'String',
+        :'status' => :'String'
       }
     end
 
@@ -81,6 +86,10 @@ module Wire4Client
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
       end
+
+      if attributes.has_key?(:'status')
+        self.status = attributes[:'status']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -105,7 +114,8 @@ module Wire4Client
           currency_code == o.currency_code &&
           depositant_clabe == o.depositant_clabe &&
           email == o.email &&
-          name == o.name
+          name == o.name &&
+          status == o.status
     end
 
     # @see the `==` method
@@ -117,7 +127,7 @@ module Wire4Client
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [_alias, currency_code, depositant_clabe, email, name].hash
+      [_alias, currency_code, depositant_clabe, email, name, status].hash
     end
 
     # Builds the object from hash

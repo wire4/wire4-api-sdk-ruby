@@ -67,10 +67,6 @@ module Wire4Client
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @last_name.nil?
-        invalid_properties.push('invalid value for "last_name", last_name cannot be nil.')
-      end
-
       if @middle_name.nil?
         invalid_properties.push('invalid value for "middle_name", middle_name cannot be nil.')
       end
@@ -85,7 +81,6 @@ module Wire4Client
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @last_name.nil?
       return false if @middle_name.nil?
       return false if @name.nil?
       true
