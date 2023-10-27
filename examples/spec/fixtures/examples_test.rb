@@ -1840,4 +1840,331 @@ end
     end
   end
 
+  def test_obtain_payment_request_by_order_id
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, ENVIRONMENT)
+
+    begin
+      # Obtain an access token use application flow and scope "general" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e.response_body}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::ReporteDeSolicitudesDePagosApi.new
+
+    opts = {
+      order_id: 'order_id_example' # String | Numero de orden de la solicitud de pago.
+    }
+
+    begin
+      # Call the API
+      response = api_instance.payment_request_id_report_by_order_id_using_get(authorization, opts)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e.response_body}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  def test_obtain_payment_request_by_request_id
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, ENVIRONMENT)
+
+    begin
+      # Obtain an access token use application flow and scope "general" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e.response_body}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::ReporteDeSolicitudesDePagosApi.new
+
+    request_id = 'order_id_example' # String | Numero de orden de la solicitud de pago.
+
+    begin
+      # Call the API
+      response = api_instance.payment_request_id_report_using_get(authorization, request_id)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e.response_body}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  def test_create_payment_request_method_card
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, ENVIRONMENT)
+
+    begin
+      # Obtain an access token use application flow and scope "general" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e.response_body}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::SolicitudDePagosApi.new
+
+    # build body with info (check references for more info: types, required fields, etc.)
+    payment_data = Wire4Client::PaymentRequestReq.new
+    customer_data = Wire4Client::Customer.new
+
+    order_id = 'order_id_example' # String | Numero de orden de la solicitud de pago.
+
+    customer_data.name = 'name test'
+    customer_data.email = 'email test'
+
+    payment_data.customer = customer_data
+    payment_data.description = 'description'
+    payment_data.due_date = '2023-11-21'
+    payment_data.amount = 8963.25
+    payment_data.order_id = order_id
+    payment_data.cancel_return_url = 'https://wire4.mx'
+    payment_data.return_url = 'https://wire4.mx'
+    payment_data.method = 'CARD'
+
+
+    begin
+      # Call the API
+      response = api_instance.register_payment_request_using_post(authorization, payment_data)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e.response_body}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  def test_create_payment_request_method_spei
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, ENVIRONMENT)
+
+    begin
+      # Obtain an access token use application flow and scope "general" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('general')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e.response_body}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::SolicitudDePagosApi.new
+
+    # build body with info (check references for more info: types, required fields, etc.)
+    payment_data = Wire4Client::PaymentRequestReq.new
+    customer_data = Wire4Client::Customer.new
+
+    order_id = 'order_id_example' # String | Numero de orden de la solicitud de pago.
+
+    customer_data.name = 'name test'
+    customer_data.email = 'email test'
+
+    payment_data.customer = customer_data
+    payment_data.description = 'description'
+    payment_data.due_date = '2023-10-21'
+    payment_data.amount = 8963.25
+    payment_data.order_id = order_id
+    payment_data.method = 'SPEI'
+    payment_data.depositant_account = '112680000176543217'
+    payment_data.type = 'ONE_OCCASION'
+
+
+    begin
+      # Call the API
+      response = api_instance.register_payment_request_using_post(authorization, payment_data)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e.response_body}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  def test_create_recurring_charge
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, ENVIRONMENT)
+
+    begin
+      # Obtain an access token use application flow and scope "general" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('charges_general')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e.response_body}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::CargosRecurrentesApi.new
+
+    # build body with info (check references for more info: types, required fields, etc.)
+    payment_data = Wire4Client::RecurringChargeRequest.new
+    customer_data = Wire4Client::Customer.new
+    product_data = Wire4Client::Product.new
+
+    order_id = 'order_id_example' # String | Numero de orden de la solicitud de pago.
+
+    customer_data.name = 'name test'
+    customer_data.email = 'email test'
+
+    product_data.name = 'name test'
+    product_data.amount = 2
+    product_data.billing_period = 'WEEKLY'
+    product_data.frequency = 1
+
+    payment_data.customer = customer_data
+    payment_data.product = product_data
+    payment_data.first_charge_date = '2022-12-23T00:00:00.000-06:00'
+    payment_data.charges = 5
+    payment_data.charges = order_id
+    payment_data.cancel_return_url = 'https://wire4.mx'
+    payment_data.return_url = 'https://wire4.mx'
+
+
+
+    begin
+      # Call the API
+      response = api_instance.register_recurring_charge_using_post(authorization, payment_data)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e.response_body}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  def test_delete_recurring_charge
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, ENVIRONMENT)
+
+    begin
+      # Obtain an access token use application flow and scope "general" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('charges_general')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e.response_body}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::CargosRecurrentesApi.new
+
+    order_id = 'order_id_example' # String | Numero de orden de los cargos recurrentes.
+
+    begin
+      # Call the API
+      response = api_instance.delete_recurring_charge_using_delete(authorization, order_id)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e.response_body}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  def test_deposit_authorization
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, ENVIRONMENT)
+
+    begin
+      # Obtain an access token use application flow and scope "general" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('spei_admin')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e.response_body}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::AutorizacinDeDepsitosApi.new
+
+    subscription = '19b341dd-88b0-49a2-9997-117f553d15cd' # String | Numero de subscripcion.
+
+    begin
+      # Call the API
+      response = api_instance.get_deposit_auth_configurations(authorization, subscription)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e.response_body}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
+  def test_enable_disable_deposit_authorization
+    # Create the authenticator to obtain access token
+    # The token URL and Service URL are defined for this environment enum value.
+    # e.g. for Sandbox environment: Wire4Auth::EnvironmentEnum::SANDBOX
+    oauth_wire4 = Wire4Auth::OAuthWire4.new(CLIENT_ID, CLIENT_SECRET, ENVIRONMENT)
+
+    begin
+      # Obtain an access token use application flow and scope "general" and add to request
+      oauth_wire4.config_default_api_client
+      authorization = oauth_wire4.obtain_access_token_app('spei_admin')
+    rescue Wire4Client::ApiError => e
+      puts "Exception to obtain access token #{e.response_body}"
+      # Optional manage exception in access token flow
+      return
+    end
+
+    # create an instance of the API class
+    api_instance = Wire4Client::AutorizacinDeDepsitosApi.new
+
+    # build body with info (check references for more info: types, required fields, etc.)
+    deposit_data = Wire4Client::DepositAuthorizationRequest.new
+    webhook_data = Wire4Client::WebHookDepositAuthorizationRequest.new
+
+    webhook_data.name = 'mio'
+    webhook_data.url = 'https://tu-url-de-webhook'
+
+    deposit_data.enabled = true
+    deposit_data.wh_uuid = 'wh_30bfe7b213ea49bca4a29cc7793dda41'
+    deposit_data.webhook = webhook_data
+
+
+    subscription = '19b341dd-88b0-49a2-9997-117f553d15cd' # String | Numero de subscripcion.
+
+    begin
+      # Call the API
+      response = api_instance.put_deposit_auth_configurations(deposit_data, authorization, subscription)
+      p response
+    rescue Wire4Client::ApiError => e
+      puts "Exception when calling the API: #{e.response_body}"
+      # Optional manage exception in call API
+      return
+    end
+  end
+
 end
